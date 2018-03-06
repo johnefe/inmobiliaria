@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+
+		<!-- ************* LOS MAPEOS SE LOS VA AGREGANDO DE ULTIMOS PARA NO TENER CONFLICTOS ********** -->
+
+		<!-- SCHEMA SECURITY -->
+		<mapping class="com.proinsalud.sistemas.core.security.model.Users" />
+		<mapping class="com.proinsalud.sistemas.core.security.model.Option" />
+		<mapping class="com.proinsalud.sistemas.core.security.model.Level" />
+		<mapping class="com.proinsalud.sistemas.core.security.model.UserOption" />
+		<mapping class="com.proinsalud.sistemas.core.security.model.UserOptionAction" />
+		<mapping class="com.proinsalud.sistemas.core.security.model.OptionAction" />
+		<mapping class="com.proinsalud.sistemas.core.security.model.Action" />
+		<mapping class="com.proinsalud.sistemas.core.security.model.Authority" />
+		<mapping class="com.proinsalud.sistemas.core.security.model.UserAuthority" />
+		<mapping class="com.proinsalud.sistemas.core.security.model.Parameter" />
+		<mapping class="com.proinsalud.sistemas.core.security.model.UserHistorial" />
+
+
+		<!-- SCHEMA GENERAL -->
+		<mapping class="com.proinsalud.sistemas.core.general.model.OptionFavorite" />
+		<mapping class="com.proinsalud.sistemas.core.general.model.Person" />
+		<mapping class="com.proinsalud.sistemas.core.general.model.Country" />
+		<mapping class="com.proinsalud.sistemas.core.general.model.Department" />
+		<mapping class="com.proinsalud.sistemas.core.general.model.Municipality" />
+		<mapping class="com.proinsalud.sistemas.core.general.model.DocumentType" />
+		<mapping class="com.proinsalud.sistemas.core.general.model.News" />
+		
+		
+
+		<!-- SCHEMA CONVOCATORY -->
+		<mapping class="com.proinsalud.sistemas.core.convocatory.model.Provider" />
+		<mapping class="com.proinsalud.sistemas.core.convocatory.model.Convocatory" />
+		<mapping class="com.proinsalud.sistemas.core.convocatory.model.Quotation" />
+		<mapping class="com.proinsalud.sistemas.core.convocatory.model.ConvocatoryProduct" />
+		<mapping class="com.proinsalud.sistemas.core.convocatory.model.Product" />
+		<mapping class="com.proinsalud.sistemas.core.convocatory.model.QuotationConvocatoryProduct" />
+		<mapping class="com.proinsalud.sistemas.core.convocatory.model.TypeConvocatory" />
+		
+		
+		<!-- SCHEMA HUMAN TALENT -->
+		<mapping class="com.proinsalud.sistemas.core.human_talent.model.Employee" />
+		<mapping class="com.proinsalud.sistemas.core.human_talent.model.Area" />
+		
+		<!-- SCHEMA DOCUMENTARY MANAGEMENT -->
+		<mapping class="com.proinsalud.sistemas.core.documentary_management.model.FileDG" />
+		<mapping class="com.proinsalud.sistemas.core.documentary_management.model.Trd" />
+		<mapping class="com.proinsalud.sistemas.core.documentary_management.model.TrdItem" />
+		<mapping class="com.proinsalud.sistemas.core.documentary_management.model.LevelTrd" />
+		
+		
+		<!-- SCHEMA WAREHOUSE -->
+		<mapping class="com.proinsalud.sistemas.core.warehouse.model.Medicine" />
+		<mapping class="com.proinsalud.sistemas.core.warehouse.model.ProductWarehouse" />
+
+	</session-factory>
+</hibernate-configuration>

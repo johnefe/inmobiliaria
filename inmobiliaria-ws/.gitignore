@@ -1,0 +1,13 @@
+build/
+build/*
+build/**/*.class
+target/*
+target/
+src/main/resources/logging.log
+src/main/resources/rebel.xml
+.settings
+.settings/
+.classpath
+.project
+bin/
+.tern-project
