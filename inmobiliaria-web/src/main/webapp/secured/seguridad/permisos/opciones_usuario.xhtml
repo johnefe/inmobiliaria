@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>#{msg['msg.tituloPrincipal']}</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="/layouts/default.xhtml">
+			<ui:define name="content">
+
+				<div class="col-sm-12">
+
+					<h:form prependId="false" id="formUsers">
+						<p:messages id="messages" showDetail="true" autoUpdate="false" closable="true" globalOnly="true" for="formUsers" />
+
+						<div class="col-sm-12">
+							<p:dataTable rendered="#{proinsaludBean.accionListar}" id="dtUsers" var="u" value="#{permisoUsuariosBean.users}" emptyMessage="#{msg['lbl.registrosVacios']}" paginator="true" rows="10" rowsPerPageTemplate="5 ,10, 20" paginatorPosition="bottom" rowKey="#{u.id}">
+
+								<f:facet name="header">#{msg['lbl.listadoUsuarios']}</f:facet>
+
+								<p:column headerText="#{msg['lbl.nombreUsuario']}" filterBy="#{u.username}" filterMatchMode="contains" sortBy="#{u.username}">
+									<h:outputText value="#{u.username}" priority="1" />
+								</p:column>
+
+								<p:column headerText="#{msg['lbl.activo']}" priority="2" sortBy="#{u.enabled}">
+									<h:outputText value="#{u.enabled}" />
+								</p:column>
+
+								<p:column headerText="#{msg['lbl.perfil']}" priority="2" sortBy="#{u.enabled}">
+									<h:outputText value="#{u.profile}" />
+								</p:column>
+
+								<p:column>
+									<p:commandButton icon="icon-desasignarpeque" title="#{msg['lbl.actualizarOpciones']}" process="@this" global="false" update="@form" action="#{permisoUsuariosBean.loadUserCompletely()}">
+										<f:setPropertyActionListener value="#{u}" target="#{permisoUsuariosBean.userSelected}" />
+									</p:commandButton>
+								</p:column>
+
+
+							</p:dataTable>
+						</div>
+
+						<div class="clearfix"></div>
+
+						<p:outputPanel id="pnlOpciones" rendered="#{permisoUsuariosBean.userSelected != null ? true : false}">
+
+							<div class="col-sm-12">
+								<h:outputText value="Usuario: #{permisoUsuariosBean.userSelected.username}" />
+							</div>
+
+							<div class="col-sm-12">
+								<h:outputText value="#{msg['lbl.autoridades']}" />
+								<p:selectManyCheckbox value="#{permisoUsuariosBean.authoritiesSelected}" layout="responsive" columns="3">
+									<f:selectItems value="#{permisoUsuariosBean.authorities}" var="au" itemLabel="#{au.name}" itemValue="#{au}" />
+									<f:converter converterId="hdsConvertEntity"></f:converter>
+								</p:selectManyCheckbox>
+							</div>
+
+							<div class="col-sm-3">
+								<h:outputText value="#{msg['lbl.heredarPerfil']}" />
+								<p:selectOneListbox value="#{permisoUsuariosBean.userProfileSelected}">
+									<f:selectItems value="#{permisoUsuariosBean.usersProfile}" var="up" itemLabel="#{up.username}" />
+									<f:converter converterId="hdsConvertEntity"></f:converter>
+									<p:ajax update="@([id$=btnInheritOptions])"></p:ajax>
+								</p:selectOneListbox>
+								<p:commandButton process="@this" disabled="#{permisoUsuariosBean.userProfileSelected == null}" id="btnInheritOptions" value="#{msg['lbl.heredarOpciones']}" update="@form" action="#{permisoUsuariosBean.inheritOptions()}"></p:commandButton>
+							</div>
+
+							<div class="col-sm-3">
+								<h:outputText value="#{msg['lbl.listadoOpciones']}" />
+
+								<p:tree animate="true" draggable="false" droppable="false" value="#{permisoUsuariosBean.root}" var="node" filterBy="#{node}" filterMatchMode="contains" selectionMode="checkbox" selection="#{permisoUsuariosBean.selectedNodes}">
+									<p:treeNode type="opcion" icon="ui-icon-document">
+										<h:outputText value="#{node.name}" />
+									</p:treeNode>
+									<p:ajax event="select" listener="#{permisoUsuariosBean.selectOption}" update="pnlActions" />
+									<p:ajax event="unselect" listener="#{permisoUsuariosBean.unselectOption}" update="pnlActions" />
+								</p:tree>
+							</div>
+
+							<p:outputPanel id="pnlActions">
+								<p:outputPanel rendered="#{permisoUsuariosBean.optionSelected != null}">
+									<div class="col-sm-3">
+										<h:form prependId="false" id="formListadoAcciones">
+											<h:outputText value="#{msg['lbl.listadoAcciones']}" />
+											<p:messages id="msgListadoOpciones" showDetail="true" autoUpdate="false" closable="true" globalOnly="true" for="formListadoAcciones" />
+											<p:scrollPanel mode="native" style="width:250px;height:#{permisoUsuariosBean.actionsOption.size() * 40}px">
+												<h:outputLabel value="#{permisoUsuariosBean.optionSelected.name}" />
+												<p:selectManyCheckbox id="cbxAction" value="#{permisoUsuariosBean.actionsSelected}" layout="responsive" columns="1">
+													<f:selectItems value="#{permisoUsuariosBean.actionsOption}" var="a" itemLabel="#{a.action.action}" itemValue="#{a}" />
+													<f:converter converterId="hdsConvertEntity"></f:converter>
+												</p:selectManyCheckbox>
+											</p:scrollPanel>
+											<div class="col-sm-12">
+												<p:commandButton action="#{permisoUsuariosBean.saveActions()}" value="#{msg['lbl.guardar']}" update="@form" process="@form"></p:commandButton>
+											</div>
+										</h:form>
+									</div>
+								</p:outputPanel>
+							</p:outputPanel>
+
+							<div class="col-sm-offset-4 col-sm-8">
+								<p:commandButton action="#{permisoUsuariosBean.cancel()}" value="#{msg['lbl.cancelar']}" update="@form"></p:commandButton>
+								<p:commandButton action="#{permisoUsuariosBean.save()}" value="#{msg['lbl.guardar']}" update="@form"></p:commandButton>
+							</div>
+						</p:outputPanel>
+
+						<div class="clearfix"></div>
+
+					</h:form>
+				</div>
+
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
+</html>

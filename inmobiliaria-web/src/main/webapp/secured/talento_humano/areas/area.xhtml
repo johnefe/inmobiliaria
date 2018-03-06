@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>#{msg['msg.tituloPrincipal']}</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="/layouts/default.xhtml">
+			<ui:define name="content">
+				<h:form prependId="false" id="form1">
+					<div class="col-sm-12">
+						<div class="box">
+							<p:messages id="messages" showDetail="true" autoUpdate="false"
+								closable="true" globalOnly="true" for="form1" />
+							<div class="box-head">
+								<label class="title-head">#{msg['lbl.tituloTalentoHumano']}</label>
+							</div>
+							<div class="box-body">
+								<p:outputPanel id="pnlArea">
+									<div class="col-sm-12">
+
+										
+										<div class="clearfix"></div>
+
+										<div class="col-lg-6  col-md-6 col-sm-12">
+
+											<p:tree style="width:100%;" id="areaBean" animate="true"
+												draggable="false" droppable="false" var="node"
+												value="#{areaBean.root}" filterBy="#{node.name}"
+												filterMatchMode="contains" selectionMode="single"
+												selection="#{areaBean.select}">
+												<p:treeNode type="area" icon="ui-icon-document">
+													<b>#{node.name}</b>
+												</p:treeNode>
+
+												<p:ajax event="select" update="pnlForm, formArea"
+													listener="#{areaBean.loadSelect()}" />
+											</p:tree>
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-12">
+											<p:outputPanel id="pnlForm">
+												<p:outputPanel id="formArea">
+													<div class="col-lg-6 form-group">
+														<label for="father" class="col-sm-12 control-label">#{msg['lbl.nombrePadre']}</label>
+														<div class="col-sm-12">
+															<h:inputText type="text"
+																value="#{areaBean.area.areaFather.name}" id="father"
+																class="form-control" disabled="true" />
+														</div>
+
+													</div>
+													<div class="col-lg-6 form-group">
+														<label for="name" class="col-sm-12 control-label required">#{msg['lbl.nombreArea']}</label>
+														<div class="col-sm-12">
+															<h:inputText type="text" required="true" value="#{areaBean.area.name}"
+																id="name" class="form-control" requiredMessage="#{msg['obligatoryField']}" />
+																<p:watermark value="#{msg['lbl.digiteNombreArea']}" for="name"></p:watermark>
+																<p:message for="name" />
+														</div>
+
+													</div>
+													<div class="clearfix" />
+
+													<div class="col-lg-12 form-group">
+														<div class="div-btn">
+															<p:commandButton action="#{areaBean.saveArea()}"
+																title="#{msg['lbl.guardar']}" process="@([id$=form1])"
+																update="@([id$=form1])" onstart="showSpinner();"
+																onsuccess="hideSpinner();" styleClass="btn-ic"
+																icon="ic-btn ic-btn-save" />
+															<p:commandButton title="#{msg['lbl.cancelar']}"
+																process="@this" update="pnlArea" styleClass="btn-ic"
+																icon="ic-btn ic-btn-cancel"
+																action="#{areaBean.cancel()}" />
+														</div>
+													</div>
+												</p:outputPanel>
+											</p:outputPanel>
+										</div>
+
+										
+									</div>
+								</p:outputPanel>
+							</div>
+
+						</div>
+					</div>
+				</h:form>
+
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
+</html>

@@ -1,0 +1,57 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security" xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+          http://www.springframework.org/schema/security
+          http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<beans:property name="locations" value="classpath:application.properties"></beans:property>
+	</beans:bean>
+
+
+
+	<http auto-config='true' authentication-manager-ref="userITAuthenticationManager">
+
+		<!-- <access-denied-handler error-page="/secured/error/acceso_denegado.xhtml" /> -->
+
+		<intercept-url pattern="/secured/**" access="${role.administrator}" />
+		<intercept-url pattern="/secured/error/**" access="${role.anonymous},${role.administrator}" />
+		<intercept-url pattern="/secured/*" access="${role.view}" />
+		<intercept-url pattern="/secured/info/*" access="${role.superadmin}" />
+		<intercept-url pattern="/layouts/**" access="${role.anonymous},${role.administrator}" />
+
+		<form-login 
+		login-page="/login" 
+		default-target-url="/secured/bienvenido" 
+		authentication-success-handler-ref="customSuccessAuthentication" 
+		always-use-default-target="true" 
+		authentication-failure-url="/loginError"
+		authentication-failure-handler-ref="customAuthenticationFailureHandler"
+		 />
+
+		<logout logout-url="/logout" success-handler-ref="customLogoutSuccessHandler" />
+		<!-- SESION DOBLE -->
+		<!-- <session-management invalid-session-url="/" -->
+		<!-- session-authentication-strategy-ref="sas"/> -->
+
+		<custom-filter after="BASIC_AUTH_FILTER" ref="customFilter" />
+
+	</http>
+
+	<authentication-manager id="userITAuthenticationManager" erase-credentials="true">
+		<authentication-provider ref="customAuthenticationProvider" />
+	</authentication-manager>
+
+
+
+
+	<beans:bean id="customFilter" class="com.proinsalud.sistemas.web.application.component.CustomFilter" />
+
+	<beans:bean id="customSuccessAuthentication" class="com.proinsalud.sistemas.web.application.authentication.CustomAuthenticationSuccessHandler" />
+
+	<beans:bean id="customLogoutSuccessHandler" class="com.proinsalud.sistemas.web.application.authentication.CustomLogoutSuccessHandler" />
+	
+	<beans:bean id="customAuthenticationFailureHandler" class="com.proinsalud.sistemas.web.application.authentication.CustomAuthenticationFailureHandler" />
+
+
+</beans:beans>

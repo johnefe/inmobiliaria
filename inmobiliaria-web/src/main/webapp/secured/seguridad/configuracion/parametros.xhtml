@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>#{proinsaludBean.optionSelectedApp != null ?
+			proinsaludBean.optionSelectedApp.name : '?????'}</title>
+	</h:head>
+
+	<h:body>
+		<ui:composition template="/layouts/default.xhtml">
+			<ui:define name="content">
+
+				<h:form prependId="false" id="form1" enctype="multipart/form-data">
+					<div class="col-sm-12">
+						<div class="box">
+							<p:messages id="messages" showDetail="true" autoUpdate="false"
+								closable="true" globalOnly="true" for="form1" />
+							<div class="box-head">
+								<label class="title-head">#{msg['lbl.configuracion']}</label>
+							</div>
+							<div class="box-body">
+								<p:outputPanel id="pnlParametros">
+									<div class="col-lg-12 col-md-12 col-sm-12">
+										<p:outputPanel id="pnlListadoParametros"
+											rendered="#{!parametroBean.showForm}">
+											<div class="col-sm-4 col-sm-offset-4">
+												<div class="div-btn-header left">
+													<p:commandButton title="#{msg['lbl.editar']}"
+														process="@this" action="#{parametroBean.initForm()}"
+														update="@([id$=pnlParametros])" onstart="showSpinner();"
+														onsuccess="hideSpinner();" styleClass="btn-ic"
+														icon="ic-btn ic-btn-edit" />
+														
+												</div>
+											</div>
+											<div class="col-sm-4 col-sm-offset-4">
+											
+												<table class="table table-striped">
+													<tbody>
+														<tr>
+															<th scope="row">#{msg['lbl.nombre']}</th>
+															<td>#{parametroBean.parameter.nameApplication}</td>
+														</tr>
+														<tr>
+															<th scope="row">#{msg['lbl.numFavoritos']}</th>
+															<td>#{parametroBean.parameter.numFavorites}</td>
+														</tr>
+														<tr>
+															<th scope="row">#{msg['lbl.logo']}</th>
+															<td><img style="height: 60px"
+																src="#{facesContext.externalContext.requestContextPath}/resources/assets/img/#{parametroBean.parameter.iconApp}">
+															</img></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+											<div class="clearfix"></div>
+										</p:outputPanel>
+										<p:outputPanel
+											rendered="#{parametroBean.showForm == true ? true : false}"
+											id="pnlFormParametros">
+
+											<div class=" col-sm-4 col-sm-offset-4">
+												<div class="panel panel-default">
+													<div class="panel-heading">#{msg['lbl.actualizarDatos']}</div>
+													<div class="panel-body">
+													
+														<div class="col-sm-12 form-group">
+															<label for="txt_nombre" class="col-sm-12 control-label required">#{msg['lbl.nombre']}</label>
+															<div class="col-sm-12">
+																<h:inputText maxlength="20" type="text"
+																	class="validate form-control" id="txt_nombre"
+																	placeholder="Nombre"
+																	value="#{parametroBean.parameter.nameApplication}"
+																	required="true"
+																	requiredMessage="#{msg['obligatoryField']}" />
+																<p:watermark for="txt_nombre" value="#{msg['lbl.nombre']}" />
+																<p:message for="txt_nombre" display="icon text" />
+															</div>
+														</div>
+														<div class="clearfix"></div>
+														<div class="col-sm-12 form-group">
+															<label for="txt_numfav" class="col-sm-12 control-label required">#{msg['lbl.numFavoritos']}</label>
+															<div class="col-sm-12">
+																<h:inputText type="text" class="validate form-control"
+																	id="txt_numfav"
+																	value="#{parametroBean.parameter.numFavorites}"
+																	required="true"
+																	requiredMessage="#{msg['obligatoryField']}" />
+																<p:watermark for="txt_numfav" value="#{msg['lbl.numFav']}" />
+																<p:message for="txt_numfav" />
+															</div>
+														</div>
+														<div class="clearfix"></div>
+														<div class="col-sm-12 form-group">
+															<label for="uploadIcon" class="col-sm-12 control-label required">#{msg['lbl.logo']}</label>
+															<div class="col-sm-2">
+																<img style="height: 60px"
+																	src="#{facesContext.externalContext.requestContextPath}/resources/assets/img/#{parametroBean.parameter.iconApp}"></img>
+															</div>
+															<div class="col-sm-10">
+																<p:fileUpload update="uploadFileName" id="uploadIcon"
+																	multiple="false" allowTypes="/(\.|\/)(jpe?g|png)$/"
+																	label="Archivo" process="@this"
+																	invalidFileMessage="Archivo invalido"
+																	fileUploadListener="#{parametroBean.uploadFile}"
+																	auto="true" skinSimple="true" mode="advanced" />
+																<p:message for="uploadIcon" />
+																<h:outputText id="uploadFileName"
+																	value="#{parametroBean.uploadFile != null ? parametroBean.uploadFile.fileName : ''}" />
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="clearfix"></div>
+											<div class="col-sm-12">
+												<div class="div-btn">
+													<p:commandButton title="#{msg['lbl.guardar']}"
+														process="@form" action="#{parametroBean.saveParameter()}"
+														update="@form" onstart="showSpinner();"
+														onsuccess="hideSpinner();" styleClass="btn-ic"
+														icon="ic-btn ic-btn-save" />
+													<p:commandButton title="#{msg['lbl.cancelar']}"
+														process="@this" action="#{parametroBean.cancel()}"
+														update="pnlParametros" styleClass="btn-ic"
+														icon="ic-btn ic-btn-cancel" />
+												</div>
+											</div>
+										</p:outputPanel>
+									</div>
+								</p:outputPanel>
+							</div>
+							
+						</div>
+					</div>
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
+</html>

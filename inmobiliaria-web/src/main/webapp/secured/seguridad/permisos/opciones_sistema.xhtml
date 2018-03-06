@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>#{msg['msg.tituloPrincipal']}</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="/layouts/default.xhtml">
+			<ui:define name="content">
+
+				<div class="col-sm-9">
+					<div class="box">
+						<h:form prependId="false" id="form1">
+							<p:messages id="messages" showDetail="true" autoUpdate="false" closable="true" globalOnly="true" for="form1" />
+
+							<div class="box-header with-border">
+								<label class="title-box">#{msg['msg.opcionSystem']}</label>
+							</div>
+
+							<div class="box-body">
+								<div class="col-sm-4">
+									<p:tree id="treeOptions" animate="true" draggable="false" droppable="false" dragdropScope="demo" value="#{opcionesSistemaBean.root}" var="node" filterBy="#{node}" filterMatchMode="contains" selectionMode="single" selection="#{opcionesSistemaBean.select}">
+										<p:treeNode type="opcion" icon="ui-icon-document">
+											<b>#{node.name}</b>
+											<small>#{node.active == true ? '': msg['lbl.inactivo']}</small>
+										</p:treeNode>
+										<p:ajax event="select" update="pnlFormOption" listener="#{opcionesSistemaBean.cleanForm()}" />
+									</p:tree>
+								</div>
+
+
+								<div class="col-sm-8">
+									<h:form class="form-horizontal" id="formOption" prependId="false">
+
+										<p:outputPanel id="pnlFormOption">
+
+											<p:outputPanel rendered="#{opcionesSistemaBean.select != null}">
+												<div class="col-sm-12">
+													<table class="table table-bordered">
+														<thead>
+															<tr class="success">
+																<th>Opción</th>
+																<th>Detalle</th>
+																<th>Nivel</th>
+																<th>Padre</th>
+																<th>Estado</th>
+																<th></th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr class="info">
+																<td>#{opcionesSistemaBean.select.data.name}</td>
+																<td>#{opcionesSistemaBean.select.data.detail}</td>
+																<td>#{opcionesSistemaBean.select.data.level.name} #{opcionesSistemaBean.select.data.level.levelPos}</td>
+																<td>#{opcionesSistemaBean.select.data.optionFather != null ? opcionesSistemaBean.select.data.optionFather.name : 'N/A'}</td>
+																<td>#{opcionesSistemaBean.select.data.active ? 'A':'I'}</td>
+																<td>
+																	<p:commandButton process="@this" action="#{opcionesSistemaBean.deleteOption()}" title="#{msg['lbl.eliminar']}" styleClass="btn-ic-little" icon="ic-btn-little ic-btn-trash btn-table" onstart="showSpinner();" onsuccess="hideSpinner();" update="treeOptions, pnlFormOption,messages" />
+																	<p:commandButton process="@this" action="#{opcionesSistemaBean.prepareEditOption()}" title="#{msg['lbl.editar']}" styleClass="btn-ic-little" icon="ic-btn-little ic-btn-edit btn-table" update="pnlFormOption,messages" />
+																	<p:commandButton process="@this" action="#{opcionesSistemaBean.prepareNewOptionChild()}" title="#{msg['lbl.nuevaOpcion']}" styleClass="btn-ic-little" icon="ic-btn-little ic-btn-new btn-table" update="pnlFormOption,messages" />
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<div class="clearfix"></div>
+											</p:outputPanel>
+
+											<div class="col-sm-12">
+												<br></br>
+												<div class="col-sm-12 form-group">
+													<label for="cmbLevel" class="col-sm-2 control-label">Nivel</label>
+													<div class="col-sm-10">
+														<h:selectOneMenu id="cmbLevel" value="#{opcionesSistemaBean.option.level}" immediate="true" styleClass="form-control cmb-formulario" required="true" requiredMessage="#{msg['obligatoryField']}">
+															<f:selectItem itemLabel="Seleccione un nivel" noSelectionOption="true" />
+															<f:selectItems value="#{opcionesSistemaBean.levels}" var="l" itemLabel="#{l.levelPos} #{l.name} #{l.description}" />
+															<f:converter converterId="hdsConvertEntity" />
+															<p:ajax event="change" update="@([id$=pnlActions])"></p:ajax>
+														</h:selectOneMenu>
+														<p:message for="cmbLevel" />
+													</div>
+												</div>
+												<p:outputPanel id="pnlActions">
+													<p:outputPanel rendered="#{opcionesSistemaBean.option.level != null and opcionesSistemaBean.option.level.resource ? true : false}">
+														<div class="col-sm-12 form-group">
+															<label for="cbxAction" class="col-sm-2 control-label">Acciones</label>
+															<div class="col-sm-10">
+																<p:selectManyCheckbox styleClass="control-label-checkbox" id="cbxAction" value="#{opcionesSistemaBean.actionsSelected}" layout="responsive" columns="2">
+																	<f:selectItems value="#{opcionesSistemaBean.actions}" var="a" itemLabel="#{a.action}" itemValue="#{a}" />
+																	<f:converter converterId="hdsConvertEntity"></f:converter>
+																</p:selectManyCheckbox>
+																<p:message for="cbxAction" />
+															</div>
+														</div>
+													</p:outputPanel>
+												</p:outputPanel>
+
+												<div class="col-sm-12 form-group">
+													<label for="txt_father" class="col-sm-2 control-label">Padre</label>
+													<div class="col-sm-10">
+														<h:inputText type="text" class="form-control" id="txt_father" placeholder="Padre" value="#{opcionesSistemaBean.option.optionFather.name}" disabled="true" />
+														<p:message for="txt_father" />
+														<p:outputPanel rendered="#{opcionesSistemaBean.option.id == null ? false : true }">
+															<h:outputText value="Seleccionar Padre" />
+															<p:tree animate="true" draggable="false" droppable="false" value="#{opcionesSistemaBean.root}" var="node" filterBy="#{node}" filterMatchMode="contains" selectionMode="single">
+																<p:treeNode type="opcion" icon="ui-icon-document">
+																	<b>#{node.name}</b>
+																	<small>#{node.active == true ? '': msg['lbl.inactivo']}</small>
+																</p:treeNode>
+																<p:ajax event="select" update="@([id$=txt_father])" listener="#{opcionesSistemaBean.option.setOptionFather(node)}" />
+															</p:tree>
+														</p:outputPanel>
+													</div>
+												</div>
+
+												<div class="col-sm-12 form-group">
+													<label for="txt_option" class="col-sm-2 control-label">Nombre</label>
+													<div class="col-sm-10">
+														<h:inputText type="text" class="form-control" id="txt_option" value="#{opcionesSistemaBean.option.name}" required="true" requiredMessage="#{msg['obligatoryField']}" />
+														<p:watermark value="#{msg['lbl.nombre']}" for="txt_option"/>
+														<p:message for="txt_option" />
+													</div>
+												</div>
+
+												<div class="col-sm-12 form-group">
+													<label for="txt_detail" class="col-sm-2 control-label">Detalle</label>
+													<div class="col-sm-10">
+														<h:inputText type="text" class="form-control" id="txt_detail" value="#{opcionesSistemaBean.option.detail}" required="true" requiredMessage="#{msg['obligatoryField']}" />
+														<p:watermark value="#{msg['lbl.detalle']}" for="txt_detail"/>
+														<p:message for="txt_detail" />
+													</div>
+												</div>
+
+												<div class="col-sm-12 form-group">
+													<label for="txt_detail" class="col-sm-2 control-label">Activo</label>
+													<div class="col-sm-10">
+														<p:selectBooleanCheckbox value="#{opcionesSistemaBean.option.active}" />
+													</div>
+												</div>
+											</div>
+
+											<div class="clearfix"></div>
+											<div class="col-sm-12">
+												<div class="div-btn">
+													<p:commandButton process="@this" action="#{opcionesSistemaBean.cleanAll()}" title="#{msg['lbl.cancelar']}" styleClass="btn-ic" icon="ic-btn ic-btn-cancel" update="treeOptions,pnlFormOption,messages" />
+													<p:commandButton process="@form" action="#{opcionesSistemaBean.saveOption()}" title="#{msg['lbl.guardar']}" styleClass="btn-ic" icon="ic-btn ic-btn-save" update="treeOptions,pnlFormOption,messages" />
+												</div>
+											</div>
+										</p:outputPanel>
+									</h:form>
+								</div>
+							</div>
+						</h:form>
+					</div>
+				</div>
+
+				<div class="col-lg-3 sol-md-3 col-sm-4">
+					<div class="box">
+
+						<p:messages id="messages2" showDetail="true" autoUpdate="false" closable="true" globalOnly="true" for="formListActions" />
+
+						<div class="box-header with-border">
+							<label class="title-box">Acciones</label>
+						</div>
+
+						<div class="box-body">
+
+							<h:form id="formListActions" prependId="false">
+								<div class="col-sm-12 form-group">
+									<label for="slcActions" class="col-sm-12 control-label">
+										<b>Acciones registradas:</b>
+										#{opcionesSistemaBean.actions.size()}
+									</label>
+									<div class="col-sm-12">
+										<p:selectOneListbox value="#{opcionesSistemaBean.actionSelected}" id="slcActions" scrollHeight="320" style="width:100%;">
+											<f:selectItems value="#{opcionesSistemaBean.actions}" var="a" itemLabel="#{a.id}. #{a.action}" />
+											<f:converter converterId="hdsConvertEntity"></f:converter>
+											<p:ajax update="@([id$=pnlAction])"></p:ajax>
+										</p:selectOneListbox>
+									</div>
+								</div>
+								<p:outputPanel id="pnlAction">
+									<div class="col-sm-12 form-group">
+										<label for="txt_action" class="col-sm-12 control-label">Nombre</label>
+										<div class="col-sm-12">
+											<h:inputText type="text" class="form-control" id="txt_action" placeholder="Acción" value="#{opcionesSistemaBean.actionSelected.action}" required="true" requiredMessage="#{msg['obligatoryField']}" />
+											<p:message for="txt_action" />
+										</div>
+									</div>
+
+									<div class="clearfix"></div>
+									<div class="col-sm-12">
+										<div class="div-btn">
+											<p:commandButton process="@this" action="#{opcionesSistemaBean.cancelAction()}" id="btnCancelAction" title="#{msg['lbl.cancelar']}" styleClass="btn-ic" icon="ic-btn ic-btn-cancel" update="@form" />
+											<p:commandButton process="@([id$=pnlAction])" action="#{opcionesSistemaBean.saveAction()}" id="btnSaveAction" title="#{msg['lbl.guardar']}" styleClass="btn-ic" icon="ic-btn ic-btn-save" update="@form,messages2" />
+											<p:commandButton process="@form" action="#{opcionesSistemaBean.deleteAction()}" rendered="#{opcionesSistemaBean.actionSelected.id != null}" id="btnDeleteAction" title="#{msg['lbl.eliminar']}" styleClass="btn-ic" icon="ic-btn ic-btn-trash" update="@form,messages2" />
+										</div>
+									</div>
+								</p:outputPanel>
+							</h:form>
+						</div>
+
+					</div>
+				</div>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
+</html>

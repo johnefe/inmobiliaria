@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<f:view>
+	<h:head>
+		<title>#{proinsaludBean.optionSelectedApp != null ? proinsaludBean.optionSelectedApp.name: msg['msg.tituloPrincipal']}</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="/layouts/default.xhtml">
+			<ui:define name="content">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+					<div class="box">
+						<div class="box-head">
+							<label class="title-head">#{msg['lbl.managerUsers']}</label>
+						</div>
+						<h:form prependId="false" id="form1">
+							<h:panelGroup rendered="#{usuariosSistemaBean.userCurrent eq null}">
+								<p:messages id="messages" showDetail="true" autoUpdate="false" closable="true" globalOnly="true" for="form1" />
+								<div class="box-body">
+									<div class="col-sm-12 x_title panel-heading">
+										<label class="subtitle-head">#{msg['lbl.listadoUsuarios']}</label>
+										<div class="div-btn-header">
+											<p:commandButton title="#{msg['lbl.nuevo']}" process="@this" action="#{usuariosSistemaBean.nuevo()}" update=":form1 :form2" onstart="showSpinner();" onsuccess="hideSpinner();" styleClass="btn-ic" icon="ic-btn ic-btn-new" />
+										</div>
+										<div class="clearfix"/>
+									</div>
+									<div class="col-md-12">
+										<h:panelGroup id="tablaPersonas">
+											<div class="panel-body form-table">
+												<p:dataTable id="tblPersons" widgetVar="table1" var="person" value="#{usuariosSistemaBean.persons}" paginatorAlwaysVisible="false" paginatorPosition="bottom" rows="5" paginator="true"
+													paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" emptyMessage="#{msg['lbl.registrosVacios']}" rowsPerPageTemplate="5,10,15">
+													<p:column headerText="#{msg['lbl.persona']}" sortBy="#{person.firstName}" priority="2" filterBy="#{person.firstName} #{person.lastName}" filterMatchMode="contains">
+														<h:outputText value="#{person.firstName} #{person.lastName}" />
+													</p:column>
+													<p:column headerText="#{msg['lbl.identificacion']}" priority="3" filterBy="#{person.identification}" filterMatchMode="contains">
+														<h:outputText value="#{person.identification}" />
+													</p:column>
+													<p:column headerText="#{msg['lbl.usuarios']}" priority="1" filterBy="#{person.users} " filterMatchMode="contains">
+														<table style="border: transparent; border-bottom: #e2e2e2;">
+															<tbody>
+																<ui:repeat var="u" value="#{person.users}" priority="1">
+																	<tr>
+																		<td style="text-align: right;">#{u.username}</td>
+																		<td style="text-align: center;">
+																			<i class="#{u.enabled ? 'fa fa-check-circle text-success':'fa fa-info text-danger'}"></i>
+																			<i class="#{u.profile ? 'fa fa-users color-gray-dark':''}" aria-hidden="true"></i>
+																		</td>
+																		<td>
+																			<p:commandButton process="@this" action="#{usuariosSistemaBean.loadUserById(u.id)}" update=":form1 :form2" title="#{msg['lbl.editar']}" styleClass="btn-ic-little" icon="ic-btn-little ic-btn-edit" onstart="showSpinner();" onsuccess="hideSpinner();" />
+																		</td>
+																	</tr>
+																</ui:repeat>
+															</tbody>
+														</table>
+													</p:column>
+													<f:facet name="footer">
+														<p:outputPanel style="text-align:right;">
+															<label>#{msg['lbl.inactivo']}</label>
+															<i class="fa fa-info fa-lg text-danger"> | </i>
+															<label>#{msg['lbl.activo']} </label>
+															<i class="fa fa-check-circle fa-lg text-success"> | </i>
+															<label>#{msg['lbl.plantillaUsuario']} </label>
+															<i class="fa fa-users fa-lg color-gray-dark"> | </i>
+														</p:outputPanel>
+													</f:facet>
+												</p:dataTable>
+											</div>
+										</h:panelGroup>
+									</div>
+								</div>
+							</h:panelGroup>
+						</h:form>
+						<h:form prependId="false" id="form2">
+							<p:outputPanel id="pnlForm" rendered="#{usuariosSistemaBean.userCurrent ne null}">
+								<div class="box-body">
+									<div class="col-lg-offset-3 col-lg-6 col-md-12 col-sm-12">
+										<div class="panel panel-default">
+											<div class="panel-heading" style="height: 50px;">
+												<label class="subtitle-head">#{msg['lbl.usuarioNuevo']}</label>
+											</div>
+											<div class="panel-body form-fields-vertical">
+												<div class="col-sm-12 form-group">
+													<label for="txt_user_name" class="col-sm-12 control-label">#{msg['lbl.nombreUsuario']}</label>
+													<div class="col-sm-12">
+														<h:inputText type="text" autocomplete="off" styleClass="form-control" id="txt_user_name" value="#{usuariosSistemaBean.userCurrent.username}" required="true" requiredMessage="#{msg['obligatoryField']}">
+														</h:inputText>
+														<p:watermark for="txt_user_name" value="#{msg['lbl.nombre']}" />
+														<p:message for="txt_user_name" />
+													</div>
+												</div>
+
+												<div class="clearfix" />
+
+												<div class="col-sm-12 form-group">
+													<label for="txt_password" class="col-sm-12 control-label">#{msg['lbl.contrasena']}</label>
+													<div class="col-sm-12 input-group" style="padding-left: 16px; padding-right: 16px;">
+														<h:inputText type="text" autocomplete="off" validatorMessage="#{msg.passwordValidatorMsg}" styleClass="form-control" id="txt_password" value="#{usuariosSistemaBean.passwordTemp}" required="#{usuariosSistemaBean.obligatorio}"
+															requiredMessage="#{msg['obligatoryField']}">
+															<f:ajax event="blur" render="passwordMsg" />
+															<f:validateRegex for="txt_password" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{5,20})$" />
+														</h:inputText>
+														<p:watermark for="txt_password" value="#{msg['lbl.contrasena']}" />
+														<span class="input-group-btn">
+															<button class="btn btn-default" type="button" onclick="password();">#{msg['lbl.generar']}</button>
+														</span>
+													</div>
+													<div style="padding-left: 16px; padding-right: 16px;">
+														<p:message for="txt_password" id="passwordMsg" />
+													</div>
+												</div>
+
+												<div class="clearfix" />
+
+												<div class="col-sm-12 form-group">
+													<label for="txt_timeout" class="col-sm-12 control-label">#{msg['lbl.tiempoSession']}</label>
+													<div class="col-sm-12">
+														<h:inputText maxlength="4" onkeypress="return onlyNumbers(event);" type="text" autocomplete="off" styleClass="form-control" id="txt_timeout" value="#{usuariosSistemaBean.timeSession}" required="true" requiredMessage="#{msg['obligatoryField']}">
+														</h:inputText>
+														<p:watermark for="txt_timeout" value="#{msg['lbl.nombre']}" />
+														<p:message for="txt_timeout" />
+													</div>
+												</div>
+
+												<div class="clearfix" />
+
+												<div class="col-sm-12 form-group">
+													<label for="cbx_person" class="col-sm-12 control-label">#{msg['lbl.persona']}</label>
+													<div class="col-sm-12">
+														<h:inputText rendered="#{usuariosSistemaBean.userCurrent.id != null}" type="text" styleClass="form-control" id="cbx_person_hidden" value="#{usuariosSistemaBean.userCurrent.person.firstName} #{usuariosSistemaBean.userCurrent.person.lastName}" disabled="true" />
+														<p:selectOneListbox rendered="#{usuariosSistemaBean.userCurrent.id == null}" disabled="#{usuariosSistemaBean.userCurrent.id != null}" style="width:100%; !important" id="cbx_person" value="#{usuariosSistemaBean.userCurrent.person}" converter="hdsConvertEntity" var="p" filter="true"
+															filterMatchMode="contains" required="true" requiredMessage="#{msg['obligatoryFieldList']}">
+															<f:selectItems value="#{usuariosSistemaBean.persons}" var="person" itemLabel="#{person.firstName} #{person.lastName} #{person.identification}" itemValue="#{person}" />
+															<p:column style="width:180px;">
+																<h:outputText value="#{p.firstName} #{p.lastName}" style="padding-left: 15px !important;" />
+															</p:column>
+															<p:column>
+																<h:outputText value="#{p.employee ne null ? 'Empleado':'' or p.provider ne null ? 'Proveedor':''}" style="padding-right: 15px !important;" />
+															</p:column>
+															<p:ajax event="change" process="@this" update="msg_cbx_person, @this" />
+															<p:ajax event="blur" process="@this" update="msg_cbx_person, @this" />
+														</p:selectOneListbox>
+														<p:message id="msg_cbx_person" for="cbx_person" />
+													</div>
+												</div>
+
+												<div class="clearfix" />
+
+												<div class="col-sm-6 form-group">
+													<label for="bol_active" class="col-sm-12 control-label">#{msg['lbl.usuarioActivo']}</label>
+													<div class="col-sm-12">
+														<p:selectBooleanCheckbox id="bol_active" value="#{usuariosSistemaBean.userCurrent.enabled}" itemLabel="#{msg['lbl.usuarioActivo']}"></p:selectBooleanCheckbox>
+														<p:message for="bol_active" />
+													</div>
+												</div>
+
+												<div class="col-sm-6 form-group">
+													<label for="bol_template_user" class="col-sm-12 control-label">#{msg['lbl.plantillaUsuario']}</label>
+													<div class="col-sm-12">
+														<p:selectBooleanCheckbox id="bol_template_user" value="#{usuariosSistemaBean.userCurrent.profile}" itemLabel="#{msg['lbl.plantillaUsuario']}"></p:selectBooleanCheckbox>
+														<p:message for="bol_template_user" />
+													</div>
+												</div>
+
+												<div class="clearfix" />
+
+												<div class="col-sm-12">
+													<div class="div-btn">
+														<p:commandButton title="#{msg['lbl.guardar']}" process="@form" action="#{usuariosSistemaBean.save()}" update=":form1 :form2" onstart="showSpinner();" onsuccess="hideSpinner();" styleClass="btn-ic" icon="ic-btn ic-btn-save" />
+														<p:commandButton title="#{msg['lbl.cancelar']}" process="@this" action="#{usuariosSistemaBean.cancel()}" update="@form,@([id$=form1],[id$=msg_cbx_person]),@(form :not(#tblPersons))" styleClass="btn-ic" icon="ic-btn ic-btn-cancel" >
+														<p:resetInput target="pnlForm"/>
+														</p:commandButton>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</p:outputPanel>
+						</h:form>
+					</div>
+				</div>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
+</html>

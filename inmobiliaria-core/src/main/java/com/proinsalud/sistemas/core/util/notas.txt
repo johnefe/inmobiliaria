@@ -1,0 +1,65 @@
+//LA COLUMNA ADQUIERE LA FECHA POR DEFECTO DEL SISTEMA
+@Column(name = "registered", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+private Date registered;
+
+
+//recorrecore un listado forma lambda
+//final Convocatory cTemp = convocatory; final solo si es necesario
+//convocatoryProducts.forEach(c -> c.setConvocatory(cTemp));
+
+		
+//ordenamiento labmbda
+Collections.sort(convocatories,(Convocatory p1,Convocatory p2)->p2.getRegistered().compareTo(p1.getRegistered()) );
+//Collections.sort(convocatories, (Convocatory p1, Convocatory p2) -> p2.getRegistered().compareTo(p1.getRegistered()));
+
+		
+//IMPORTAR ENUMS Y CONSTANTES EN LA VISTA
+<p:importEnum type="com.proinsalud.sistemas.core.util.enums.StateConvocatoryEnum" var="states" allSuffix="ALL_ENUM_VALUES" />
+<p:importConstants type="com.proinsalud.sistemas.web.util.ActionPermits" var="AP" />
+
+//NATIVE QUERIES
+//dao
+parametros.put("id", 1);
+lst = executeNamedQuery("Person.test", parametros);
+//entity
+@NamedNativeQueries(value = { @NamedNativeQuery(name = "Person.test", query = "SELECT p.* FROM general.person p WHERE p.id_person=:id", resultClass=Person.class) })
+
+//QUERY NATIVE DAO
+String q = "INSERT INTO security.level (description,name, level_pos,is_resource) VALUES ( :description, :name, :level_pos, :is_resource );";
+		parametros.put("description", "nivel de prueba");
+		parametros.put("name", "nivelprueba");
+		parametros.put("level_pos", 10);
+		parametros.put("is_resource", true);
+		executeNamedQueryUpdate(q, parametros);
+		
+		executeNamedQueryUpdate("ALTER TYPE convocatory.state_convocatory ADD VALUE '" + type + "'", parametros);
+
+//NO TRANSACTIONAL
+@Transactional(propagation = Propagation.NEVER)
+
+
+//ENUMS
+//		String query = "SELECT enumlabel AS \"name\" FROM pg_enum WHERE enumtypid = 'enum_category'::regtype ORDER BY name;";
+//		query = "DELETE FROM pg_enum en WHERE en.enumtypid=134769 AND en.enumlabel='NUEVO VALOR';\r\n" + 
+//				"SELECT enumsortorder, enumtypid , enumlabel AS \"name\" FROM pg_enum WHERE enumtypid = 'convocatory.state_convocatory'::regtype ORDER BY name;";
+	
+	
+
+//RELATIONS JPA HIBERNATE	
+From the JPA 2.0 spec, the defaults are:
+OneToMany: LAZY
+ManyToOne: EAGER
+ManyToMany: LAZY
+OneToOne: EAGER
+And in hibernate, all is Lazy
+
+//json jackson
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})Ignorar la repeticion de ciclos
+@JsonIgnoreProperties({"notInterstingMember", "forgetThisField"}) Ignorar campos especificos
+public class....
+class MyTestClass {
+
+
+//PARA QUE NO SE MAPPE EL ATRIBUTO EN LA BASE DE DATOS
+	@Transient
+	private string atributo;

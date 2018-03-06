@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:component_proinsalud="http://proinsalud.co/sistemas/tags">	
+<f:view>
+
+	<header class="main-header"> <!-- Logo --> <a
+		href="#{facesContext.externalContext.requestContextPath}/secured/bienvenido"
+		class="logo"> <!-- mini logo for sidebar mini 50x50 pixels --> <span
+		class="logo-mini"> <img style="height: 45px;"
+			src="#{facesContext.externalContext.requestContextPath}/resources/assets/img/#{proinsaludBean.getNameImg()}"></img>
+			<b>A</b> LT
+	</span> <!-- logo for regular state and mobile devices --> <span
+		class="logo-lg"> <b>Proinsalud</b> S.A.
+	</span>
+	</a> <h:form id="formHeader" prependId="false">
+		<div id="idDivG">
+			<p:growl id="growl1" life="8000" showDetail="true" icon="none"
+				autoUpdate="false" infoIcon="fa fa-info-circle" />
+		</div>
+		<div class="navbar navbar-default" role="navigation">
+			<a href="#" class="sidebar-toggle" data-toggle="push-menu"
+				role="button"> <span class="sr-only">Toggle navigation</span>
+			</a>
+			<div class="container" style="width: auto">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<component_proinsalud:menuHeaderComponent option="#{proinsaludBean.optionSelectedApp}"></component_proinsalud:menuHeaderComponent>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><p:commandButton rendered="#{proinsaludBean.optionSelectedApp != null}" id="btnFav" styleClass="btn-fav"
+								actionListener="#{proinsaludBean.saveFavorite}"
+								process="@this"
+								icon="fa fa-#{proinsaludBean.optionFavorite == true ? 'heart' : 'heart-o'}"
+								update="@([id$=btnFav]) @([id$=formListFav]) @([id$=growl1]) @([id$=lista])" /></li>
+
+						<h:panelGroup rendered="#{proinsaludBean.user == null}">
+							<li class="dropdown messages-menu"><a
+								href="#{facesContext.externalContext.requestContextPath}/login">
+									Login </a></li>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{proinsaludBean.user != null}">
+							<li class="dropdown user user-menu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<img src="#{facesContext.externalContext.requestContextPath}/resources/assets/img/user2-160x160.jpg" class="user-image" alt="User Image" />
+									<span class="hidden-xs">#{proinsaludBean.user.username}</span>
+								</a>
+								<ul class="dropdown-menu">
+									<li class="user-header">
+										<img src="#{facesContext.externalContext.requestContextPath}/resources/assets/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+										<p>
+											<small>#{proinsaludBean.user.person.nameCompleted}</small>
+										</p>
+									</li>
+									<li class="user-footer" style="min-width: 200px;">
+										<div class="pull-left">
+											<a href="#{facesContext.externalContext.requestContextPath}/secured/talento_humano/perfil_usuario.xhtml" class="btn btn-primary">Profile</a>
+										</div>
+										<div class="pull-right">
+											<a href="#{facesContext.externalContext.requestContextPath}/logout" class="btn btn-danger">Sign out</a>
+										</div>
+									</li>
+								</ul>
+							</li>
+						</h:panelGroup>
+						<!-- Control Sidebar Toggle Button -->
+						<li><a href="#" data-toggle="control-sidebar"> <i class="fa fa-gears"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</h:form></header>
+</f:view>
+</html>

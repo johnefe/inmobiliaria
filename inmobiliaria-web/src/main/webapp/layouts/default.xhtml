@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui">
+<f:view contentType="text/html">
+	<h:head>
+		<f:facet name="first">
+			<!-- Meta, title, CSS, favicons, etc. -->
+			<meta charset="utf-8" />
+			<meta name="keywords" content="#{msg['msg.tituloPrincipal']}" />
+			<meta name="description" content="#{msg['msg.tituloPrincipal']}" />
+			<meta name="author" content="#{msg['msg.autor']}" />
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+			<!-- Favicon -->
+			<!-- 			<link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/assets/img/mycustomfavicon.ico" /> -->
+			<link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/assets/img/mycustomfavicon.ico" type="image/x-icon" />
+			<!-- 			<link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/assets/img/mycustomfavicon.ico" type="image/x-icon" /> -->
+			<!-- 			<link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/assets/img/mycustomfavicon.ico" /> -->
+			<!-- 			<link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/mycustomfavicon.ico" /> -->
+			<!-- 			<link rel="shortcut icon" href="/resources/favicon.ico" /> -->
+			<!-- 			<link rel="shortcut icon" href="/favicon.ico" /> -->
+			<!-- 			<link href="/proinsalud-web/resources/favicon.ico" type="image/x-icon" rel="shortcut icon" /> -->
+
+
+			<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/bootstrap.min.css" />
+			<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/font-awesome.min.css" />
+<!-- 			<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/plugins/fontawesome/css/fontawesome-all.min.css" /> -->
+			<!-- 						<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script> -->
+			<!-- 						<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet" /> -->
+<!-- 			<script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/assets/plugins/fontawesome/js/fontawesome-all.min.js"></script> -->
+
+
+
+			<!-- Ionicons -->
+			<!-- 			<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/ionicons.min.css" /> -->
+			<!-- Theme style -->
+			<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/AdminLTE.min.css" />
+			<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/_all-skins.min.css" />
+			<!-- Google Font -->
+			<!-- 			<link rel="stylesheet" -->
+			<!-- 				href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" /> -->
+			<!-- 			SMARTMENUS -->
+			<link href="#{facesContext.externalContext.requestContextPath}/resources/assets/plugins/smartmenus/sm-core-css.css" rel="stylesheet" />
+			<link href="#{facesContext.externalContext.requestContextPath}/resources/assets/plugins/smartmenus/jquery.smartmenus.bootstrap.css" rel="stylesheet" />
+
+			<!-- 			PROINSALUD -->
+			<link href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/proinsalud.css" rel="stylesheet" />
+
+			<!-- 			MATERIALIZE -->
+			<!-- 			<link -->
+			<!-- 				href="#{facesContext.externalContext.requestContextPath}/resources/assets/plugins/materialize/material_icons.css" -->
+			<!-- 				rel="stylesheet" /> -->
+			<!-- 			<link type="text/css" rel="stylesheet" -->
+			<!-- 				href="#{facesContext.externalContext.requestContextPath}/resources/assets/plugins/materialize/materialize.css" -->
+			<!-- 				media="screen,projection" /> -->
+
+			<!-- SCRIPTS QUE SE NECESITAN DESDE EL INICIO -->
+			<!-- jQuery -->
+			<!-- SCRIPTS PROPIOS -->
+			<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+			<!--[if lt IE 9]>
+				  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+				  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+				<![endif]-->
+		</f:facet>
+	</h:head>
+	<h:body>
+		<body class="hold-transition skin-blue sidebar-mini fixed #{proinsaludBean.optionSelectedApp != null ? 'sidebar-collapse':''}">
+			<div class="wrapper">
+				<!-- Start: Main -->
+				<div id="main">
+					<ui:insert name="header">
+						<ui:include src="header.xhtml" />
+
+					</ui:insert>
+					<ui:insert name="sidebar">
+						<ui:include src="sidebar.xhtml" />
+					</ui:insert>
+					<div class="content-wrapper" style="overflow: auto;">
+						<ui:insert name="spinner">
+							<ui:include src="/layouts/utils/spinner.xhtml" />
+						</ui:insert>
+						<div style="padding: 15px;">
+							<ui:insert name="content">
+								<ui:include src="content.xhtml" />
+							</ui:insert>
+						</div>
+						<ui:insert name="confirm_dialog">
+							<ui:include src="/layouts/utils/confirm_dialog.xhtml" />
+						</ui:insert>
+					</div>
+					<ui:insert name="footer">
+						<ui:include src="footer.xhtml" />
+					</ui:insert>
+					<ui:insert name="asidebar">
+						<ui:include src="asidebar.xhtml" />
+						<div class="control-sidebar-bg"></div>
+					</ui:insert>
+
+
+				</div>
+			</div>
+			<!-- BEGIN: PAGE SCRIPTS -->
+			<!-- sweetalert plugins -->
+			<!-- HighCharts Plugin -->
+
+			<script>
+				onerror = handleErr;
+				function handleErr(msg, url, l) {
+					txt = "Error: " + msg + "\n";
+					txt += "url: " + url + "\n";
+					txt += "line: " + l + "\n";
+					alert(txt);
+					console.log(txt);
+					return true;
+				}
+			</script>
+
+			<!-- jQuery 3 -->
+			<script src="#{facesContext.externalContext.requestContextPath}/resources/assets/js/jquery.min.js"></script>
+			<script>
+				$.noConflict();
+			</script>
+			<!-- Bootstrap 3.3.7 -->
+			<script src="#{facesContext.externalContext.requestContextPath}/resources/assets/js/bootstrap.min.js"></script>
+			<!-- SlimScroll -->
+			<script src="#{facesContext.externalContext.requestContextPath}/resources/assets/js/jquery.slimscroll.min.js"></script>
+			<!-- FastClick -->
+			<script src="#{facesContext.externalContext.requestContextPath}/resources/assets/js/fastclick.js"></script>
+			<!-- AdminLTE App -->
+			<script src="#{facesContext.externalContext.requestContextPath}/resources/assets/js/adminlte.min.js"></script>
+			<!-- SmartMenus jQuery plugin -->
+			<script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/assets/plugins/smartmenus/jquery.smartmenus.js"></script>
+			<!-- SmartMenus jQuery Bootstrap Addon -->
+			<script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/assets/plugins/smartmenus/jquery.smartmenus.bootstrap.js"></script>
+			<!-- 		 AdminLTE for demo purposes -->
+			<!-- 			<script src="#{facesContext.externalContext.requestContextPath}/resources/assets/js/demo.js"></script> -->
+			<!-- 			MATERIALIZE -->
+			<!-- 			<script type="text/javascript" -->
+			<!-- 				src="#{facesContext.externalContext.requestContextPath}/resources/assets/plugins/materialize/materialize.min.js"></script> -->
+			<!-- 			JS PROJECT -->
+			<script type="text/javascript" src="#{facesContext.externalContext.requestContextPath}/resources/assets/js/proinsalud.js"></script>
+		</body>
+	</h:body>
+</f:view>
+</html>

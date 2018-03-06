@@ -1,0 +1,625 @@
+@charset "ISO-8859-1";
+
+.box {
+	
+}
+
+/*--------COLORES-------*/
+.color-white {
+	color: #fff;
+}
+
+.color-black {
+	color: #000;
+}
+
+.color-gray-dark {
+	color: #949494;
+}
+
+.color-blue {
+	color: #1976D2 !important;
+}
+/*--------FIN COLORES-------*/
+
+/*---------BOTONES------------*/
+.btn-fav {
+	background: #2399e503 !important;
+	border: #2399e503 !important;
+	margin-top: 14px !important;
+}
+
+.ui-growl {
+	z-index: 9999 !important;
+	position: fixed !important;
+	width: 250px;
+	height: 10px !important;
+	top: 7%;
+}
+
+.ui-growl-title {
+	font-size: 16px;
+	text-align: center;
+}
+
+.ui-growl-message p {
+	font-size: 14px;
+	/*letter-spacing: -1px;*/
+}
+
+.btn-fav:hover {
+	background: #2b28282b !important;
+}
+
+/*BOTON NORMAL*/
+.btn-icon {
+	background: transparent !important;
+	border: none !important;
+	margin: 0px !important;
+	padding: 0px !important;
+	width: auto !important;
+	height: auto !important;
+}
+
+.btn-icon>span {
+	width: auto !important;
+	height: auto !important;
+	top: 0px !important;
+	margin: 0px !important;
+}
+
+.btn-ic {
+	height: 45px;
+	width: 45px;
+	top: 5px;
+	border: 0px !important;
+	color: #000000 !important;
+	background: #ffffff00 !important;
+	margin: 5px;
+	float: left;
+}
+
+.btn-ic span+span {
+	display: none !important;
+}
+
+.ui-button.ui-state-default .ic-btn {
+	background-size: 45px;
+	height: 45px;
+	width: 45px;
+	position: initial;
+	font-family: FontAwesome;
+	background: #3c8dbc !important;
+	border: 1px solid #2473a0;
+	border-radius: 5%;
+	padding-top: 0px;
+	color: white;
+	overflow: visible;
+	text-indent: -0;
+	font-size: 2em;
+	margin: 0px !important;
+}
+
+.ui-button.ui-state-default .ic-btn:hover {
+	background: #146a9c !important;
+	transition: 0.3s background ease;
+	border: 1px solid #0e5a86;
+}
+
+.ui-button.ui-state-disabled .ic-btn {
+	background-size: 45px;
+	height: 45px;
+	width: 45px;
+	position: initial;
+	font-family: FontAwesome;
+	background: #3c8dbc !important;
+	border: 1px solid #2473a0;
+	border-radius: 5%;
+	padding-top: 0px;
+	color: white;
+	overflow: visible;
+	text-indent: -0;
+	font-size: 2em;
+	margin: 0px !important;
+}
+
+.ui-button.ui-state-disabled .ic-btn:hover {
+	background: #3c8dbc !important;
+	border: 1px solid #2473a0;
+}
+
+/*CAMBIA EL COLOR DE LOS BOTONES*/
+.ui-button.ui-state-default .ic-btn2 {
+	background: #3c8dbc !important;
+	border: 1px solid #1e6086;
+}
+
+.ui-button.ui-state-default .ic-btn2:hover {
+	background-color: #2374a2 !important;
+	transition: 0.5s background ease;
+	border: 1px solid #074061;
+}
+
+.ui-button.ui-state-disabled .ic-btn2 {
+	background: #3c8dbc !important;
+	border: 1px solid #1e6086;
+}
+
+.ui-button.ui-state-disabled .ic-btn2:hover {
+	background: #3c8dbc !important;
+	border: 1px solid #1e6086;
+}
+
+/*----BOTON PEQUEÑO---*/
+.btn-icon-little {
+	background: transparent !important;
+	border: none !important;
+	margin: 0px !important;
+	padding: 0px !important;
+	width: auto !important;
+	height: auto !important;
+}
+
+.btn-icon-little>span {
+	width: auto !important;
+	height: auto !important;
+	top: 0px !important;
+	margin: 0px !important;
+}
+
+.btn-ic-little {
+	height: 25px;
+	width: 25px;
+	top: 5px;
+	border: 0px !important;
+	color: #000000 !important;
+	background: #ffffff00 !important;
+	margin: 5px;
+	float: left;
+}
+
+.btn-ic-little span+span {
+	display: none !important;
+}
+
+.ui-button.ui-state-default .ic-btn-little {
+	background-size: 25px;
+	height: 25px;
+	width: 25px;
+	position: initial;
+	transition: 0.5s background ease;
+	font-family: FontAwesome;
+	background: #3c8dbc !important;
+	border: 1px solid #2473a0;
+	border-radius: 25%;
+	padding-top: 0px;
+	color: white;
+	overflow: visible;
+	text-indent: -0;
+	font-size: 15px;
+	margin: 0px !important;
+}
+
+.ui-button.ui-state-default .ic-btn-little:hover {
+	background: #146a9c !important;
+	transition: 0.3s background ease;
+	border: 1px solid #0e5a86;
+}
+
+.ui-button.ui-state-disabled .ic-btn-little {
+	background-size: 25px;
+	height: 25px;
+	width: 25px;
+	position: initial;
+	transition: 0.5s background ease;
+	font-family: FontAwesome;
+	background: #3c8dbc !important;
+	border: 1px solid #2473a0;
+	border-radius: 25%;
+	padding-top: 0px;
+	color: white;
+	/*overflow: visible;*/
+	text-indent: -0;
+	font-size: 15px;
+	margin: 0px !important;
+}
+
+.ui-button.ui-state-disabled .ic-btn-little:hover {
+	background: #3c8dbc !important;
+	border: 1px solid #2473a0;
+}
+
+/* -------btn nuevo----- */
+.ui-button.ui-state-default .ic-btn-new:before {
+	content: "\f067";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn guardar----- */
+.ui-button.ui-state-default .ic-btn-save:before {
+	content: "\f0c7";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn cancelar----- */
+.ui-button.ui-state-default .ic-btn-cancel:before {
+	content: "\f05e";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn editar----- */
+.ui-button.ui-state-default .ic-btn-edit:before {
+	content: "\f040";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn check----- */
+.ui-button.ui-state-default .ic-btn-check:before {
+	content: "\f058";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn quitar----- */
+.ui-button.ui-state-default .ic-btn-trash:before {
+	content: "\f1f8";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn ver----- */
+.ui-button.ui-state-default .ic-btn-view:before {
+	content: "\f06e";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn no ver----- */
+.ui-button.ui-state-default .ic-btn-noview:before {
+	content: "\f070";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn actualizar----- */
+.ui-button.ui-state-default .ic-btn-refresh:before {
+	content: "\f021";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn signo pesos----- */
+.ui-button.ui-state-default .ic-btn-money:before {
+	content: "\f155";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn limpiar----- */
+.ui-button.ui-state-default .ic-btn-clean:before {
+	content: "\f12d";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn candado----- */
+.ui-button.ui-state-default .ic-btn-lock:before {
+	content: "\f13e";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn atraz----- */
+.ui-button.ui-state-default .ic-btn-back:before {
+	content: "\f0a8";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn pdf----- */
+.ui-button.ui-state-default .ic-btn-pdf:before {
+	content: "\f1c1";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn excel----- */
+.ui-button.ui-state-default .ic-btn-excel:before {
+	content: "\f1c3";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn informacion----- */
+.ui-button.ui-state-default .ic-btn-info:before {
+	content: "\f129";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn download----- */
+.ui-button.ui-state-default .ic-btn-download:before {
+	content: "\f019";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+/* -------btn comentario----- */
+.ui-button.ui-state-default .ic-btn-comment:before {
+	content: "\f27a";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+/* -------btn x----- */
+.ui-button.ui-state-default .ic-btn-x:before {
+	content: "\f00d";
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+}
+
+.ui-button.ui-state-default .ic-btn-list:before {
+	font-family: FontAwesome, "Font Awesome 5 Light", "Font Awesome 5 Free",
+		"Font Awesome 5 Brands", "Font Awesome 5 Solid";
+	content: "\f0ca";
+	font-style: normal;
+	font-weight: normal;
+}
+
+/*---boton para las tablas o pequeños----*/
+.ui-button.ui-state-default .btn-table {
+	background: #3c8dbc !important;
+	border: 1px solid #2473a0;
+}
+
+.ui-button.ui-state-default .btn-table:hover {
+	background: #146a9c !important;
+	transition: 0.3s background ease;
+	border: 1px solid #0e5a86;
+}
+
+.ui-button.ui-state-disabled .btn-table {
+	background: #3c8dbc !important;
+	border: 1px solid #2473a0;
+}
+
+.ui-button.ui-state-disabled .btn-table:hover {
+	background: #3c8dbc !important;
+	border: 1px solid #2473a0;
+}
+
+/*---boton para los picklist----*/
+.picklist-pro .ui-picklist-buttons .ui-picklist-buttons-cell .ui-state-default
+	{
+	color: #fff;
+	background: #3c8dbc !important;
+	border: 1px solid #2473a0;
+}
+
+.picklist-pro .ui-picklist-buttons .ui-picklist-buttons-cell .ui-state-hover
+	{
+	background: #146a9c !important;
+	transition: 0.3s background ease;
+	border: 1px solid #0e5a86;
+}
+
+.picklist-pro .ui-picklist-list-wrapper {
+	width: auto !important;
+}
+
+/*---------FIN BOTONES------------*/
+.no-float {
+	float: none;
+	display: inline-block;
+}
+
+.centered {
+	float: none;
+	margin: 0 auto;
+}
+
+.control-label {
+	text-align: left !important;
+	font-weight: normal;
+}
+
+.control-label-checkbox label {
+	font-size: 11px;
+	font-weight: normal;
+}
+
+.title-box {
+	font-size: 30px !important;
+}
+
+.title-form {
+	font-size: 20px !important;
+	font-weight: normal;
+}
+
+.form-fields-vertical>div {
+	margin-bottom: 8px;
+}
+
+.form-table {
+	padding: 0px;
+}
+
+.color-blue {
+	color: #1976D2 !important;
+}
+
+.ui-radiobutton-icon {
+	margin-top: -1px !important;
+}
+
+.space-vertical {
+	height: 10px !important;
+}
+
+.div-btn {
+	float: right;
+	border-top: 1px solid #d8d8d8;
+	margin: 15px;
+}
+
+.card-n {
+	position: relative !important;
+	display: -webkit-box !important;
+	display: -webkit-flex !important;
+	display: -ms-flexbox !important;
+	display: flex !important;
+	-webkit-box-orient: vertical !important;
+	-webkit-box-direction: normal !important;
+	-webkit-flex-direction: column !important;
+	-ms-flex-direction: column !important;
+	flex-direction: column !important;
+	background-color: #ecf0f5 !important;
+	border: 1px solid rgba(0, 0, 0, .125) !important;
+	border-radius: .25rem !important;
+	margin-bottom: 18px;
+}
+
+.card-block-n {
+	-webkit-box-flex: 1 !important;
+	-webkit-flex: 1 1 auto !important;
+	-ms-flex: 1 1 auto !important;
+	flex: 1 1 auto !important;
+	padding: 1.25rem !important;
+}
+
+.div-btn-header {
+	float: right;
+	margin: 15px;
+}
+
+.card-footer-n {
+	padding: .75rem 1.25rem;
+	background-color: #f7f7f9;
+	border-top: 1px solid rgba(0, 0, 0, .125);
+}
+
+.block-with-text {
+	overflow: hidden;
+	position: relative;
+	line-height: 1.2em;
+	max-height: 3.6em;
+	text-align: justify;
+	margin-right: -1em;
+	padding-right: 1em;
+	/*min-height: 86px;*/
+}
+
+.nofloat {
+	float: none;
+	display: inline-block;
+}
+
+.fieldset {
+	border: 1px solid #ebedf0;
+	float: left;
+	margin: 15px;
+	padding: 10px;
+}
+
+.date-input>input {
+	display: block !important;
+	width: 100% !important;
+	height: 34px !important;
+	padding: 6px 12px !important;
+	font-size: 14px !important;
+	line-height: 1.42857143 !important;
+	color: #555 !important;
+	background-color: #fff !important;
+	background-image: none !important;
+	border: 1px solid #ccc !important;
+}
+
+/*PARA UN LABEL QUE ES REQUERIDO*/
+.required {
+	color: black;
+	font-weight: bold;
+}
+
+.required:after {
+	content: " *";
+}
+
+/*PARA EL MENSAJE DE AYUDA*/
+.tooltip-icon {
+	color: #3c8dbc;
+}
+
+.tooltip-icon:hover {
+	cursor: help;
+}
+
+.tooltip-icon-tbl:hover {
+	cursor: help;
+}
+
+/*TITULO*/
+.box-head {
+	margin: 10px;
+	border-bottom: 1px solid #00000017;
+}
+
+.title-head {
+	width: 100%;
+	font-size: 30px;
+	text-align: center;
+	font-weight: normal;
+	color: black;
+	font-size: 30px;
+}
+
+.subtitle-head {
+	font-size: 25px;
+	color: #757575;
+	font-weight: normal;
+	margin-bottom: 50px;
+}
+
+/*INPUT TABLE PRIMEFACES*/
+.ui-datatable .ui-column-filter {
+	height: 25px;
+	/*width: 100%;*/
+}
+
+/*HEADER TABLA PEQUEÑA*/
+.row-table-small {
+	font-size: 10px;
+	font-weight: bold;
+}
+
+.sin-label {
+	margin-top: 30px;
+}
+
+.text-normal {
+	font-size: 12px;
+	font-weight: normal;
+	color: black;
+}

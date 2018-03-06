@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"
+	xmlns:mvc="http://www.springframework.org/schema/mvc">
+
+	<context:component-scan base-package="com.proinsalud.sistemas" />
+
+
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<beans:bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<beans:property name="objectMapper" ref="jacksonObjectMapper" />
+			</beans:bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+	<beans:bean id="jacksonObjectMapper" class="com.proinsalud.sistemas.core.util.MyJsonConverter" />
+
+
+	<mvc:default-servlet-handler />
+	<!-- DECLARAR INTERCEPTOR -->
+	<mvc:interceptors>
+		<beans:bean id="loggerInterceptor" class="com.proinsalud.sistemas.web.application.component.RequestInterceptor" />
+	</mvc:interceptors>
+
+	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="prefix" value="/secured/" />
+		<beans:property name="suffix" value=".xhtml" />
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+	</beans:bean>
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Getting Database properties -->
+	<context:property-placeholder location="classpath:application.properties" />
+
+	<!-- DataSource -->
+	<beans:bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+		<beans:property name="driverClassName" value="${jdbc.driverClassName}"></beans:property>
+		<beans:property name="url" value="${jdbc.url}"></beans:property>
+		<beans:property name="username" value="${jdbc.username}"></beans:property>
+		<beans:property name="password" value="${jdbc.password}"></beans:property>
+	</beans:bean>
+
+	<!-- Hibernate 4 SessionFactory Bean definition -->
+	<beans:bean id="sessionFactoryGeneral" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="configLocation">
+			<beans:value>classpath:hibernate-general.cfg.xml</beans:value>
+		</beans:property>
+		<beans:property name="hibernateProperties">
+			<beans:props>
+				<beans:prop key="hibernate.dialect">${hibernate.dialect}</beans:prop>
+				<beans:prop key="hibernate.show_sql">${hibernate.show_sql}</beans:prop>
+				<beans:prop key="hibernate.format_sql">${hibernate.format_sql}</beans:prop>
+				<beans:prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</beans:prop>
+				<beans:prop key="hibernate.enable_lazy_load_no_trans">${hibernate.enable_lazy_load_no_trans}</beans:prop>
+			</beans:props>
+		</beans:property>
+	</beans:bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<beans:property name="sessionFactory" ref="sessionFactoryGeneral" />
+	</beans:bean>
+
+
+	<!-- ESTO ES PARA LA SESION DOBLE AUN NO ESTA LISTA -->
+	<!-- <beans:bean id="sessionRegistry" -->
+	<!-- class="org.springframework.security.core.session.SessionRegistryImpl" /> -->
+
+	<!-- <beans:bean id="sas" -->
+	<!-- class="org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy"> -->
+	<!-- <beans:constructor-arg> -->
+	<!-- <beans:list> -->
+	<!-- <beans:bean -->
+	<!-- class="org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy"> -->
+	<!-- <beans:constructor-arg ref="sessionRegistry" /> -->
+	<!-- <beans:property name="maximumSessions" value="1" /> -->
+	<!-- <beans:property name="exceptionIfMaximumExceeded" -->
+	<!-- value="true" /> -->
+	<!-- </beans:bean> -->
+	<!-- <beans:bean -->
+	<!-- class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy" /> -->
+	<!-- <beans:bean -->
+	<!-- class="org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy"> -->
+	<!-- <beans:constructor-arg ref="sessionRegistry" /> -->
+	<!-- </beans:bean> -->
+	<!-- </beans:list> -->
+	<!-- </beans:constructor-arg> -->
+	<!-- </beans:bean> -->
+
+
+	<!-- SERVICIOS -->
+	<!-- estos servicios se los habilita cuando la inyeccion se la hace desde el faces-config.xml -->
+
+	<!-- <beans:bean name="iPersonaService" -->
+	<!-- class="com.proinsalud.sistemas.core.pqrs.serviceImpl.PersonaService" /> -->
+
+	<!-- <beans:bean name="iUsuarioService" -->
+	<!-- class="com.spring.hibernate.base.serviceimpl.UsuarioService" /> -->
+
+</beans:beans>

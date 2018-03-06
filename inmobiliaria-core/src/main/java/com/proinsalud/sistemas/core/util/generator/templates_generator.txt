@@ -1,0 +1,106 @@
+*****TEMPLATE INTERFAZ DAO Y SERVICE*****
+
+"package com.proinsalud.sistemas.core.@SCHEMA@.@FOLDER@;\r\n" + "\r\n" + 
+"import java.util.List;\r\n" + "\r\n" + 
+"import com.proinsalud.sistemas.core.@SCHEMA@.model.@MODEL@;\r\n" + "\r\n" + 
+"public interface I@MODEL@@PHASE@ {\r\n" + "\r\n" + 
+			"	public @MODEL@ persistEntity(@MODEL@ entity);\r\n" + "	\r\n" + 
+			"	public @MODEL@ mergeEntity(@MODEL@ entity);\r\n" + "	\r\n" + 
+			"	public void deleteEntity(@MODEL@ entity);\r\n" + "	\r\n" + 
+			"	public List<@MODEL@> findAllEntity();\r\n" + "	\r\n" +
+			"	public @MODEL@ findEntityById(Long id);\r\n" + "	\r\n" + 
+			"	public void persistEntity(List<@MODEL@> entities);\r\n" + "	\r\n" + 
+			"	public void mergeEntity(List<@MODEL@> entities);\r\n" + "	\r\n" + 
+			"	public void deleteEntity(List<@MODEL@> entities);\r\n" + "	\r\n" + 
+			"}"
+			
+
+***TEMPLATE DAO IMPLEMENTACION****
+
+"package com.proinsalud.sistemas.core.@SCHEMA@.dao.impl;\r\n" + "\r\n" + 
+"import java.io.Serializable;\r\n" + "import java.util.List;\r\n" + "\r\n" + 
+"import org.springframework.stereotype.Repository;\r\n" + "\r\n"+ 
+"import com.proinsalud.sistemas.core.@SCHEMA@.dao.I@MODEL@Dao;\r\n" + 
+"import com.proinsalud.sistemas.core.@SCHEMA@.model.@MODEL@;\r\n" + 
+"import com.proinsalud.sistemas.core.generic.GenericDao;\r\n" + "\r\n" + 
+"@Repository(value = \"@REPOSITORY@Dao\")\r\n"	+ 
+			"public class @MODEL@Dao extends GenericDao<Long, @MODEL@> implements I@MODEL@Dao, Serializable {\r\n" + "\r\n" + 
+			"	public @MODEL@ persistEntity(@MODEL@ entity) {\r\n" + 
+			"		return super.persist(entity);\r\n" + 
+			"	}\r\n" + "\r\n"+ 
+			"	public @MODEL@ mergeEntity(@MODEL@ entity) {\r\n" + 
+			"		return super.merge(entity);\r\n" + 
+			"	}\r\n" + "\r\n" + 
+			"	public void deleteEntity(@MODEL@ entity) {\r\n" + 
+			"		super.delete(entity);\r\n" + 
+			"	}\r\n" + "\r\n" + 
+			"	public List<@MODEL@> findAllEntity() {\r\n"+ 
+			"		return super.findAll();\r\n" + 
+			"	}\r\n" + "\r\n" + 
+			"	public @MODEL@ findEntityById(Long id) {\r\n" + 
+			"		return super.findById(id);\r\n" + 
+			"	}\r\n" + "\r\n" + 
+			"	public void persistEntity(List<@MODEL@> entities) {\r\n" + 
+			"		super.persistAll(entities);\r\n" + 
+			"	}\r\n" + "\r\n" + 
+			"	public void mergeEntity(List<@MODEL@> entities) {\r\n" + 
+			"		super.mergeAll(entities);\r\n" + 
+			"	}\r\n" + "\r\n" + 
+			"	public void deleteEntity(List<@MODEL@> entities) {\r\n" + 
+			"		super.deleteAll(entities);\r\n" + 
+			"	}\r\n" + "\r\n" + 
+			"}"
+			
+			
+***TEMPLATE SERVICE IMPLEMENTACION****		
+			
+"package com.proinsalud.sistemas.core.@SCHEMA@.service.impl;\r\n" + "\r\n" + 
+"import java.io.Serializable;\r\n" + "import java.util.List;\r\n" + "\r\n" + 
+"import org.springframework.beans.factory.annotation.Autowired;\r\n"+ 			
+"import org.springframework.beans.factory.annotation.Qualifier;\r\n" + 
+"import org.springframework.stereotype.Repository;\r\n" + 
+"import org.springframework.transaction.annotation.Transactional;\r\n" + "\r\n" + 
+"import com.proinsalud.sistemas.core.@SCHEMA@.dao.I@MODEL@Dao;\r\n"+
+"import com.proinsalud.sistemas.core.@SCHEMA@.model.@MODEL@;\r\n" + 
+"import com.proinsalud.sistemas.core.@SCHEMA@.service.I@MODEL@Service;\r\n" + "\r\n" + 
+"@Repository(value = \"@REPOSITORY@Service\")\r\n" + 
+"public class @MODEL@Service implements I@MODEL@Service, Serializable {\r\n"+ "\r\n" + 
+"	@Autowired(required = true)\r\n" + 
+"	@Qualifier(value = \"@REPOSITORY@Dao\")\r\n" + 
+"	private I@MODEL@Dao i@MODEL@Dao;\r\n" + "\r\n" + 
+"	@Transactional\r\n" + 
+"	public @MODEL@ persistEntity(@MODEL@ entity) {\r\n"+ 
+"		return i@MODEL@Dao.persistEntity(entity);\r\n" + 
+"	}\r\n" + "\r\n" + 
+"	@Transactional\r\n" + 
+"	public @MODEL@ mergeEntity(@MODEL@ entity) {\r\n" + 
+"		return i@MODEL@Dao.mergeEntity(entity);\r\n" + 
+"	}\r\n" + "\r\n" + 
+"	@Transactional\r\n"+
+"	public void deleteEntity(@MODEL@ entity) {\r\n" + 
+"		i@MODEL@Dao.deleteEntity(entity);\r\n" + 
+"	}\r\n" + "\r\n" + 
+"	@Transactional\r\n" + 
+"	public List<@MODEL@> findAllEntity() {\r\n" + 
+"		return i@MODEL@Dao.findAllEntity();\r\n" + 
+"	}\r\n" + "\r\n" + 
+"	@Transactional\r\n"+ 
+"	public @MODEL@ findEntityById(Long id) {\r\n" + 
+"		return i@MODEL@Dao.findEntityById(id);\r\n" + 
+"	}\r\n" + "\r\n" + 
+"	@Transactional\r\n"+ 
+"	public void persistEntity(List<@MODEL@> entities) {\r\n" + 
+"		i@MODEL@Dao.persistEntity(entities);\r\n" + 
+"	}\r\n" + "\r\n" + 
+"	@Transactional\r\n"+ 
+"	public void mergeEntity(List<@MODEL@> entities) {\r\n" + 
+"		i@MODEL@Dao.mergeEntity(entities);\r\n" + 
+"	}\r\n" + "\r\n" + 
+"	@Transactional\r\n"+ 
+"	public void deleteEntity(List<@MODEL@> entities) {\r\n" + 
+"		i@MODEL@Dao.deleteEntity(entities);\r\n" + 
+"	}\r\n" + "\r\n" + 
+"}\r\n"
+			
+
+				

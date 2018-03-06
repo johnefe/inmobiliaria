@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>#{proinsaludBean.optionSelectedApp.name}</title>
+	</h:head>
+	<h:body>
+		<div class="col-sm-12">
+			<h1>#{proinsaludBean.optionSelectedApp.name}</h1>
+			<ui:repeat var="modulo" value="#{proinsaludBean.optionSelectedApp.options}">
+				<div class="col-sm-3">
+					<a></a>
+					<div class="jumbotron" style="background-color: #3c8dbc4f; padding: 50px; text-align: center;">
+						<p:outputPanel rendered="#{modulo.level.levelPos == 2}">
+							<h3>#{modulo.name}</h3>
+							<p>#{modulo.options.size()} Items</p>
+							<p>
+								<a class="btn btn-primary btn-lg" href="#{modulo.detail}" role="button">Ir</a>
+							</p>
+						</p:outputPanel>
+
+						<p:outputPanel rendered="#{modulo.options.size() > 0}">
+							<h3>#{modulo.name}</h3>
+							<ul>
+								<ui:repeat var="r" value="#{modulo.options}">
+									<li class="text-left">
+										<a href="#{r.detail}">#{r.name}</a>
+									</li>
+								</ui:repeat>
+							</ul>
+						</p:outputPanel>
+
+						<p:outputPanel rendered="#{modulo.options.size() == 0}">
+							<ul>
+								<li class="text-left">
+									<a href="#{modulo.detail}">#{modulo.name}</a>
+								</li>
+							</ul>
+						</p:outputPanel>
+					</div>
+				</div>
+			</ui:repeat>
+		</div>
+	</h:body>
+</f:view>
+</html>

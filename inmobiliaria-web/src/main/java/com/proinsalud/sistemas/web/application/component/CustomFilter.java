@@ -1,0 +1,93 @@
+package com.proinsalud.sistemas.web.application.component;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.filter.GenericFilterBean;
+
+import com.proinsalud.sistemas.core.security.model.Option;
+import com.proinsalud.sistemas.web.application.bean.SessionBean;
+import com.proinsalud.sistemas.web.util.App;
+import com.proinsalud.sistemas.web.util.Constants;
+
+/**
+ * @author Andres Santacruz
+ * @datetime 9/11/2017 - 11:31:14 a. m.
+ *
+ */
+public class CustomFilter extends GenericFilterBean implements Serializable {
+
+	private static final long serialVersionUID = -4349941450537389102L;
+	private static final Log LOG = App.getLogger(CustomFilter.class);
+	
+	@Autowired
+	@Qualifier(value = Constants.REF_SESSION_BEAN)
+	private SessionBean sessionBean;
+	
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+
+		HttpServletRequest req = (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;
+		String url = req.getRequestURI();
+		if (App.isAuthenticated()) {
+			try {
+				if (existeOpcion(url)) {
+					chain.doFilter(req, res);
+				} else {
+					// res.sendRedirect("/proinsalud-web/secured/error/acceso_denegado.xhtml");
+					res.sendError(403);
+				}
+			} catch (ServletException e) {
+				LOG.error("ERROR ServletException: " + e.getMessage() + " Pagina: " + url);
+			} catch (IOException e) {
+				LOG.error("ERROR IOException: " + e.getMessage() + " Pagina: " + url);
+			}
+		} else {
+			LOG.info("Recurso: " + url);
+			chain.doFilter(request, response);
+		}
+	}
+
+	public boolean existeOpcion(String requestURL) {
+		LOG.info("URL: " + requestURL.toLowerCase());
+		if (requestURL.toLowerCase().contains("javax.faces.resource")) {
+			return true;
+		} else if (requestURL.toLowerCase().contains("/proinsalud-web/resources")) {
+			return true;
+		} else if (requestURL.toLowerCase().equals("/proinsalud-web/secured/bienvenido")
+				|| requestURL.toLowerCase().equals("/proinsalud-web/secured/index.xhtml")
+				|| requestURL.toLowerCase().equals("/proinsalud-web/secured/")
+				|| requestURL.toLowerCase().equals("/proinsalud-web/secured")
+				|| requestURL.toLowerCase().equals("/proinsalud-web/")
+				|| requestURL.toLowerCase().equals("/proinsalud-web/login")
+				|| requestURL.toLowerCase().equals("/proinsalud-web/logout")
+				|| requestURL.toLowerCase().equals("/proinsalud-web/index.xhtml")
+				|| requestURL.toLowerCase().equals("/proinsalud-web/errors")
+				|| requestURL.toLowerCase().equals("/proinsalud-web/secured/error/acceso_denegado.xhtml")
+				|| requestURL.toLowerCase().equals("/proinsalud-web/secured/error/error_page.xhtml")) {
+			sessionBean.setOptionSelectedApp(null);
+			return true;
+		} else {
+			String url = requestURL.split("/proinsalud-web/secured/")[1];
+			url = url.endsWith("index.xhtml") ? url.replace("index.xhtml","" ) : url;
+			List<String> urlList = Arrays.asList(url.split("/"));
+			Option option = App.hasPermission(urlList);
+			sessionBean.setOptionSelectedApp(option);			
+			return option != null;
+		}
+	}
+}

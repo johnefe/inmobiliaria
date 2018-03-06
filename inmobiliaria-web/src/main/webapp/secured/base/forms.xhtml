@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>#{msg['msg.tituloPrincipal']}</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="/layouts/default.xhtml">
+			<ui:define name="content">
+				<p:outputLabel></p:outputLabel>
+
+				<div class="box box-success">
+					<div class="box-header with-border">
+						<h3 class="box-title ">
+							<strong>Formulario Horizontal</strong>
+						</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+
+						<h:form id="form1" prependId="false">
+
+							<p:messages id="messages" showDetail="true" autoUpdate="false" closable="true" globalOnly="true" for="form1" />
+
+							<p:commandButton title="Nuevo" process="@this" onclick="PF('statusDialog').show(); " />
+
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label>Text</label>
+									<input type="text" class="form-control" placeholder="Enter ..." />
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label>Text Disabled</label>
+									<input type="text" class="form-control" placeholder="Enter ..." disabled="true" />
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label>Textarea</label>
+									<textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+								</div>
+							</div>
+
+							<div class="clearfix"></div>
+
+							<!-- 							fila 2 -->
+							<div class="col-sm-4">
+								<div class="form-group has-success">
+									<label class="control-label" for="inputSuccess">
+										<i class="fa fa-check"></i>
+										Input with success
+									</label>
+									<input type="text" class="form-control" id="inputSuccess" placeholder="Enter ..." />
+									<span class="help-block">Help block with success</span>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group has-warning">
+									<label class="control-label" for="inputWarning">
+										<i class="fa fa-bell-o"></i>
+										Input with warning
+									</label>
+									<input type="text" class="form-control" id="inputWarning" placeholder="Enter ..." />
+									<span class="help-block">Help block with warning</span>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group has-error">
+									<label class="control-label" for="inputError">
+										<i class="fa fa-times-circle-o"></i>
+										Input with error
+									</label>
+									<input type="text" class="form-control" id="inputError" placeholder="Enter ..." />
+									<span class="help-block">Help block with error</span>
+								</div>
+							</div>
+
+							<div class="clearfix"></div>
+
+							<!-- 							fila 3 -->
+							<div class="col-sm-4">
+								<div class="form-group">
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" />
+											Checkbox 1
+										</label>
+									</div>
+
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" />
+											Checkbox 2
+										</label>
+									</div>
+
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" disabled="true" />
+											Checkbox disabled
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<div class="radio">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="true" />
+											Option one is this and that&mdash;be sure to include why it's great
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
+											Option two can be something else and selecting it will deselect option one
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled="true" />
+											Option three is disabled
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label>Select</label>
+									<select class="form-control">
+										<option>option 1</option>
+										<option>option 2</option>
+										<option>option 3</option>
+										<option>option 4</option>
+										<option>option 5</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="clearfix"></div>
+
+							<!-- fila4 -->
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label>Select Disabled</label>
+									<select class="form-control" disabled="true">
+										<option>option 1</option>
+										<option>option 2</option>
+										<option>option 3</option>
+										<option>option 4</option>
+										<option>option 5</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label>Select Multiple</label>
+									<select multiple="true" class="form-control">
+										<option>option 1</option>
+										<option>option 2</option>
+										<option>option 3</option>
+										<option>option 4</option>
+										<option>option 5</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<label>Select Multiple Disabled</label>
+									<select multiple="true" class="form-control" disabled="true">
+										<option>option 1</option>
+										<option>option 2</option>
+										<option>option 3</option>
+										<option>option 4</option>
+										<option>option 5</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-sm-offset-4">
+								<div class="form-group">
+									<div class="btn-group center-block">
+										<p:commandButton class="btn btn-lg btn-danger" process="@this" action="#{formularioTest.showMessage('Se presiono el boton Cancelar')}" value="Cancelar" update="messages" />
+										<p:commandButton class="btn btn-lg btn-info" process="@this" action="#{formularioTest.showMessage('Se presiono el boton Mostrar Mensaje')}" value="Mostrar Mensaje" update="messages" />
+										<p:commandButton class="btn btn-lg btn-success" process="@this" action="#{formularioTest.showMessage('Se presiono el boton Aceptar')}" value="Aceptar" update="messages" />
+										<p:commandButton class="btn btn-lg btn-warning" process="@this" action="#{formularioTest.showMessage('Se presiono el boton Otro')}" value="Otro" update="messages" />
+									</div>
+								</div>
+							</div>
+						</h:form>
+					</div>
+				</div>
+
+
+
+				<div class="box box-info">
+					<div class="box-header with-border">
+						<h3 class="box-title">
+							<strong>Formulario Vertical</strong>
+						</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+
+						<form role="form">
+
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label>Text</label>
+									<input type="text" class="form-control" placeholder="Enter ..." />
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label>Text Disabled</label>
+									<input type="text" class="form-control" placeholder="Enter ..." disabled="true" />
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label>Textarea</label>
+									<textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+								</div>
+							</div>
+
+							<div class="clearfix"></div>
+
+							<!-- 							fila 2 -->
+							<div class="col-sm-12">
+								<div class="form-group has-success">
+									<label class="control-label" for="inputSuccess">
+										<i class="fa fa-check"></i>
+										Input with success
+									</label>
+									<input type="text" class="form-control" id="inputSuccess" placeholder="Enter ..." />
+									<span class="help-block">Help block with success</span>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="form-group has-warning">
+									<label class="control-label" for="inputWarning">
+										<i class="fa fa-bell-o"></i>
+										Input with warning
+									</label>
+									<input type="text" class="form-control" id="inputWarning" placeholder="Enter ..." />
+									<span class="help-block">Help block with warning</span>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="form-group has-error">
+									<label class="control-label" for="inputError">
+										<i class="fa fa-times-circle-o"></i>
+										Input with error
+									</label>
+									<input type="text" class="form-control" id="inputError" placeholder="Enter ..." />
+									<span class="help-block">Help block with error</span>
+								</div>
+							</div>
+
+							<div class="clearfix"></div>
+
+							<!-- 							fila 3 -->
+							<div class="col-sm-12">
+								<div class="form-group">
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" />
+											Checkbox 1
+										</label>
+									</div>
+
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" />
+											Checkbox 2
+										</label>
+									</div>
+
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" disabled="true" />
+											Checkbox disabled
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="form-group">
+									<div class="radio">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="true" />
+											Option one is this and that&mdash;be sure to include why it's great
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" />
+											Option two can be something else and selecting it will deselect option one
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled="true" />
+											Option three is disabled
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label>Select</label>
+									<select class="form-control">
+										<option>option 1</option>
+										<option>option 2</option>
+										<option>option 3</option>
+										<option>option 4</option>
+										<option>option 5</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="clearfix"></div>
+
+							<!-- fila4 -->
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label>Select Disabled</label>
+									<select class="form-control" disabled="true">
+										<option>option 1</option>
+										<option>option 2</option>
+										<option>option 3</option>
+										<option>option 4</option>
+										<option>option 5</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label>Select Multiple</label>
+									<select multiple="true" class="form-control">
+										<option>option 1</option>
+										<option>option 2</option>
+										<option>option 3</option>
+										<option>option 4</option>
+										<option>option 5</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-sm-12">
+								<div class="form-group">
+									<label>Select Multiple Disabled</label>
+									<select multiple="true" class="form-control" disabled="true">
+										<option>option 1</option>
+										<option>option 2</option>
+										<option>option 3</option>
+										<option>option 4</option>
+										<option>option 5</option>
+									</select>
+								</div>
+							</div>
+
+						</form>
+					</div>
+				</div>
+
+				<!-- 				BOX3 -->
+				<div class="col-sm-4">
+					<div class="box box-info">
+						<div class="box-header with-border">
+							<h3 class="box-title">
+								<strong>Formulario Vertical 1</strong>
+							</h3>
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body">
+
+							<form role="form">
+
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>Text</label>
+										<input type="text" class="form-control" placeholder="Enter ..." />
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>Text Disabled</label>
+										<input type="text" class="form-control" placeholder="Enter ..." disabled="true" />
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>Textarea</label>
+										<textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class="form-group has-error">
+										<label class="control-label" for="inputError">
+											<i class="fa fa-times-circle-o"></i>
+											Input with error
+										</label>
+										<input type="text" class="form-control" id="inputError" placeholder="Enter ..." />
+										<span class="help-block">Help block with error</span>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="col-sm-4">
+					<div class="box box-danger">
+						<div class="box-header with-border">
+							<h3 class="box-title">
+								<strong>Formulario Vertical 2</strong>
+							</h3>
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body">
+
+							<form role="form">
+
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>Text</label>
+										<input type="text" class="form-control" placeholder="Enter ..." />
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>Text Disabled</label>
+										<input type="text" class="form-control" placeholder="Enter ..." disabled="true" />
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>Textarea</label>
+										<textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class="form-group has-error">
+										<label class="control-label" for="inputError">
+											<i class="fa fa-times-circle-o"></i>
+											Input with error
+										</label>
+										<input type="text" class="form-control" id="inputError" placeholder="Enter ..." />
+										<span class="help-block">Help block with error</span>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-4">
+					<div class="box box-success">
+						<div class="box-header with-border">
+							<h3 class="box-title">
+								<strong>Formulario Vertical 3</strong>
+							</h3>
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body">
+
+							<form role="form">
+
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>Text</label>
+										<input type="text" class="form-control" placeholder="Enter ..." />
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>Text Disabled</label>
+										<input type="text" class="form-control" placeholder="Enter ..." disabled="true" />
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label>Textarea</label>
+										<textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+									</div>
+								</div>
+
+								<div class="col-sm-12">
+									<div class="form-group has-error">
+										<label class="control-label" for="inputError">
+											<i class="fa fa-times-circle-o"></i>
+											Input with error
+										</label>
+										<input type="text" class="form-control" id="inputError" placeholder="Enter ..." />
+										<span class="help-block">Help block with error</span>
+									</div>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+
+
+				<div class="clearfix"></div>
+
+
+				<div class="box box-danger">
+					<div class="box-header with-border">
+						<h3 class="box-title">
+							<strong>Formulario Botones</strong>
+						</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+
+						<form role="form">
+
+							<div class="col-sm-3">
+								<a class="btn btn-info btn-app">
+									<i class="fa fa-save"></i>
+									Info
+								</a>
+
+								<a class="btn btn-danger btn-app">
+									<i class="fa fa-save"></i>
+									Cancel
+								</a>
+							</div>
+
+
+
+							<!-- 								forma2 -->
+							<div class="col-sm-3">
+								<a class="btn btn-info">
+									<i class="fa fa-save"></i>
+									Info
+								</a>
+
+								<a class="btn btn-success btn-xs">
+									<i class="fa fa-save"></i>
+									Success
+								</a>
+								<a class="btn btn-info btn-sm">
+									<i class="fa fa-save"></i>
+									Info
+								</a>
+
+								<a class="btn btn-danger btn-md">
+									<i class="fa fa-save"></i>
+									Cancel
+								</a>
+
+								<a class="btn btn-lg waves-effect waves-light">
+									<i class="fa fa-save"></i>
+									Warning
+								</a>
+							</div>
+
+							<!-- forma3 -->
+
+							<div class="col-sm-3">
+								<div class="btn-group">
+									<button type="button" class="btn btn-lg btn-info">Cancelar</button>
+									<button type="button" class="btn btn-lg btn-info">Guardar</button>
+									<button type="button" class="btn btn-lg btn-info">Otro</button>
+								</div>
+							</div>
+
+							<div class="col-sm-3">
+								<div class="btn-group-vertical">
+									<button type="button" class="btn btn-lg btn-info">Cancelar</button>
+									<button type="button" class="btn btn-lg btn-info">Guardar</button>
+									<button type="button" class="btn btn-lg btn-info">Otro</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
+</html>

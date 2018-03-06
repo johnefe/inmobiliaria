@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<f:view>
+	<h:head>
+		<title>#{msg['msg.tituloPrincipal']}</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="/layouts/default.xhtml">
+			<ui:define name="content">
+				<p:importEnum type="com.proinsalud.sistemas.core.util.enums.StateConvocatoryEnum" var="states" allSuffix="ALL_ENUM_VALUES" />
+
+				<h:form prependId="false" id="form1">
+					<div class="col-sm-12">
+						<div class="box">
+							<p:messages id="messages" showDetail="true" autoUpdate="false" closable="true" globalOnly="true" for="form1" />
+
+							<div class="box-head">
+								<label class="title-head">#{msg['lbl.analisisConvocatoria']}</label>
+							</div>
+
+							<div class="box-body">
+								<p:outputPanel id="pnlConvocatoria">
+
+
+									<!-- 	PANEL LISTADO -->
+
+									<p:outputPanel id="pnlListadoConvocatorias" rendered="#{seguimientoConvocatoriaBean.pnlListadoConvocatorias}">
+
+										<div class="col-sm-12">
+											<label class="subtitle-head">#{msg['lbl.listadoConvocatorias']}</label>
+										</div>
+
+										<div class="clearfix" />
+
+										<div class="col-sm-12">
+
+											<p:dataTable id="tbl" var="item" value="#{seguimientoConvocatoriaBean.convocatories}" paginatorAlwaysVisible="false" paginatorPosition="bottom" rows="5" paginator="true"
+												paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" emptyMessage="#{msg['lbl.registrosVacios']}" rowsPerPageTemplate="#{msg['msg.tbl.rowsPerPageTemplate']}">
+
+												<p:column width="200" headerText="#{msg['lbl.nombre']}" sortBy="#{item.name}" priority="1" filterBy="#{item.name}" filterMatchMode="contains">
+													<h:outputText value="#{item.name}" />
+												</p:column>
+
+												<p:column headerText="#{msg['lbl.descripcion']}" priority="5" width="250">
+													<h:outputText value="#{proinsaludUtilBean.truncate(item.description,100, true)}" />
+												</p:column>
+
+												<p:column headerText="#{msg['lbl.fechaApertura']}" priority="5" sortBy="#{item.opening}">
+													<h:outputText value="#{item.opening}">
+														<f:convertDateTime locale="es_CO" timeZone="America/Bogota" dateStyle="short" type="date" pattern="dd/MM/yyyy - h:mm:ss a" />
+													</h:outputText>
+												</p:column>
+
+												<p:column headerText="#{msg['lbl.fechaCierre']}" priority="3" sortBy="#{item.expiration}">
+													<h:outputText value="#{item.expiration}">
+														<f:convertDateTime locale="es_CO" timeZone="America/Bogota" dateStyle="short" type="date" pattern="dd/MM/yyyy - h:mm:ss a" />
+													</h:outputText>
+												</p:column>
+
+												<p:column headerText="#{msg['lbl.productos']}" priority="5" width="100">
+													<h:outputText value="#{item.convocatoryProducts.size()}" />
+												</p:column>
+
+												<p:column headerText="#{msg['lbl.proveedores']}" priority="5" width="100">
+													<h:outputText value="#{item.quotations.size()}" />
+												</p:column>
+
+												<p:column headerText="#{msg['lbl.estado']}" sortBy="#{item.state}" filterBy="#{item.state}" filterMatchMode="contains" priority="2">
+													<h:outputText value="#{item.state}" />
+													<i title="#{msg['lbl.convocatoriaAbierta']}" class="#{item.openConvocatory ? 'fa fa-globe tooltip-icon-tbl text-info':''}" style="margin-left: 10px;" aria-hidden="true"></i>
+												</p:column>
+
+												<p:column priority="1" width="130">
+													<p:commandButton action="#{seguimientoConvocatoriaBean.loadConvocatory(item)}" process="@this" update="pnlConvocatoria" title="#{msg['lbl.revizarCotizaciones']}" styleClass="btn-ic-little" icon="ic-btn-little ic-btn-money" onstart="showSpinner();" onsuccess="hideSpinner();" />
+
+													<p:commandButton rendered="#{item.orderBuy.steps.size() > 0}" action="#{seguimientoConvocatoriaBean.cargarFlujoConvocatoria(item)}" process="@this" update="pnlConvocatoria" title="#{msg['lbl.flujo']}" styleClass="btn-ic-little" icon="ic-btn-little ic-btn-list" onstart="showSpinner();"
+														onsuccess="hideSpinner();" />
+
+													<p:commandButton rendered="#{seguimientoConvocatoriaBean.hasQuotationsProviders(item)}" onclick="PrimeFaces.monitorDownload(null, onFinishDownload)" title="Descargar Formato de Cotización" ajax="false" process="@this"
+														actionListener="#{seguimientoConvocatoriaBean.exportarCotizacionConvocatoriaExcel(item)}" update="@this" styleClass="btn-ic-little" icon="ic-btn-little ic-btn-download">
+														<p:fileDownload value="#{seguimientoConvocatoriaBean.download}"></p:fileDownload>
+													</p:commandButton>
+													<p:commandButton styleClass="btn_download_hide_delete" process="@this" actionListener="#{seguimientoConvocatoriaBean.onFinishDownload()}" style="display:none" />
+												</p:column>
+
+												<f:facet name="footer">
+													<p:outputPanel style="text-align:right;">
+														<label>#{msg['lbl.convocatoriaAbierta']}</label>
+														<i class="fa fa-globe fa-lg text-info"></i>
+													</p:outputPanel>
+												</f:facet>
+
+											</p:dataTable>
+
+										</div>
+
+									</p:outputPanel>
+
+									<!-- 	PANEL ANALISIS -->
+
+									<p:outputPanel id="pnlAnalisisConvocatoria" rendered="#{seguimientoConvocatoriaBean.pnlAnalisisConvocatoria}">
+
+										<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 form-group">
+											<label class="subtitle-head">#{seguimientoConvocatoriaBean.convocatory.name}</label>
+											<div class="div-btn-header">
+												<p:commandButton title="#{msg['lbl.regresar']}" action="#{seguimientoConvocatoriaBean.back()}" process="@this" update="pnlConvocatoria" styleClass="btn-ic" icon="ic-btn ic-btn-back" />
+											</div>
+										</div>
+
+										<div class="clearfix" />
+
+										<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 form-group">
+											<p class="text-justify">#{seguimientoConvocatoriaBean.convocatory.description}</p>
+
+											<div class="clearfix" />
+
+											<div class="col-sm-6">
+												<p:panel style="border:none;">
+													<h:panelGrid columns="2" style="width:100%">
+														<h:outputText value="Fecha de Apertura:" style="font-weight: bold;" />
+														<h:outputText value="#{seguimientoConvocatoriaBean.convocatory.opening}">
+															<f:convertDateTime locale="es_CO" timeZone="America/Bogota" dateStyle="short" type="date" pattern="dd/MM/yyyy - h:mm:ss a" />
+														</h:outputText>
+
+														<h:outputText value="Fecha de Cierre:" style="font-weight: bold;" />
+														<h:outputText value="#{seguimientoConvocatoriaBean.convocatory.expiration}">
+															<f:convertDateTime locale="es_CO" timeZone="America/Bogota" dateStyle="short" type="date" pattern="dd/MM/yyyy - h:mm:ss a" />
+														</h:outputText>
+
+													</h:panelGrid>
+												</p:panel>
+											</div>
+										</div>
+
+										<div class="clearfix" />
+
+
+
+
+										<div class="col-lg-offset-4 col-lg-4 col-sm-12 text-center form-group">
+
+											<p:outputPanel rendered="#{seguimientoConvocatoriaBean.convocatory.orderBuy.id != null}">
+
+												<div class="panel panel-info">
+													<div class="panel-heading">
+														<label>Orden de Compra</label>
+													</div>
+													<table class="table table-bordered">
+														<tbody class="text-left">
+															<tr>
+																<td>
+																	<label>Fecha de Registro</label>
+																</td>
+																<td class="text-left">
+																	<h:outputLabel styleClass="text-normal" value="#{seguimientoConvocatoriaBean.convocatory.orderBuy.registered}">
+																		<f:convertDateTime locale="es_CO" timeZone="America/Bogota" dateStyle="short" type="date" pattern="dd/MM/yyyy - h:mm:ss a" />
+																	</h:outputLabel>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	<label>Flujo actual</label>
+																</td>
+																<td class="text-left">#{seguimientoConvocatoriaBean.stepCurrent.stepOCTC.stepOrderConvocatory.name}</td>
+															</tr>
+															<tr>
+																<td>
+																	<p:commandButton oncomplete="PF('wdgCommentsOrderBuy').show();" process="@this" update="@([id$=pnlDlgCommentsOrderBuy])" title="Comentarios" icon="fa fa-comment" value="Comentarios" />
+																</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</p:outputPanel>
+										</div>
+
+										<div class="clearfix" />
+
+										<p:outputPanel rendered="#{!seguimientoConvocatoriaBean.hasQuotationsProviders(seguimientoConvocatoriaBean.convocatory)}">
+											<div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 text-center">
+												<div class="well well-lg">
+													<label>No se han realizado cotizaciones.</label>
+												</div>
+											</div>
+										</p:outputPanel>
+
+										<div class="clearfix" />
+
+										<p:outputPanel rendered="#{seguimientoConvocatoriaBean.hasQuotationsProviders(seguimientoConvocatoriaBean.convocatory)}">
+
+											<div class="col-sm-12 form-group">
+
+												<p:dataTable id="tbl_analitics" frozenColumns="1" scrollable="true" scrollWidth="auto" var="convocatoryP" value="#{seguimientoConvocatoriaBean.convocatory.convocatoryProducts}" paginatorAlwaysVisible="false" paginatorPosition="bottom" rows="5" paginator="true"
+													paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" emptyMessage="#{msg['lbl.registrosVacios']}" rowsPerPageTemplate="#{msg['msg.tbl.rowsPerPageTemplate']}">
+
+													<f:facet name="header">
+												      #{msg['lbl.productosCotizados']}
+													</f:facet>
+
+													<p:columnGroup type="frozenHeader">
+														<p:row>
+															<p:column styleClass="row-table-small" headerText="Producto"></p:column>
+														</p:row>
+													</p:columnGroup>
+
+													<p:columnGroup type="scrollableHeader">
+														<p:row>
+															<ui:repeat value="#{seguimientoConvocatoriaBean.convocatory.quotations}" var="q">
+																<p:column styleClass="row-table-small" width="200" headerText="#{q.provider.name}" />
+															</ui:repeat>
+														</p:row>
+													</p:columnGroup>
+
+													<p:column style="height:50px;">
+														<h:outputText value="#{convocatoryP.product.name}" />
+													</p:column>
+
+													<p:columns style="height:50px;" value="#{seguimientoConvocatoriaBean.convocatory.quotations}" var="q">
+														<c:set var="qcp" value="#{seguimientoConvocatoriaBean.getQCP(q , convocatoryP)}" />
+														<p:commandButton icon="#{qcp.isChecked() ? 'fa fa-check':''}" style="border:none;#{qcp.getColor() != null ?'background:'.concat(qcp.getColor()):'background:#666;'}" value="#{qcp.getPrice()}" action="#{seguimientoConvocatoriaBean.addQCP(qcp)}" process="@this"
+															update="@this, pnlProductsSelected,pnlAddQCP,tbl_analitics" title="#{msg['lbl.editar']}" />
+													</p:columns>
+
+													<f:facet name="footer">
+														<p:outputPanel style="text-align:left;">
+															<label style="margin-left: 10px;">#{msg['lbl.primeraOpcion']}</label>
+															<i title="#{msg['lbl.primeraOpcion']}" class="fa fa-circle fa-lg" style="color:#{seguimientoConvocatoriaBean.primeraOpcion}"></i>
+
+															<label style="margin-left: 10px;">#{msg['lbl.segundaOpcion']}</label>
+															<i title="#{msg['lbl.segundaOpcion']}" class="fa fa-circle fa-lg" style="color:#{seguimientoConvocatoriaBean.segundaOpcion}"></i>
+
+															<label style="margin-left: 10px;">#{msg['lbl.terceraOpcion']}</label>
+															<i title="#{msg['lbl.terceraOpcion']}" class="fa fa-circle fa-lg" style="color:#{seguimientoConvocatoriaBean.terceraOpcion}"></i>
+														</p:outputPanel>
+													</f:facet>
+
+												</p:dataTable>
+											</div>
+
+											<div class="clearfix" />
+
+											<div class="col-lg-6 col-sm-12 form-group">
+												<div class="panel panel-default">
+													<div class="panel-heading">
+														<label>#{msg['lbl.productosCotizados']}</label>
+													</div>
+													<div class="panel-body">
+
+														<div class="col-lg-6 col-sm-12 form-group">
+															<p:selectOneListbox scrollHeight="200" style="width:100%;" value="#{seguimientoConvocatoriaBean.cpSelected}" id="cbx_products" converter="hdsConvertEntity" var="item" filter="true" filterMatchMode="contains">
+																<f:selectItems value="#{seguimientoConvocatoriaBean.convocatory.convocatoryProducts}" var="item2" itemLabel="#{item2.product.name}" itemValue="#{item2}" />
+																<p:column>
+																	<h:outputText value="#{item.product.name}" style="padding-left: 15px !important;" />
+																</p:column>
+																<p:ajax event="change" process="@this" update="@this,pnlAddQCP" listener="#{seguimientoConvocatoriaBean.cargarCotizacionesPorProducto(item)}" />
+																<p:ajax event="blur" process="@this" update="@this,pnlAddQCP" />
+															</p:selectOneListbox>
+														</div>
+
+														<div class="col-lg-6 col-sm-12 form-group">
+															<p:outputPanel id="pnlAddQCP">
+																<p:selectOneListbox scrollHeight="200" rendered="#{seguimientoConvocatoriaBean.qcpByProduct != null}" value="#{seguimientoConvocatoriaBean.qcpSelected}" style="width:100%;" id="cbx_cotizacion_p" converter="hdsConvertEntity" var="item">
+																	<f:selectItems value="#{seguimientoConvocatoriaBean.qcpByProduct}" var="item2" itemLabel="#{item2.price}" itemValue="#{item2}" />
+																	<p:column>
+																		<h:outputText value="#{item.price} - #{item.quotation.provider.name}" style="padding-left: 15px !important;" />
+																	</p:column>
+																	<p:ajax event="change" process="@this" update="@this,pnlBtnAddQCP" />
+																	<p:ajax event="blur" process="@this" update="@this,pnlBtnAddQCP" />
+																</p:selectOneListbox>
+																<p:outputPanel id="pnlBtnAddQCP">
+																	<p:commandButton action="#{seguimientoConvocatoriaBean.addQCP(seguimientoConvocatoriaBean.qcpSelected)}" rendered="#{seguimientoConvocatoriaBean.qcpSelected != null}" id="btnAddQCP" process="@this" update="@this,pnlAddQCP,cbx_products,pnlProductsSelected,tbl_analitics"
+																		title="#{msg['lbl.agregar']}" styleClass="btn-ic-little" icon="ic-btn-little ic-btn-check" />
+																</p:outputPanel>
+															</p:outputPanel>
+														</div>
+
+													</div>
+												</div>
+											</div>
+
+											<div class="col-lg-6 col-sm-12 form-group">
+												<p:outputPanel id="pnlProductsSelected">
+													<p:dataTable id="tblPSelected" var="s" value="#{seguimientoConvocatoriaBean.productOrderBuys}" editMode="cell" editable="true" widgetVar="cellCars" paginatorAlwaysVisible="false" paginatorPosition="bottom" rows="5" paginator="true"
+														paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" emptyMessage="#{msg['lbl.registrosVacios']}" rowsPerPageTemplate="#{msg['msg.tbl.rowsPerPageTemplate']}">
+
+														<f:facet name="header">
+												        	Productos Seleccionados
+												    	</f:facet>
+
+														<p:column headerText="Producto">
+															<h:outputText value="#{s.productSelected.convocatoryProduct.product.name}" />
+														</p:column>
+
+														<p:column headerText="Proveedor">
+															<h:outputText value=" #{s.productSelected.quotation.provider.name}" />
+														</p:column>
+
+														<p:column headerText="Precio">
+															<h:outputText value=" #{s.productSelected.price}" />
+														</p:column>
+
+														<p:column headerText="Comentario">
+															<p:cellEditor>
+																<f:facet name="output">
+																	<h:outputText value="#{s.comment == null ? '...':s.comment}" />
+																</f:facet>
+																<f:facet name="input">
+																	<p:inputText value="#{s.comment}" style="width:96%" label="Comentario" />
+																</f:facet>
+															</p:cellEditor>
+														</p:column>
+
+														<p:column>
+															<p:commandButton update="pnlDlgCommentsProduct" rendered="#{s.comments.size() > 0}" oncomplete="PF('dlgCommentsProduct').show();" title="#{s.comments.size()} Comentario(s)" process="@this" styleClass="btn-ic-little" icon="ic-btn-little ic-btn-comment">
+																<f:setPropertyActionListener value="#{s}" target="#{seguimientoConvocatoriaBean.pobSelected}" />
+															</p:commandButton>
+														</p:column>
+
+													</p:dataTable>
+												</p:outputPanel>
+											</div>
+
+											<div class="clearfix" />
+
+											<div class="col-sm-12">
+												<div class="div-btn">
+													<p:commandButton rendered="#{seguimientoConvocatoriaBean.stepCurrent == null or seguimientoConvocatoriaBean.stepCurrent.stepOCTC.isFirst}" title="#{msg['lbl.guardar']}" process="pnlAnalisisConvocatoria" action="#{seguimientoConvocatoriaBean.guardarOrdenDeCompra()}"
+														update="@([id$=form1])" onstart="showSpinner();" onsuccess="hideSpinner();" styleClass="btn-ic" icon="ic-btn ic-btn-save" />
+													<p:commandButton title="#{msg['lbl.limpiar']}" process="@this" action="#{seguimientoConvocatoriaBean.limpiar()}" update="pnlAnalisisConvocatoria" styleClass="btn-ic" icon="ic-btn ic-btn-clean" />
+													<p:commandButton title="#{msg['lbl.cancelar']}" process="@this" action="#{seguimientoConvocatoriaBean.back()}" update="pnlConvocatoria" styleClass="btn-ic" icon="ic-btn ic-btn-cancel" />
+												</div>
+											</div>
+										</p:outputPanel>
+
+									</p:outputPanel>
+
+									<!-- 	PANEL FLUJO -->
+
+									<p:outputPanel id="pnlFlujoConvocatoria" rendered="#{seguimientoConvocatoriaBean.pnlFlujoConvocatoria}">
+
+										<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 form-group">
+											<label class="subtitle-head">#{seguimientoConvocatoriaBean.convocatory.name}</label>
+											<div class="div-btn-header">
+												<p:commandButton title="#{msg['lbl.regresar']}" action="#{seguimientoConvocatoriaBean.back()}" process="@this" update="pnlConvocatoria" styleClass="btn-ic" icon="ic-btn ic-btn-back" />
+											</div>
+										</div>
+
+										<div class="clearfix" />
+
+										<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 form-group">
+											<p class="text-justify">#{seguimientoConvocatoriaBean.convocatory.description}</p>
+										</div>
+
+										<div class="clearfix" />
+
+										<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 form-group">
+											<p class="text-justify">#{seguimientoConvocatoriaBean.convocatory.description}</p>
+
+											<div class="clearfix" />
+
+											<div class="col-lg-6 col-sm-12">
+												<table class="table table-bordered">
+													<tbody class="text-left">
+														<tr>
+															<td>
+																<label>Fecha de Apertura</label>
+															</td>
+															<td>
+																<h:outputText value="#{seguimientoConvocatoriaBean.convocatory.opening}">
+																	<f:convertDateTime locale="es_CO" timeZone="America/Bogota" dateStyle="short" type="date" pattern="dd/MM/yyyy - h:mm:ss a" />
+																</h:outputText>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<label>Fecha de Cierre</label>
+															</td>
+															<td>
+																<h:outputText value="#{seguimientoConvocatoriaBean.convocatory.expiration}">
+																	<f:convertDateTime locale="es_CO" timeZone="America/Bogota" dateStyle="short" type="date" pattern="dd/MM/yyyy - h:mm:ss a" />
+																</h:outputText>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+
+										<div class="clearfix" />
+										
+										<c:set var="sizeDivOrder" value="#{seguimientoConvocatoriaBean.modificarFlujo ? 'col-lg-6' : 'col-lg-offset-3 col-lg-6'}" />
+										
+										<div class="#{sizeDivOrder} col-sm-12 form-group">
+
+											<div class="panel panel-info">
+												<div class="panel-heading">
+													<label>Orden de Compra</label>
+												</div>
+												<table class="table table-bordered">
+													<tbody class="text-left">
+
+														<p:outputPanel rendered="#{seguimientoConvocatoriaBean.ordenDeCompraEsAprobada()}">
+															<tr>
+																<td colspan="2">
+																	<label class="col-sm-12 text-right">
+																		<span class="label label-info text-center" style="font-size: 15px;">
+																			Orden Disponible
+																			<i class="fa fa-check" />
+																		</span>
+																	</label>
+																</td>
+															</tr>
+														</p:outputPanel>
+
+														<tr>
+															<td>
+																<label>Fecha de Registro</label>
+															</td>
+															<td class="text-left">
+																<h:outputLabel styleClass="text-normal" value="#{seguimientoConvocatoriaBean.convocatory.orderBuy.registered}">
+																	<f:convertDateTime locale="es_CO" timeZone="America/Bogota" dateStyle="short" type="date" pattern="dd/MM/yyyy - h:mm:ss a" />
+																</h:outputLabel>
+															</td>
+														</tr>
+														<tr>
+															<td>
+																<label>Flujo actual</label>
+															</td>
+															<td class="text-left">#{seguimientoConvocatoriaBean.stepCurrent.stepOCTC.stepOrderConvocatory.name}</td>
+														</tr>
+														<tr>
+															<td colspan="2">
+																<p:commandButton oncomplete="PF('wdgCommentsOrderBuy').show();" process="@this" update="@([id$=pnlDlgCommentsOrderBuy])" title="Comentarios" icon="fa fa-comment" value="Comentarios" />
+															</td>
+														</tr>
+
+
+
+														<tr>
+															<td colspan="2">
+																<label class="col-sm-12 text-center">Flujo de la Orden de Compra</label>
+																<p:dataScroller value="#{seguimientoConvocatoriaBean.convocatory.orderBuy.steps}" var="s" chunkSize="10" mode="inline" scrollHeight="300">
+																	<div class="col-sm-12 form-group" style="background: #eaeaea; padding: 5px 15px;">
+																		<label class="col-sm-8 text-left">
+																			#{s.stepOCTC.stepOrderConvocatory.name} por #{s.user.person.nameCompleted} (#{s.user.username})
+																			<i title="#{s.aprobed ? 'Aprobada':'No Aprobada'}" class="fa fa-#{s.aprobed ? 'check':'times'}"></i>
+																		</label>
+
+																		<h:outputText value="#{s.registered}" class="col-sm-4 text-right text-normal" style="color: #989898;">
+																			<f:convertDateTime locale="es_CO" timeZone="America/Bogota" dateStyle="short" type="date" pattern="dd/MM/yyyy - h:mm:ss a" />
+																		</h:outputText>
+
+																		<div class="clearfix" />
+
+																		<div class="clearfix" />
+																		<p class="text-justify text-normal">#{s.comment}</p>
+																	</div>
+																</p:dataScroller>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+
+										<p:outputPanel rendered="#{seguimientoConvocatoriaBean.modificarFlujo}" id="pnlFlujoConvocatoriaModificar">
+											<div class="col-lg-6 col-md-6 col-sm-12 form-group">
+												<div class="panel panel-default">
+													<div class="panel-heading">
+														<label>Aprobar Orden de Compra</label>
+													</div>
+													<div class="panel-body">
+
+														<div class="col-sm-12 form-group">
+															<label for="txt_comment_step" class="col-sm-12 control-label required">#{msg['lbl.descripcion']}</label>
+															<div class="col-sm-12">
+																<p:inputTextarea styleClass="form-control" id="txt_comment_step" value="#{seguimientoConvocatoriaBean.stepOrder.comment}" required="true" requiredMessage="#{msg['obligatoryField']}" rows="10" cols="30" counter="display2" maxlength="#{msg['lbl.maxTextArea1000']}"
+																	counterTemplate="{0} caracteres restantes." autoResize="false">
+																	<p:ajax event="blur" update="msg_txt_comment_step , txt_comment_step"></p:ajax>
+																	<p:ajax event="change" update="msg_txt_comment_step txt_comment_step"></p:ajax>
+																</p:inputTextarea>
+																<p:watermark for="txt_comment_step" value="#{msg['lbl.digiteDescripcion']}"></p:watermark>
+																<p:message id="msg_txt_comment_step" for="txt_comment_step" />
+																<h:outputText id="display2" />
+															</div>
+														</div>
+
+														<p:outputPanel rendered="#{seguimientoConvocatoriaBean.btnNoAprobarOrden}">
+															<div class="col-lg-6 col-md-6 col-sm-12 form-group">
+																<label for="sltStepOCTP" class="col-sm-12 control-label required">Regresar a</label>
+																<div class="col-sm-12">
+																	<h:selectOneMenu styleClass="form-control" id="sltStepOCTP" value="#{seguimientoConvocatoriaBean.stepOCTCSelected}" required="true" requiredMessage="#{msg.obligatoryFieldList}">
+																		<f:converter converterId="hdsConvertEntity" />
+																		<f:selectItem itemLabel="#{msg['lbl.seleccioneItem']}" />
+																		<f:selectItems value="#{seguimientoConvocatoriaBean.stepsOCTC}" var="item" itemLabel="#{item.position} - #{item.stepOrderConvocatory.name}" itemValue="#{item}" />
+																		<p:ajax event="change" update="msg_sltStepOCTP" process="@this" />
+																	</h:selectOneMenu>
+																	<p:message id="msg_sltStepOCTP" for="sltStepOCTP" />
+																</div>
+															</div>
+														</p:outputPanel>
+
+														<div class="col-sm-12">
+															<div class="div-btn">
+																<p:commandButton title="#{msg['lbl.aprobar']}" process="pnlFlujoConvocatoriaModificar" action="#{seguimientoConvocatoriaBean.aprobarPasoOrden(true)}" update="pnlFlujoConvocatoria" onstart="showSpinner();" onsuccess="hideSpinner();" icon="fa fa-check" value="Aprobar" />
+																<p:commandButton title="#{msg['lbl.noAprobar']}" process="pnlFlujoConvocatoriaModificar" action="#{seguimientoConvocatoriaBean.aprobarPasoOrden(false)}" update="pnlFlujoConvocatoria" onstart="showSpinner();" onsuccess="hideSpinner();" icon="fa fa-times" value="No Aprobar"
+																	rendered="#{seguimientoConvocatoriaBean.btnNoAprobarOrden}" />
+															</div>
+														</div>
+
+													</div>
+												</div>
+											</div>
+										</p:outputPanel>
+
+										<div class="clearfix" />
+
+										<p:outputPanel id="pnlComentariosProductos">
+											<div class="col-sm-12 form-group">
+												<p:dataTable var="s" value="#{seguimientoConvocatoriaBean.convocatory.orderBuy.productsOrder}">
+													<f:facet name="header">
+												        Productos en la orden de compra
+												    </f:facet>
+
+													<p:column headerText="Producto">
+														<h:outputText value="#{s.productSelected.convocatoryProduct.product.name}" />
+													</p:column>
+
+													<p:column headerText="Proveedor">
+														<h:outputText value=" #{s.productSelected.quotation.provider.name}" />
+													</p:column>
+
+													<p:column headerText="Precio">
+														<h:outputText value=" #{s.productSelected.price}" />
+													</p:column>
+
+													<p:column>
+														<p:commandButton oncomplete="PF('wdgCommentsProductOrderBuy').show();" process="@this" update="pnlDlgCommentsProductFlujo" title="#{s.comments.size()} Comentario(s)" styleClass="btn-ic-little" icon="ic-btn-little ic-btn-comment">
+															<f:setPropertyActionListener value="#{s}" target="#{seguimientoConvocatoriaBean.pobSelected}" />
+														</p:commandButton>
+													</p:column>
+
+												</p:dataTable>
+											</div>
+										</p:outputPanel>
+
+									</p:outputPanel>
+								</p:outputPanel>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- DIALOGO PARA LOS COMENTARIOS DE UN PRODUCTO SELECCIONADO -->
+
+					<p:outputPanel id="pnlDlgCommentsProduct">
+						<p:dialog height="auto" width="500" rendered="#{seguimientoConvocatoriaBean.pobSelected != null}" header="Comentarios: #{seguimientoConvocatoriaBean.pobSelected.productSelected.convocatoryProduct.product.name}" widgetVar="dlgCommentsProduct" modal="true" closeOnEscape="true" resizable="false">
+							<ui:repeat var="c" value="#{seguimientoConvocatoriaBean.pobSelected.comments}">
+								<div class="col-sm-12 form-group" style="background: #eaeaea; padding: 5px 15px;">
+									<label class="col-sm-8 text-left">#{c.user.person.nameCompleted}</label>
+									<h:outputText value="#{c.registered}" class="col-sm-4 text-right" style="color: #989898;">
+										<f:convertDateTime locale="es_CO" timeZone="America/Bogota" dateStyle="short" type="date" pattern="dd/MM/yyyy - h:mm:ss a" />
+									</h:outputText>
+									<div class="clearfix" />
+									<p class="text-justify">#{c.comment}</p>
+								</div>
+							</ui:repeat>
+						</p:dialog>
+					</p:outputPanel>
+
+					<!-- DIALOGO PARA LOS COMENTARIOS DE LA ORDEN -->
+					<p:outputPanel id="pnlDlgCommentsOrderBuy">
+						<p:dialog rendered="#{seguimientoConvocatoriaBean.convocatory != null}" height="auto" width="500" header="Comentarios Orden de Compra" id="dlgCommentsOrderBuy" widgetVar="wdgCommentsOrderBuy" modal="true" closeOnEscape="true" resizable="false">
+							<div class="col-sm-12 form-group">
+								<p:dataScroller id="dlgDsCommentsOrderBuy" value="#{seguimientoConvocatoriaBean.convocatory.orderBuy.comments}" var="c" chunkSize="10" mode="inline" scrollHeight="300">
+									<div class="col-sm-12 form-group" style="background: #eaeaea; padding: 5px 15px;">
+										<label class="col-sm-8 text-left">#{c.user.person.nameCompleted}</label>
+										<h:outputText value="#{c.registered}" class="col-sm-4 text-right" style="color: #989898;">
+											<f:convertDateTime locale="es_CO" timeZone="America/Bogota" dateStyle="short" type="date" pattern="dd/MM/yyyy - h:mm:ss a" />
+										</h:outputText>
+										<div class="clearfix" />
+										<p class="text-justify">#{c.comment}</p>
+									</div>
+								</p:dataScroller>
+							</div>
+
+							<div class="clearfix" />
+
+							<div class="col-sm-12 form-group">
+								<label for="dlg_txt_comentario_order" class="col-sm-12 control-label required">Comentario</label>
+								<div class="col-sm-12">
+									<p:inputTextarea styleClass="form-control" id="dlg_txt_comentario_order" value="#{seguimientoConvocatoriaBean.convocatory.orderBuy.comment}" rows="5" cols="30" required="true" requiredMessage="#{msg['obligatoryField']}" counter="dlg_display" maxlength="#{msg['lbl.maxTextArea1000']}"
+										counterTemplate="{0} caracteres restantes." autoResize="false">
+										<p:ajax event="blur" update="dlg_msg_txt_comentario_order , dlg_txt_comentario_order" />
+										<p:ajax event="change" update="dlg_msg_txt_comentario_order, dlg_txt_comentario_order" />
+									</p:inputTextarea>
+									<p:watermark for="dlg_txt_comentario_order" value="Agrega un comentario a la orden de compra" />
+									<p:message id="dlg_msg_txt_comentario_order" for="dlg_txt_comentario_order" />
+									<h:outputText id="dlg_display" />
+								</div>
+							</div>
+
+							<div class="clearfix" />
+
+							<div class="col-sm-12">
+								<div class="div-btn">
+									<p:commandButton update="dlg_txt_comentario_order,dlgDsCommentsOrderBuy" title="#{msg['lbl.guardar']}" process="dlgCommentsOrderBuy" action="#{seguimientoConvocatoriaBean.agregarComentarioOrdenCompra()}" onstart="showSpinner();" onsuccess="hideSpinner();" styleClass="btn-ic"
+										icon="ic-btn ic-btn-save" />
+									<p:commandButton action="#{seguimientoConvocatoriaBean.convocatory.orderBuy.setComment(null)}" title="#{msg['lbl.cancelar']}" process="@this" styleClass="btn-ic" icon="ic-btn ic-btn-cancel" onclick="PF('wdgCommentsOrderBuy').hide();">
+										<p:resetInput target="dlgCommentsOrderBuy"></p:resetInput>
+									</p:commandButton>
+								</div>
+							</div>
+
+						</p:dialog>
+					</p:outputPanel>
+
+
+					<!-- DIALOGO PARA REGISTRAR LOS COMENTARIOS DE UN PRODUCTO -->
+
+					<p:outputPanel id="pnlDlgCommentsProductFlujo">
+						<p:dialog height="auto" width="500" rendered="#{seguimientoConvocatoriaBean.pobSelected != null}" header="Comentarios: #{seguimientoConvocatoriaBean.pobSelected.productSelected.convocatoryProduct.product.name}" id="dlgCommentsProductOrderBuy" widgetVar="wdgCommentsProductOrderBuy" modal="true"
+							closeOnEscape="true" resizable="false">
+
+							<div class="col-sm-12 form-group">
+								<p:dataScroller id="dlgDsCommentsProductOrderBuy" value="#{seguimientoConvocatoriaBean.pobSelected.comments}" var="c" chunkSize="10" mode="inline" scrollHeight="300">
+									<div class="col-sm-12 form-group" style="background: #eaeaea; padding: 5px 15px;">
+										<label class="col-sm-8 text-left">#{c.user.person.nameCompleted}</label>
+										<h:outputText value="#{c.registered}" class="col-sm-4 text-right" style="color: #989898;">
+											<f:convertDateTime locale="es_CO" timeZone="America/Bogota" dateStyle="short" type="date" pattern="dd/MM/yyyy - h:mm:ss a" />
+										</h:outputText>
+										<div class="clearfix" />
+										<p class="text-justify">#{c.comment}</p>
+									</div>
+								</p:dataScroller>
+							</div>
+
+							<div class="clearfix" />
+
+							<p:outputPanel id="pnlFormCommentsProduct" rendered="#{seguimientoConvocatoriaBean.modificarFlujo}">
+
+								<div class="col-sm-12 form-group">
+									<label for="dlg_txt_comentario_producto" class="col-sm-12 control-label required">Realizar un Comentario</label>
+									<div class="col-sm-12">
+										<p:inputTextarea styleClass="form-control" id="dlg_txt_comentario_producto" value="#{seguimientoConvocatoriaBean.pobSelected.comment}" rows="5" cols="30" required="true" requiredMessage="#{msg['obligatoryField']}" counter="dlg_display3" maxlength="#{msg['lbl.maxTextArea1000']}"
+											counterTemplate="{0} caracteres restantes." autoResize="false">
+											<p:ajax event="blur" update="dlg_msg_txt_comentario_product , dlg_txt_comentario_producto" />
+											<p:ajax event="change" update="dlg_msg_txt_comentario_product dlg_txt_comentario_producto" />
+										</p:inputTextarea>
+										<p:watermark for="dlg_txt_comentario_producto" value="Agrega un comentario al producto" />
+										<p:message id="dlg_msg_txt_comentario_product" for="dlg_txt_comentario_producto" />
+										<h:outputText id="dlg_display3" />
+									</div>
+								</div>
+
+								<div class="clearfix" />
+
+								<div class="col-sm-12">
+									<div class="div-btn">
+										<p:commandButton update="dlg_txt_comentario_producto , dlgDsCommentsProductOrderBuy" title="#{msg['lbl.guardar']}" process="dlgCommentsProductOrderBuy" action="#{seguimientoConvocatoriaBean.agregarComentarioProducto()}" onstart="showSpinner();" onsuccess="hideSpinner();"
+											styleClass="btn-ic" icon="ic-btn ic-btn-save" />
+										<p:commandButton update="dlgCommentsProductOrderBuy" action="#{seguimientoConvocatoriaBean.setPobSelected(null)}" title="#{msg['lbl.cancelar']}" process="@this" styleClass="btn-ic" icon="ic-btn ic-btn-cancel" oncomplete="PF('wdgCommentsProductOrderBuy').hide();">
+											<p:resetInput target="pnlFormCommentsProduct"></p:resetInput>
+										</p:commandButton>
+									</div>
+								</div>
+
+							</p:outputPanel>
+
+						</p:dialog>
+					</p:outputPanel>
+
+					<p:log rendered="false" />
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
+</html>

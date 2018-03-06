@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>#{msg['msg.tituloPrincipal']}</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="/layouts/default.xhtml">
+			<ui:define name="content">
+				<h:form prependId="false" id="form1">
+					<div class="col-sm-12">
+						<div class="box">
+							<p:messages id="messages" showDetail="true" autoUpdate="false" closable="true" globalOnly="true" for="form1" />
+							<div class="box-head">
+								<label class="title-head">Tabla de retención documental</label>
+							</div>
+							<div class="box-body">
+								<p:outputPanel id="pnlTRD">
+									<div class="col-sm-12">
+
+										<div class="col-sm-12">
+											<label class="subtitle-head">Árbol Tabla de Retención Documental</label>
+										</div>
+
+										<div class="clearfix"></div>
+
+										<div class="col-lg-6 col-md-6 col-sm-12">
+											<p:tree style="width:100%;" id="treeTrd" animate="true" draggable="false" droppable="false" var="node" value="#{trdBean.root}" filterBy="#{node.name}#{node.trdItem.name}" filterMatchMode="contains" selectionMode="single" selection="#{trdBean.select}">
+												<p:treeNode type="area" icon="ui-icon-document">
+													<b>#{node.name}</b>
+												</p:treeNode>
+												<p:treeNode type="trd" icon="ui-icon-document">
+													<b>#{node.trdItem.name}</b>
+												</p:treeNode>
+												<p:ajax event="select" update="pnlForm, btnNew" listener="#{trdBean.loadSelect()}" />
+											</p:tree>
+										</div>
+
+										<div class="col-lg-6 col-md-6 col-sm-12">
+											<p:outputPanel id="pnlForm">
+												<div class="col-sm-12 form-group">
+													<p:commandButton rendered="#{trdBean.showBtn}" action="#{trdBean.loadForm()}" title="#{msg['lbl.nuevo']}" process="@this" update="pnlForm,messages" styleClass="btn-ic" icon="ic-btn ic-btn-new" id="btnNew" />
+												</div>
+
+												<div class="clearfix" />
+
+												<p:outputPanel rendered="#{trdBean.area != null}">
+													<div class="col-sm-4 form-group">
+														<table class="table table-bordered">
+															<thead>
+																<tr class="success">
+																	<th>Area</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>#{trdBean.area.name}</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</p:outputPanel>
+
+
+												<p:outputPanel rendered="#{trdBean.trd != null}">
+													<div class="col-sm-8 form-group">
+														<table class="table table-bordered">
+															<thead>
+																<tr class="success">
+																	<th>Nombre Item</th>
+																	<th>Código</th>
+																	<th>Nivel</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr>
+																	<td>#{trdBean.trd.trdItem.name }</td>
+																	<td>#{trdBean.trd.codSerial}</td>
+																	<td>#{trdBean.trd.trdItem.level.nameLevel}</td>
+																</tr>
+															</tbody>
+														</table>
+
+													</div>
+												</p:outputPanel>
+
+												<p:outputPanel rendered="#{trdBean.trdNew != null}">
+
+													<div class="clearfix" />
+
+													<div class="col-lg-6 form-group">
+														<label for="nameFather" class="col-sm-12 control-label">Nombre Padre</label>
+														<div class="col-sm-12">
+															<h:inputText type="text" value="#{trdBean.trdNew.trdFather.trdItem.name}" id="nameFather" class="form-control" disabled="true" />
+														</div>
+
+													</div>
+
+													<div class="col-lg-6 form-group">
+														<label class="col-sm-12 control-label">Area</label>
+														<div class="col-sm-12">
+															<h:inputText type="text" value="#{trdBean.area.name}" class="form-control" disabled="true" />
+														</div>
+													</div>
+
+													<div class="clearfix" />
+
+													<div class="col-lg-6 form-group">
+														<label for="item" class="col-sm-12 control-label required">Item</label>
+														<div class="col-sm-12">
+															<h:selectOneMenu styleClass="form-control" id="item" value="#{trdBean.trdNew.trdItem}" required="true" requiredMessage="#{msg.obligatoryFieldList}">
+																<f:converter converterId="hdsConvertEntity" />
+																<f:selectItem itemLabel="#{msg['lbl.seleccioneItem']}" />
+																<f:selectItems value="#{trdBean.trdItems}" var="t" itemLabel="#{t.name}" itemValue="#{t}" />
+																<p:ajax event="change" update="code,msg_item" process="@this" listener="#{trdBean.concatCode()}" />
+																<p:ajax event="blur" update="code,msg_item" process="@this" listener="#{trdBean.concatCode()}"></p:ajax>
+															</h:selectOneMenu>
+															<p:message id="msg_item" for="item" />
+														</div>
+													</div>
+
+													<div class="col-lg-6  form-group">
+														<label for="code" class="col-sm-12 control-label">Código</label>
+														<div class="col-sm-12">
+															<h:inputText type="text" value="#{trdBean.trdNew.codSerial}" id="code" class="form-control" disabled="true" />
+														</div>
+													</div>
+
+													<div class="clearfix" />
+
+													<div class="col-lg-12 form-group">
+														<div class="div-btn">
+															<p:commandButton action="#{trdBean.saveTrd()}" title="#{msg['lbl.guardar']}" process="@([id$=form1])" update="@([id$=form1])" onstart="showSpinner();" onsuccess="hideSpinner();" styleClass="btn-ic" icon="ic-btn ic-btn-save" />
+															<p:commandButton title="#{msg['lbl.cancelar']}" process="@this" update="pnlTRD" styleClass="btn-ic" icon="ic-btn ic-btn-cancel" action="#{trdBean.cancel()}" />
+														</div>
+													</div>
+													<div class="clearfix" />
+												</p:outputPanel>
+
+											</p:outputPanel>
+										</div>
+									</div>
+								</p:outputPanel>
+							</div>
+
+						</div>
+					</div>
+				</h:form>
+
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
+</html>

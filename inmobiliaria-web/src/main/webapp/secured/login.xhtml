@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>AdminLTE 2 | Starter</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+<!-- 	FAVICON -->
+<link rel="shortcut icon" href="#{facesContext.externalContext.requestContextPath}/resources/assets/img/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="#{facesContext.externalContext.requestContextPath}/resources/assets/img/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/bootstrap.min.css" />
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/font-awesome.min.css" />
+<!-- Ionicons -->
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/ionicons.min.css" />
+<!-- Theme style -->
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/AdminLTE.min.css" />
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/skin-yellow.min.css" />
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/plugins/icheck/blue.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic" />
+</head>
+<f:view>
+	<h:head>
+		<title>Spring JSF Hibernate</title>
+	</h:head>
+	<h:body class="hold-transition login-page">
+		<div class="login-box">
+			<div class="login-logo">
+				<a href="#{facesContext.externalContext.requestContextPath}/">
+					<b>Proinsalud </b>
+					S.A.
+				</a>
+			</div>
+			<!-- /.login-logo -->
+			<div class="login-box-body">
+				<p class="login-box-msg">Iniciar Sesion</p>
+				<form id="formLogin" method="post" action="j_spring_security_check">
+					<div class="form-group has-feedback">
+						<input type="text" name="j_username" id="j_username" placeholder="Usuario" class="form-control" autofocus="true" required="true" />
+						<span class="glyphicon glyphicon-user form-control-feedback"></span>
+					</div>
+					<div class="form-group has-feedback">
+						<input type="password" name="j_password" id="j_password" placeholder="Contraseña" class="form-control" required="true" />
+						<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+					</div>
+					<div class="row">
+						<div class="col-xs-8">
+							<div class="checkbox icheck">
+								<label>
+									<input type="checkbox" />
+									Remember Me
+								</label>
+							</div>
+						</div>
+						<!-- /.col -->
+						<div class="col-xs-4">
+							<button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						</div>
+						<!-- /.col -->
+						<div class="col-xs-12">
+							<p class="text-danger text-center"><label>${loginError}</label></p>
+						</div>
+					</div>
+
+				</form>
+			</div>
+			<!-- /.login-box-body -->
+		</div>
+		<!-- /.login-box -->
+	</h:body>
+	<script src="#{facesContext.externalContext.requestContextPath}/resources/assets/js/jquery.min.js"></script>
+	<script src="#{facesContext.externalContext.requestContextPath}/resources/assets/js/bootstrap.min.js"></script>
+	<script src="#{facesContext.externalContext.requestContextPath}/resources/assets/plugins/icheck/icheck.min.js"></script>
+	<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>
+	<!-- 	<form id="formLogin" method="post" action="j_spring_security_check"> -->
+	<!-- 		<input type="text" name="j_username" id="j_username" -->
+	<!-- 			placeholder="Usuario" /> <input type="password" name="j_password" -->
+	<!-- 			id="j_password" placeholder="Contraseña" /> -->
+	<!-- 		<button type="submit" class="button btn-primary mr10 pull-right">Ingresar</button> -->
+	<!-- 		<input type="hidden" name="${_csrf.parameterName}" -->
+	<!-- 			value="${_csrf.token}" /> -->
+	<!-- 	</form> -->
+</f:view>
+</html>

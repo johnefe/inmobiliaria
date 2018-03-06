@@ -1,0 +1,62 @@
+/*
+gris oscuro #212629
+amarillo #fcd134
+*/
+.header-app{
+    background:#212629 !important;
+}
+.app-a{
+    color: #fcd134 !important;
+}
+.app-link{
+    color:#fff !important;
+}
+.app-link:hover{
+    color:#fcd134 !important;
+}
+.title-app{
+    text-align:center;
+    padding:10px;
+    
+}
+.title-card h4{
+    background:#212629;
+    color:#fcd134;
+    text-align:center;
+}
+
+.app-todos{
+    background:#eee !important;
+    padding:15px 0px;
+}
+/**/
+.app-recientes{
+    padding:10px;
+}
+/**/
+.app-todas-ventas{
+    background:#fff;
+    padding:10px;
+}
+/**/
+.app-todas-anticres{
+    background: #eee !important;
+    padding:10px;
+}
+/*estilos para los botones de ver mas en index*/
+.card-app{
+    background:#212629;
+    color:#fcd134;
+    padding-top:55px;
+    border: 3px solid #636668;
+    width: 180px;
+    height: 180px;
+}
+.card-app a{
+    color:#fff;
+    font-size:15px;
+    text-decoration:none;
+}
+
+/*--------------------------------------------*/
+

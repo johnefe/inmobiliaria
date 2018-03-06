@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<f:view>
+	<h:head>
+		<title>#{msg['msg.tituloPrincipal']}</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="/layouts/default.xhtml">
+			<ui:define name="content">
+				<p:outputPanel id="pnlGeneral">
+				<p:importEnum type="com.proinsalud.sistemas.core.util.enums.TypeModuleEnum" var="types" allSuffix="ALL_ENUM_VALUES" />
+					<div class="col-sm-12">
+						<div class="box">
+							<p:messages id="messages" showDetail="true" autoUpdate="false" closable="true" globalOnly="true" for="form1" />
+							<div class="box-head">
+								<label class="title-head">Información de Puntos de atención</label>
+							</div>
+							<div class="box-body">
+								<p:outputPanel id="pnlListPoint" rendered="#{pointBean.point eq null}">
+									<h:form prependId="false" id="form1">
+										<div class="col-sm-12 x_title panel-heading">
+											<label class="subtitle-head">Listado Puntos de Atención</label>
+										</div>
+										<div class="col-lg-12 col-sm-12 col-xs-12 text-center">
+											<div class="row">
+												<div class="col-sm-offset-8">
+													<p:commandButton title="#{msg['lbl.nuevo']}" process="@this" action="#{pointBean.nuevo()}"
+														onstart="showSpinner();" onsuccess="hideSpinner();" update="pnlGeneral,pnlNewPoint"
+														styleClass="btn-ic" icon="ic-btn ic-btn-new" />
+												</div>
+												<div class="col-md-4 col-md-push-4">
+													<p:dataTable id="tblPoints" var="point" value="#{pointBean.pointList}" rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+														paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" emptyMessage="No se encontraron registros" rowsPerPageTemplate="5,10,15">
+														<p:column headerText="NOMBRE PUNTO" priority="1">
+															<h:outputText value="#{point.name}" /> 
+														</p:column>
+														<p:column headerText="SEDE" priority="2">
+															<h:outputText value="#{point.sede.nameSede}" />
+														</p:column>
+														<p:column>
+															<p:commandButton process="@this" action="#{pointBean.loadInfoPoint(point)}" title="#{msg['lbl.editar']}" styleClass="btn-ic-little" icon="ic-btn-little ic-btn-edit btn-table" update="pnlGeneral,pnlNewPoint" />
+															<p:commandButton process="@this" action="#{pointBean.loadPointForEdition(point)}" title="Asignar Servicios" styleClass="btn-ic-little" icon="ic-btn-little ic-btn-new btn-table" update="pnlGeneral,pnlNewPointService" />
+															<p:commandButton process="@this" action="#{pointBean.loadModules(point)}" title="Agregar modulos" styleClass="btn-ic-little" icon="ic-btn-little ic-btn-view btn-table" update="pnlGeneral, pnlModules" />
+														</p:column> 
+													</p:dataTable> 
+												</div>
+											</div>
+										</div>
+									</h:form>
+								</p:outputPanel>
+								<p:outputPanel id="pnlNewPoint" rendered="#{pointBean.point ne null and pointBean.showFormServices eq false and pointBean.showInfoModules eq false}">
+									<h:form id="formNewPoint" prependId="false">
+										<div class="col-sm-12 x_title panel-heading">
+											<label class="subtitle-head">#{pointBean.point.id eq null ? 'Registrar' : 'Editar'} Punto de Atención</label>
+										</div>
+										<div class="form-group">
+											<div class="form-group col-md-3">
+												<label for="nombre_sede" class="col-sm-12 control-label required">Sede</label>
+												<h:selectOneMenu required="true" styleClass="form-control" id="nombre_sede" converter="hdsConvertEntity"
+													value="#{pointBean.point.sede}" requiredMessage="#{msg['obligatoryFieldList']}">
+													<f:converter converterId="hdsConvertEntity" />
+													<f:selectItem itemLabel="Seleccione una sede" />
+													<f:selectItems value="#{pointBean.sedeList}" var="sede" itemLabel="#{sede.nameSede}" itemValue="#{sede}" />
+												</h:selectOneMenu>
+												<p:message for="nombre_sede" />
+											</div>
+											<div class="form-group col-md-3">
+												<label for="nombre_punto" class="col-sm-12 control-label">Nombre Punto</label>
+												<h:inputText type="text" class="form-control" id="nombre_punto" placeholder="Nombre Punto" autocomplete="off"
+													value="#{pointBean.point.name}" required="true" requiredMessage="#{msg['obligatoryField']}"/>
+												<p:message for="nombre_punto" />
+											</div>
+											<div class="form-group col-md-4">
+												<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
+													<p:commandButton process="@form"
+														action="#{pointBean.savePoint()}" styleClass="btn-ic" icon="ic-btn ic-btn-save"
+														update="pnlGeneral,pnlListPoint, pnlNewPoint" onstart="PF('statusDialog').show();"
+														onsuccess="PF('statusDialog').hide();" />
+													<p:commandButton process="@form"
+														action="#{pointBean.deletePoint()}" styleClass="btn-ic"
+														icon="ic-btn ic-btn-trash"
+														update="pnlGeneral,pnlListPoint, pnlNewPoint"
+														onstart="PF('statusDialog').show();"
+														onsuccess="PF('statusDialog').hide();" />
+													<p:commandButton title="#{msg['lbl.cancelar']}"
+														process="@this" styleClass="btn-ic"
+														icon="ic-btn ic-btn-cancel"
+														action="#{pointBean.cancel()}"
+														update="pnlGeneral, pnlListPoint, pnlNewPoint" />
+												</div>
+											</div>
+										</div>
+									</h:form>
+								</p:outputPanel>
+								
+								<p:outputPanel id="pnlNewPointService" rendered="#{pointBean.point ne null and pointBean.showFormServices eq true and pointBean.showInfo eq false}">
+									<h:form id="formNewPointService" prependId="false">
+										<div class="col-sm-12 x_title panel-heading">
+ 											<div class="col-sm-12 x_title panel-heading" style="padding: 0px 15px;">
+												<label class="subtitle-head">Servicios del punto: #{pointBean.point.name}</label>
+											</div>
+										</div>
+										<div class="form-group col-md-8 col-md-push-3">
+											<p:pickList required="true" id="pickListService" value="#{pointBean.dualListPointService}" var="pService" itemValue="#{pService}"
+												itemLabel="#{pService.service.nameService}" showSourceControls="false" showTargetControls="false" showCheckbox="false" responsive="true"
+												showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains" converter="hdsConvertEntity2" requiredMessage="#{msg['obligatoryFieldList']}"
+												addLabel="#{msg['lbl.agregar']}" addAllLabel="#{msg['lbl.agregarTodos']}" removeLabel="#{msg['lbl.quitar']}" removeAllLabel="#{msg['lbl.quitarTodos']}">
+												<f:facet name="sourceCaption">#{msg['lbl.disponibles']}</f:facet>
+												<f:facet name="targetCaption">#{msg['lbl.seleccionados']}</f:facet>
+												<p:ajax event="transfer" update="msg_pickListService"></p:ajax>
+												<p:column>
+													<h:outputText value="#{pService.service.nameService}" />
+												</p:column>
+											</p:pickList>
+											<div class="col-md-9">
+												<p:message id="msg_pickListService" for="pickListService" />
+											</div>
+											<div class="form-group col-md-4 col-xs-push-6">
+												<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
+													<p:commandButton process="@form"
+														action="#{pointBean.saveServicesPoint()}" styleClass="btn-ic" icon="ic-btn ic-btn-save"
+														update="pnlGeneral,pnlListPoint, pnlNewPointService"
+														onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
+													<p:commandButton title="#{msg['lbl.cancelar']}"
+														process="@this" styleClass="btn-ic" icon="ic-btn ic-btn-cancel"
+														action="#{pointBean.cancel()}" update="pnlGeneral, pnlListPoint, pnlNewPointService" />
+												</div>
+											</div>
+										</div>
+									</h:form>
+								</p:outputPanel>
+								
+								<p:outputPanel id="pnlInfoPoint" rendered="#{pointBean.point ne null and pointBean.showInfo eq true}">
+									<h:form id="form2" prependId="false">
+										<div class="col-sm-12 x_title panel-heading">
+ 											<div class="col-sm-12 x_title panel-heading">
+												<label class="subtitle-head">Punto: #{pointBean.point.name}</label>
+<!-- 												<div class="clearfix"></div> -->
+											</div>
+											<div class="col-sm-4"
+												style="width: auto; float: left; margin: 15px;">
+												<p:commandButton action="#{pointBean.cancel()}" update="pnlGeneral,pnlListPoint,pnlInfoPoint" 
+													process="@this" icon="fa fa-caret-left" value="Regresar" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="panel-body form-table">
+												<p:dataTable id="tblModulos" var="pre" value="#{pointBean.prefixPoints}" rows="10"
+													paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+													paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+													emptyMessage="No se encontraron registros" rowsPerPageTemplate="5,10,15" >
+<!-- 													<p:column headerText="Punto" priority="1"> -->
+<!-- 														<h:outputText value="#{pre.point.name}" /> -->
+<!-- 													</p:column> -->
+													<p:column headerText="Tipo Atención" priority="2">
+														<h:outputText value="#{pre.prefix.detail}" />
+													</p:column>
+													<p:column headerText="Prefijo" priority="3">
+														<h:outputText value="#{pre.prefix.prefix}" />
+													</p:column>
+													<p:column headerText="Secuencia" priority="4">
+														<h:outputText value="#{pre.secuence}" />
+													</p:column>
+													<p:column headerText="Orden Prefijo" priority="5">
+														<h:outputText value="#{pre.prefix.orderPrefix}" />
+													</p:column>
+													<p:column headerText="Color Prefijo" priority="6">
+														<h:outputText value="#{pre.prefix.color}" />
+													</p:column>
+<!-- 													<p:column width="40"> -->
+<!-- 														<p:rowEditor editTitle="Reiniciar Secuencia" saveTitle="Aceptar" cancelTitle="Cancelar" /> -->
+<!-- 													</p:column> -->
+													<p:column width="60">
+														<p:commandButton process="@form" action="editPrefixPoint(pre)" title="Reiniciar Secuencia"
+															icon="ic-btn-little ic-btn-edit" styleClass="btn-ic-little" update="messages"/>
+													</p:column>
+												</p:dataTable>
+											</div>
+										</div>
+									</h:form>
+								</p:outputPanel>
+								
+								<p:outputPanel id="pnlModules" rendered="#{pointBean.showInfoModules eq true and pointBean.module eq null}">
+									<h:form id="formModules" prependId="false">	
+										<div class="col-sm-12 x_title panel-heading">
+											<label class="subtitle-head">Modulos del punto de atención #{pointBean.point.name}</label>
+											<div class="col-sm-offset-9">
+												<p:commandButton title="#{msg['lbl.nuevo']}" process="@this" action="#{pointBean.nuevoModulo()}"
+													onstart="showSpinner();" onsuccess="hideSpinner();" update="pnlGeneral, pnlNewModule"
+													styleClass="btn-ic" icon="ic-btn ic-btn-new" />
+												<p:commandButton title="#{msg['lbl.cancelar']}" process="@this" action="#{pointBean.cancel()}"
+													onstart="showSpinner();" onsuccess="hideSpinner();" update="pnlGeneral, pnlListPoint"
+													styleClass="btn-ic" icon="ic-btn ic-btn-cancel" />
+											</div>
+										</div>
+										<div class="form-group col-md-12">
+											<div class="col-md-8 col-md-push-2">
+												<p:dataTable id="tblSubServices" var="md" value="#{pointBean.modulesByPointList}" rows="10" paginator="true" paginatorAlwaysVisible="false"
+													paginatorPosition="bottom"
+													paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+													emptyMessage="No se encontraron registros"
+													rowsPerPageTemplate="5,10,15">
+													<f:facet name="header">
+												        	Modulos
+												    </f:facet>
+													<p:column headerText="NOMBRE MODULO" priority="1">
+														<h:outputText value="#{md.nameModule}" />
+													</p:column>
+													<p:column headerText="TIPO MODULO" priority="2">
+														<h:outputText value="#{md.typeModule}" />
+													</p:column>
+													<p:column width="100">
+														<p:commandButton process="@this" 
+															title="#{msg['lbl.editar']}" styleClass="btn-ic-little" action="#{pointBean.loadModule(md)}"
+															icon="ic-btn-little ic-btn-edit btn-table" update="pnlGeneral, pnlModules, pnlNewModule" />
+														<p:commandButton process="@this" action="#{pointBean.deleteModule(md)}"
+															title="#{msg['lbl.eliminar']}" styleClass="btn-ic-little" icon="ic-btn-little ic-btn-trash btn-table"
+															update="pnlGeneral, pnlModules" />
+													</p:column>
+												</p:dataTable>
+											</div>
+										</div>
+									</h:form>
+								</p:outputPanel>
+								
+								<p:outputPanel id="pnlNewModule" rendered="#{pointBean.module ne null}">
+									<h:form id="formNewModule" prependId="false">
+										<div class="col-sm-12 x_title panel-heading">
+											<label class="subtitle-head">#{pointBean.module.id eq null ? 'Registrar' : 'Editar'} Módulo</label>
+										</div>
+										<div class="form-group col-md-12">
+											<div class="form-group col-md-3">
+												<label for="nombre_modulo" class="col-sm-12 control-label required">Nombre del módulo</label>
+												<h:inputText type="text" class="form-control" id="nombre_modulo" placeholder="Nombre del módulo" autocomplete="off"
+													value="#{pointBean.module.nameModule}" required="true" requiredMessage="#{msg['obligatoryField']}"/>
+												<p:message for="nombre_modulo" />
+											</div>
+											<div class="form-group col-md-3">
+												<label for="tipo_modulo" class="col-sm-12 control-label required">Tipo de módulo</label>
+												<h:selectOneMenu styleClass="form-control" id="tipo_modulo" 
+													value="#{pointBean.module.typeModule}" required="true" requiredMessage="#{msg['obligatoryFieldList']}">
+													<f:selectItem itemLabel="Seleccione el tipo de módulo" />
+													<f:selectItems value="#{types.ALL_ENUM_VALUES}" var="tm" itemLabel="#{tm.label}" itemValue="#{tm}" id="items" />
+												</h:selectOneMenu>
+												<p:message for="tipo_modulo" />
+											</div>
+											<div class="form-group col-md-4">
+												<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-4">
+													<p:commandButton process="@form"
+														action="#{pointBean.saveModule()}" styleClass="btn-ic"
+														icon="ic-btn ic-btn-save"
+														update="pnlGeneral, pnlModules, pnlNewModule"
+														onstart="PF('statusDialog').show();"
+														onsuccess="PF('statusDialog').hide();" />
+													<p:commandButton title="#{msg['lbl.cancelar']}"
+														process="@this" styleClass="btn-ic"
+														icon="ic-btn ic-btn-cancel"
+														action="#{pointBean.cancelModule()}"
+														update="pnlGeneral, pnlModules, pnlNewModule" />
+												</div>
+											</div>
+										</div>
+									</h:form>
+								</p:outputPanel>
+								
+								<p:outputPanel id="pnlEditPoint" rendered="#{pointBean.prefixPoint ne null}">
+									<h:form id="form3" prependId="false">
+										<div class="col-sm-12 x_title panel-heading">
+											<div class="col-sm-4"
+												style="width: auto; float: left; margin: 15px;">
+												<p:commandButton action="#{pointBean.cancel()}" process="@this" value="Regresar"
+													update="pnlGeneral,pnlListPoint,pnlInfoPoint,pnlEditPoint" icon="fa fa-caret-left"/>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="panel-body form-table">
+												
+											</div>
+										</div>
+									</h:form>
+								</p:outputPanel>
+							</div>
+						</div>
+					</div>
+				</p:outputPanel>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
+</html>

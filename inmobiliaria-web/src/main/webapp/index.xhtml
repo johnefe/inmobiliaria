@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui">
+<h:head id="head">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>Donde Vivir</title>
+<!-- Tell the browser to be responsive to screen width -->
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
+<!-- 	FAVICON -->
+
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/estilos.css" />
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/font-awesome.css" />
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/font-awesome.min.css" />
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/modern-business.css" />
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-grid.css" />
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-grid.min.css" />
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-reboot.min.css" />
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-reboot.css" />
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap.css" />
+	<title>#{msg['msg.tituloPrincipal']}</title>
+</h:head>
+<body>
+
+	<!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top header-app">
+      <div class="container ">
+        <a class="navbar-brand app-a" href="index.html">¿DONDE VIVIR?</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link app-link" href="about.html">BUSCAR INMUEBLES</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link app-link" href="contact.html">INGRESAR</a>
+            </li>          
+            <li class="nav-item">
+              <a class="nav-link app-a" href="services.html">PUBLICA TU INMUEBLE</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+<!-- HEADER -->
+    <header>
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+          <!-- Slide One - Set the background image for this slide in the line below -->
+          <div class="carousel-item active" style="background-image: url('#{facesContext.externalContext.requestContextPath}/resources/assets/img/back.jpg')">
+            <div class="carousel-caption d-none d-md-block">
+              <h3>Arriendos, Antincres y Ventas</h3>
+              <p>Encuentra habitaciones, apartamentos y casas donde tu quieras</p>
+            </div>
+          </div>
+          <!-- Slide Two - Set the background image for this slide in the line below -->
+          <div class="carousel-item" style="background-image: url('#{facesContext.externalContext.requestContextPath}/resources/assets/img/back.jpg')">
+            <div class="carousel-caption d-none d-md-block">
+              <h3>Pauta con nosotros</h3>
+              <p>Miles de usuarios estan navengando en app arriendos, haz conocer tu negocio</p>
+            </div>
+          </div>
+          <!-- Slide Three - Set the background image for this slide in the line below -->
+          <div class="carousel-item" style="background-image: url('#{facesContext.externalContext.requestContextPath}/resources/assets/img/back.jpg')">
+            <div class="carousel-caption d-none d-md-block">
+              <h3>Third Slide</h3>
+              <p>This is a description for the third slide.</p>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </header>
+<!-- END HEADER -->
+ 
+ <!-- SECTION CATEGORIES INMOBILIARIA -->
+ <section class="container">  
+         <!-- title app-->
+      <div class="row">
+        <div class="col-lg-12 col-md-12 title-app">
+            <h3 class="">¿ESTAS BUSCANDO UN LUGAR DONDE VIVIR?</h3>
+            <p>En app arriendos puedes encontrar el mejor lugar para vivir según tu interés</p>
+        </div>
+      </div>
+
+      <!-- Marketing Icons Section -->
+      <div class="row">
+      <ui:repeat var="tipoNegocios" value="#{indexAppBean.tiposNegocios}">
+        <div class="col-lg-4  mb-4 text-center">
+          <div class="card-app col-lg-8 offset-2 rounded-circle">
+            <div class="col-lg-12"> 
+                <h4>#{tipoNegocios.nameTypeBussines}</h4>
+                <a href="#">Ver más</a>
+            </div>
+            
+          </div>
+        </div>
+       </ui:repeat>
+      </div>
+      <!-- /.row -->
+
+    </section>
+  
+<!--  SECTION arrendos agregados recientemente -->
+    <section class="app-todos"> 
+        <div class="container"> 
+              <!-- Portfolio Section -->
+      <div class="row ">
+        <div class="col-lg-12 text-center"> 
+            <h3>ARRENDOS RECIENTES</h3>
+            <p>Encuentra aquí los arrendos agregados recientemente </p>
+        </div> 
+        <div class="col-lg-12 app-recientes"> 
+            <div class="row">
+            <ui:repeat var="arrendo" value="#{indexAppBean.inmueblesArriendo}">
+        <!-- primer anuncio -->
+             <div class="col-lg-3 mb-3">
+              <div class="card h-60 text-center">
+                
+                <div class="card-body">
+                  <h4 class="card-title">#{arrendo.titleInmueble}</h4>
+                  <h6 class="card-subtitle mb-2 text-muted">$#{arrendo.price}</h6>
+                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+                <div class="card-footer">
+                  <a href="#">Leer información</a>
+                </div>
+              </div>
+            </div>
+        <!-- fin primer anuncio -->
+       		</ui:repeat>
+            </div>
+        
+        </div>
+
+        
+      </div>
+      <!-- /.row -->
+        </div>
+    </section>
+	
+<!-- ventas RECIENTES -->
+<section class="app-todas-ventas"> 
+        <div class="container"> 
+              <!-- Portfolio Section -->
+      <div class="row ">
+        <div class="col-lg-12 text-center"> 
+            <h3>ARRENDOS RECIENTES</h3>
+            <p>Encuentra aquí los arrendos agregados recientemente </p>
+        </div> 
+        <div class="col-lg-12 app-recientes"> 
+            <div class="row">
+        <!-- primer anuncio -->
+             <div class="col-lg-3 mb-3">
+              <div class="card h-60 text-center">
+                
+                <div class="card-body">
+                  <h4 class="card-title">Apartaestudio en Arrendo</h4>
+                  <h6 class="card-subtitle mb-2 text-muted">$500000</h6>
+                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+                <div class="card-footer">
+                  <a href="#">Leer información</a>
+                </div>
+              </div>
+            </div>
+        <!-- fin primer anuncio -->
+        <!-- segundo anuncio -->
+             <div class="col-lg-3 mb-3">
+              <div class="card h-60 text-center">
+                <div class="card-body">
+                  <h4 class="card-title">Apartaestudio en Arrendo</h4>
+                  <h6 class="card-subtitle mb-2 text-muted">$500000</h6>
+                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+                <div class="card-footer">
+                  <a href="#">Leer información</a>
+                </div>
+              </div>
+            </div>
+        <!-- fin segundo anuncio -->
+        <!-- tercer anuncio -->
+             <div class="col-lg-3 mb-3">
+              <div class="card h-60 text-center">
+                <div class="card-body">
+                  <h4 class="card-title">Apartaestudio en Arrendo</h4>
+                  <h6 class="card-subtitle mb-2 text-muted">$500000</h6>
+                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+                <div class="card-footer">
+                  <a href="#">Leer información</a>
+                </div>
+              </div>
+            </div>
+        <!-- fin tercer anuncio -->
+        <!-- cuarto anuncio -->
+             <div class="col-lg-3 mb-3">
+              <div class="card h-60 text-center">
+                <div class="card-body">
+                  <h4 class="card-title">Apartaestudio en Arrendo</h4>
+                  <h6 class="card-subtitle mb-2 text-muted">$500000</h6>
+                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+                <div class="card-footer">
+                  <a href="#">Leer información</a>
+                </div>
+              </div>
+            </div>
+        <!-- fin cuarto anuncio --> 
+            </div>
+        
+        </div>
+
+        
+      </div>
+      <!-- /.row -->
+        </div>
+    </section>
+
+<!-- anticres recientes -->
+<section class="app-todas-anticres"> 
+        <div class="container"> 
+              <!-- Portfolio Section -->
+      <div class="row ">
+        <div class="col-lg-12 text-center"> 
+            <h3>ARRENDOS RECIENTES</h3>
+            <p>Encuentra aquí los arrendos agregados recientemente </p>
+        </div> 
+        <div class="col-lg-12 app-recientes"> 
+            <div class="row">
+            <ui:repeat var="" value="">
+        <!-- primer anuncio -->
+             <div class="col-lg-3 mb-3">
+              <div class="card h-60 text-center">
+                
+                <div class="card-body">
+                  <h4 class="card-title">Apartaestudio en Arrendo</h4>
+                  <h6 class="card-subtitle mb-2 text-muted">$500000</h6>
+                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div>
+                <div class="card-footer">
+                  <a href="#">Leer información</a>
+                </div>
+              </div>
+            </div>
+        <!-- fin primer anuncio -->
+        </ui:repeat>
+        
+            </div>
+        
+        </div>
+
+        
+      </div>
+      <!-- /.row -->
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; www.app-arriendos.com 2018</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+	
+
+
+
+
+
+
+
+	<!-- REQUIRED JS SCRIPTS -->
+	<script src="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/jquery/jquery.js"></script>
+	<script src="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/jquery/jquery.min.js"></script>
+	<script src="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	</body>
+
+</html>

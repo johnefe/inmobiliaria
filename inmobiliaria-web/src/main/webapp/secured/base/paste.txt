@@ -1,0 +1,203 @@
+
+
+
+SELECT
+
+
+<div class="col-sm-12">
+
+											<h:selectOneMenu id="cmbTipoCentroCosto" required="true" value="#{permissions.option}" immediate="true" styleClass="form-control cmb-formulario">
+
+												<f:selectItem itemLabel="Seleccione una Aplicación" noSelectionOption="true" />
+												<f:selectItems value="#{permissions.options}" var="opt" itemLabel="#{opt.detail}" />
+												<f:converter converterId="hdsConvertEntity" />
+												<p:ajax event="change" update="@([id$=optiont])"></p:ajax>
+											</h:selectOneMenu>
+										</div>
+										<br></br>
+										<div class="col-sm-12">
+
+											<h:selectOneListbox id="list" size="10" value="#{permissions.option}">
+
+												<f:selectItems value="#{permissions.options}" var="opt" itemLabel="#{opt.detail}" />
+												<f:converter converterId="hdsConvertEntity" />
+												<p:ajax event="change" update="@([id$=optiont])"></p:ajax>
+											</h:selectOneListbox>
+
+
+											<p:selectOneListbox id="advanced" value="#{permissions.option}" converter="hdsConvertEntity" var="t" filter="true" filterMatchMode="contains">
+												<f:selectItems value="#{permissions.options}" var="theme" itemLabel="#{theme.detail}" itemValue="#{theme}" />
+
+												<p:column>
+													<h:outputText value="#{t.detail}" />
+												</p:column>
+												<p:ajax event="change" update="@([id$=formAppication])"></p:ajax>
+											</p:selectOneListbox>
+										</div>
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										<li>
+						<form>
+							<h:outputLink value="#{facesContext.externalContext.requestContextPath}/#{app.option.detail}">
+								<i class="fa fa-envelope"></i>
+								<span>#{app.option.name}</span>
+								<span class="pull-right-container">
+									<small class="label pull-right bg-red">5</small>
+								</span>
+								<!-- 								<p:ajax event="click" listener="#{proinsaludBean.setOptionSelectedApp(app.option)}"></p:ajax> -->
+								<!-- 								<f:setPropertyActionListener value="#{app.option}" target="#{proinsaludBean.optionSelectedApp}" /> -->
+								<!-- 								<f:ajax event="click" listener="#{proinsaludBean.setOptionSelectedApp(app.option)}"></f:ajax> -->
+							</h:outputLink>
+						</form>
+					</li>
+								
+								
+								
+								
+								<li>
+						<h:form id="form22">
+							<p:commandLink action="#{proinsaludBean.manageLink(app.option)}" oncomplete="window.open('#{app.option.detail}')" target="_self">
+								<i class="fa fa-envelope"></i>
+								<span>#{app.option.name} 2</span>
+								<span class="pull-right-container">
+									<small class="label pull-right bg-red">5</small>
+								</span>
+							</p:commandLink>
+						</h:form>
+					</li>	
+					
+				
+						
+			
+			------------------------MENU HEADER
+							<li>
+						<a href="#">
+							Dropdown
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#">Action</a>
+							</li>
+							<li class="divider"></li>
+							<li class="dropdown-header">Nav header</li>
+							<li>
+								<a href="#">Separated link</a>
+							</li>
+							<li>
+								<a href="#">
+									One more separated link
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="#">Another action</a>
+									</li>
+									<li>
+										<a href="#">
+											A long sub menu
+											<span class="caret"></span>
+										</a>
+										<ul class="dropdown-menu">
+											
+											<li>
+												<a href="#">Something else here</a>
+											</li>
+											<li class="disabled">
+												<a class="disabled" href="#">Disabled item</a>
+											</li>
+											<li>
+												<a href="#">One more link</a>
+											</li>
+											
+										</ul>
+									</li>
+									
+									<li>
+										<a href="#">One more link</a>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+			---------------------------------
+			
+			
+							<!-- 																<p:column style="width:20%; color:black !important;"> -->
+																<!-- 																	<p:cellEditor> -->
+																<!-- 																		<f:facet name="output"> -->
+																<!-- 																			<h:outputText value="#{cp.quantity}" /> -->
+																<!-- 																		</f:facet> -->
+																<!-- 																		<f:facet name="input"> -->
+																<!-- 																			<p:inputText style="width:40px;" maxlength="4" id="txt_quantity" value="#{cp.quantity}" onclick="event.stopPropagation();focus(event, this);"> -->
+																<!-- 																			</p:inputText> -->
+																<!-- 																		</f:facet> -->
+																<!-- 																	</p:cellEditor> -->
+																<!-- 																</p:column> -->
+																
+
+												
+										
+-------------MENU LATERAL PRIMEFACES---------------------
+
+				<p:panelMenu model="#{proinsaludBean.menuModel}">
+
+				</p:panelMenu>		
+
+private MenuModel menuModel;
+
+init(){
+	menuModel = new DefaultMenuModel();
+	loadMenuModel(menuModel, options);
+}
+
+
+public void loadMenuModel(MenuModel root, List<Option> options) {
+		for (Option opt : options) {
+			String url = opt.getDetail() + Constants.SLASH;
+			if (opt.getOptions().isEmpty()) {
+				DefaultMenuItem item = new DefaultMenuItem(opt.getName());
+				item.setUrl(opt.getDetail());
+				root.addElement(item);
+			} else {
+				DefaultSubMenu firstSubmenu = new DefaultSubMenu(opt.getName());
+				loadSubMenu(firstSubmenu, opt.getOptions(), url);
+				root.addElement(firstSubmenu);
+			}
+		}
+	}
+
+	public void loadSubMenu(DefaultSubMenu rootMenu, List<Option> options, String url) {
+		for (Option opt : options) {
+			url += opt.getDetail() + Constants.SLASH;
+			if (opt.getOptions().isEmpty()) {
+				DefaultMenuItem item = new DefaultMenuItem(opt.getName());
+				item.setUrl(url);
+				rootMenu.addElement(item);
+			} else {
+				DefaultSubMenu subMenu = new DefaultSubMenu(opt.getName());
+				loadSubMenu(subMenu, opt.getOptions(), url);
+				rootMenu.addElement(subMenu);
+			}
+		}
+	}
+
+	public void loadOptions(TreeNode root, List<Option> options) {
+		for (Option opt : options) {
+			TreeNode child = new DefaultTreeNode("opcion", opt, root);
+			root.getChildren().add(child);
+			if (!opt.getOptions().isEmpty()) {
+				loadOptions(child, opt.getOptions());
+			}
+		}
+	}
+
+												

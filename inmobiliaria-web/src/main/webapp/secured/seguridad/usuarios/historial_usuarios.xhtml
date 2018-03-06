@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
+<f:view>
+	<h:head>
+		<title>#{proinsaludBean.optionSelectedApp != null ? proinsaludBean.optionSelectedApp.name: msg['msg.tituloPrincipal']}</title>
+	</h:head>
+	<h:body>
+		<ui:composition template="/layouts/default.xhtml">
+			<ui:define name="content">
+
+				<h:form prependId="false" id="form1">
+					<div class="col-sm-12">
+
+						<div class="box">
+							<p:messages id="messages" showDetail="true" autoUpdate="false" closable="true" globalOnly="true" for="form1" />
+
+							<div class="box-body">
+								<br></br>
+								<div class="col-sm-4">
+
+									<p:dataTable id="tblPersons" widgetVar="table1" var="user" value="#{historialUsuarioBean.users}" paginatorAlwaysVisible="false" paginatorPosition="bottom" rows="10" paginator="true"
+										paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" emptyMessage="#{msg['lbl.noRegistros']}" rowsPerPageTemplate="5,10,15">
+
+										<p:column headerText="#{msg['lbl.usuarios']}" sortBy="#{user.username}" priority="2" filterBy="#{user.username} #{user.username}" filterMatchMode="contains">
+											<h:outputText value="#{user.username}" />
+										</p:column>
+
+										<p:column width="15%">
+											<p:commandButton process="@this" action="#{historialUsuarioBean.loadHistorial(user)}" update="@form" title="#{msg['lbl.ver']}" styleClass="btn-ic-little" icon="ic-btn-little ic-btn-view btn-table" onstart="showSpinner();" onsuccess="hideSpinner();" />
+										</p:column>
+
+									</p:dataTable>
+
+								</div>
+								<div class="col-sm-8">
+
+									<p:outputPanel rendered="#{historialUsuarioBean.user != null ? true : false}">
+										<p:dataTable var="u" value="#{historialUsuarioBean.user.userHistorial}" paginatorAlwaysVisible="false" paginatorPosition="bottom" rows="15" paginator="true"
+											paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" emptyMessage="#{msg['lbl.registrosVacios']}" rowsPerPageTemplate="5,5,15">
+											<f:facet name="header">
+												#{historialUsuarioBean.user.username}   - <small>#{historialUsuarioBean.user.person.nameCompleted}</small>
+   											</f:facet>
+
+
+											<p:column headerText="#{msg['lbl.direccionIp']}">
+												<h:outputText value="#{u.ipAccess}" />
+											</p:column>
+
+											<p:column headerText="#{msg['lbl.fecha']}">
+												<h:outputText value="#{u.dateAccess}">
+													<f:convertDateTime locale="es_CO" timeZone="America/Bogota" dateStyle="short" type="date" pattern="dd/MM/yyyy - h:mm:ss a" />
+												</h:outputText>
+											</p:column>
+
+											<p:column headerText="#{msg['lbl.detalle']}">
+												<h:outputText value="#{u.detail}" />
+											</p:column>
+										</p:dataTable>
+
+										<p></p>
+									</p:outputPanel>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</h:body>
+</f:view>
+</html>

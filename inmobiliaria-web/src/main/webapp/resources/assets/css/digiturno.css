@@ -1,0 +1,125 @@
+.body {
+	background: #5c6bc0;
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+
+.titulo-digiturno {
+	background:  #5261b4 !important; /* #3F51B5*#5C6BC0; #7986CB azul claro para back*/
+	color: #fff;
+	margin-bottom: 10px;
+	margin-top: 0;
+	padding: 20px;
+	
+}
+.titulo-item{
+	background:rgba(91,107,192,0.8) ;
+	border: 5px solid  #5261b4;	
+	padding: 5px;
+}
+.titulo-item h4{
+	font-size: 28px;
+}
+
+.info {
+	height: 90%;
+	background: #3949AB;
+	margin-top: 2px;
+}
+
+.cabecera-lista-turno {
+	background: #E8EAF6;
+	border-left: 2px solid #fff;
+	border-right: 2px solid #fff;
+	padding: 3px;
+}
+
+.cabecera-lista-turno h3 {
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.cabecera-lista-turno h4 {
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.turno-siguiente {
+	padding-top: 2px;
+	padding-bottom: 2px;
+	font-size: 40px;
+}
+
+.turno {
+	background: #5C6BC0;
+	color: #eee;
+	border: 1px solid #fff;
+	padding: 4px;
+}
+
+.turno h4{
+	font-size: 28px;
+}
+
+.codigo-turno {
+	color: #FFD740;
+}
+
+/*----------------------------*/
+.titulo-tv {
+	color: #FFF;	
+	font-size: 35px;
+}
+.titulo-tv strong{
+	color: #FFF;
+}
+/*------------footer-----------*/
+.footer {
+	background: #5261b4;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 100px;
+	color: #fff;
+	padding-top: 10px;
+}
+.footer-item  {
+	padding-top:5px;
+	padding-bottom:5px;
+	background: #5c6bc0; /* #3F51B5 azul del footer*/
+	border:1px solid #5261b4;
+	margin-top: 10px;
+	
+}
+
+.footer-item strong {
+	color: #FFF; /*#FFD740; amarillo*/
+	font-size: 20px;
+}
+
+/*----------reloj------------------*/
+.reloj{
+	background: #3F51B5  !important;
+	border-top: 10px solid #5261b4;
+	border-left: 10px solid #5261b4;
+	border-right: 10px solid #5261b4;
+	border-top: 10px solid #5261b4;
+	padding-bottom: 5px;
+	}
+.ui-clock{
+	background: #3F51B5  !important;
+	border:none !important;
+	color: #FFD740 !important;
+	font-size:25px !important;
+	border-radius: none !important;
+	padding:0px !important;
+}
+.hora{
+	color:#eee !important;
+	font-size: 25px;
+}
+
+.list-point{
+	padding-top:100px;
+}
+
