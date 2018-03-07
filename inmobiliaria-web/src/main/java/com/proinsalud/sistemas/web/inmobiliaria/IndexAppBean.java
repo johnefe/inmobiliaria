@@ -18,7 +18,7 @@ import com.proinsalud.sistemas.core.inmobiliaria.service.ITypeBussinesService;
 import com.proinsalud.sistemas.web.util.App;
 import com.proinsalud.sistemas.web.util.UtilWeb;
 /**
- * @author Jhon Frey Diaz
+ * @author Jhon Frey Diaz D
  * @datetime 2/03/2018 - 5:48:14 p. m.
  */
 
