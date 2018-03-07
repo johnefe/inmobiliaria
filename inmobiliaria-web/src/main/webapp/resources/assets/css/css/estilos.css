@@ -1,7 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Gochi+Hand|News+Cycle|Poiret+One|Pontano+Sans');
 /*
 gris oscuro #212629
 amarillo #fcd134
+amarillo para fondo blanco: #FF9800
+
+font-family: 'Poiret One', cursive;
+font-family: 'News Cycle', sans-serif;
+font-family: 'Pontano Sans', sans-serif;
+font-family: 'Gochi Hand', cursive;
 */
+/*----TITULOS-----*/
+
+.color-yellow{
+	color:#FF9800;
+}
+.color-black{
+	color:##212121;
+}
+.titulo-one{
+	font-family: 'Pontano Sans', sans-serif;
+	font-weight: bold;
+}
+.titulo-2{
+	font-family: 'Poiret One', cursive;
+	color:#757575;
+	font-size: 25px;
+	font-weight: bold;
+}
+.bg-gris{
+	background: #E0E0E0;
+	padding:10px;
+}
+.line{
+	border-top: 1px solid #FF9800;
+}
+
+.url{
+	font-family: 'Gochi Hand', cursive;
+	color:#eee;
+}
+/*---------------*/
+
+
+
 .header-app{
     background:#212629 !important;
 }

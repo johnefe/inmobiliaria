@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-reboot.css" />
 <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap.css" />
+<script src="https://use.fontawesome.com/74edfe93a4.js"></script>
 	<title>#{msg['msg.tituloPrincipal']}</title>
 </h:head>
 <body>
@@ -117,13 +118,13 @@
 
     </section>
   
-<!--  SECTION arrendos agregados recientemente -->
+<!--ARRENDOS AGREGADOS RECIENTEMENTE-->
     <section class="app-todos"> 
         <div class="container"> 
               <!-- Portfolio Section -->
       <div class="row ">
         <div class="col-lg-12 text-center"> 
-            <h3>ARRENDOS RECIENTES</h3>
+            <h3 class="titulo-one color-black">ARRENDOS RECIENTES</h3>
             <p>Encuentra aquí los arrendos agregados recientemente </p>
         </div> 
         <div class="col-lg-12 app-recientes"> 
@@ -131,8 +132,7 @@
             <ui:repeat var="arrendo" value="#{indexAppBean.inmueblesArriendo}">
         <!-- primer anuncio -->
              <div class="col-lg-3 mb-3">
-              <div class="card h-60 text-center">
-                
+              <div class="card h-60 text-center">      
                 <div class="card-body">
                   <h4 class="card-title">#{arrendo.titleInmueble}</h4>
                   <h6 class="card-subtitle mb-2 text-muted">$#{arrendo.price}</h6>
@@ -145,32 +145,28 @@
             </div>
         <!-- fin primer anuncio -->
        		</ui:repeat>
-            </div>
-        
-        </div>
-
-        
+            </div>    
+        </div>    
       </div>
       <!-- /.row -->
         </div>
     </section>
 	
-<!-- ventas RECIENTES -->
+<!-- VENTAS RECIENTES -->
 <section class="app-todas-ventas"> 
         <div class="container"> 
               <!-- Portfolio Section -->
       <div class="row ">
         <div class="col-lg-12 text-center"> 
-            <h3>ANTICRES RECIENTES</h3>
+            <h3 class="titulo-one color-yellow">ANTICRES RECIENTES</h3>
             <p>Encuentra aquí los anticreses agregados recientemente </p>
         </div> 
         <div class="col-lg-12 app-recientes"> 
             <div class="row">
             <ui:repeat var="arrendosAnticres" value="#{indexAppBean.inmueblesAnticres}">
-                <!-- primer anuncio -->
+              <!-- primer anuncio -->
              <div class="col-lg-3 mb-3">
-              <div class="card h-60 text-center">
-                
+              <div class="card h-60 text-center">            
                 <div class="card-body">
                   <h4 class="card-title">#{arrendosAnticres.titleInmueble}</h4>
                   <h6 class="card-subtitle mb-2 text-muted">$#{arrendosAnticres.price}</h6>
@@ -181,26 +177,21 @@
                 </div>
               </div>
             </div>
-        <!-- fin primer anuncio -->
-            
+       		 <!-- fin primer anuncio -->          
             </ui:repeat>  
             </div>
-        
-        </div>
-
-        
+        </div>       
       </div>
       <!-- /.row -->
         </div>
     </section>
-
 <!-- anticres recientes -->
 <section class="app-todas-anticres"> 
         <div class="container"> 
               <!-- Portfolio Section -->
       <div class="row ">
         <div class="col-lg-12 text-center"> 
-            <h3>VENTAS RECIENTES</h3>
+            <h3 class="titulo-one color-black">VENTAS RECIENTES</h3>
             <p>Encuentra aquí los arrendos agregados recientemente </p>
         </div> 
         <div class="col-lg-12 app-recientes"> 
@@ -221,34 +212,98 @@
               </div>
             </div>
         <!-- fin primer anuncio -->
-            
             </ui:repeat> 
-        
             </div>
-        
         </div>
-
-        
       </div>
       <!-- /.row -->
         </div>
     </section>
 
+<section class="app-todas-ventas">
+	<div class="container"> 
+     
+      <div class="row ">
+        <div class="col-lg-12 text-center"> 
+            <h3 class="titulo-one color-yellow">INMUEBLES EN VENTA O ARRIENDO EN COLOMBIA</h3>
+        </div>
+        <div class="col-6 col-md">
+            <h5>Apartamentos</h5>
+            <hr class="line" />
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#">Cool stuff</a></li>
+              <li><a class="text-muted" href="#">Random feature</a></li>
+              <li><a class="text-muted" href="#">Team feature</a></li>
+              <li><a class="text-muted" href="#">Stuff for developers</a></li>
+              <li><a class="text-muted" href="#">Another one</a></li>
+              <li><a class="text-muted" href="#">Last time</a></li>
+            </ul>
+         </div>
+         <div class="col-6 col-md">
+            <h5>Casas</h5>
+            <hr class="line" />
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#">Cool stuff</a></li>
+              <li><a class="text-muted" href="#">Random feature</a></li>
+              <li><a class="text-muted" href="#">Team feature</a></li>
+              <li><a class="text-muted" href="#">Stuff for developers</a></li>
+              <li><a class="text-muted" href="#">Another one</a></li>
+              <li><a class="text-muted" href="#">Last time</a></li>
+            </ul>
+         </div>
+         <div class="col-6 col-md">
+            <h5> Habitaciones</h5>
+            <hr class="line" />
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#">Cool stuff</a></li>
+              <li><a class="text-muted" href="#">Random feature</a></li>
+              <li><a class="text-muted" href="#">Team feature</a></li>
+              <li><a class="text-muted" href="#">Stuff for developers</a></li>
+              <li><a class="text-muted" href="#">Another one</a></li>
+              <li><a class="text-muted" href="#">Last time</a></li>
+            </ul>
+         </div>
+         <div class="col-6 col-md">
+            <h5> ApartaEstudios </h5>
+            <hr class="line" />
+            <ul class="list-unstyled text-small">
+              <li><a class="text-muted" href="#">Cool stuff</a></li>
+              <li><a class="text-muted" href="#">Random feature</a></li>
+              <li><a class="text-muted" href="#">Team feature</a></li>
+              <li><a class="text-muted" href="#">Stuff for developers</a></li>
+              <li><a class="text-muted" href="#">Another one</a></li>
+              <li><a class="text-muted" href="#">Last time</a></li>
+            </ul>
+         </div>
+       </div>
+   </div> 
+</section>
+<section class="app-todas-ventas">
+	<div class="col-lg-12 text-center"> 
+			<div class="col-lg-8 offset-2 bg-gris text-center">
+				<div class="row">
+					<div class="col-lg-1">
+						<span class="fa fa-building-o fa-4x"></span>
+					</div>
+					<div class="col-lg-11">
+						<div class="col-lg-12 ">
+							<h2 class="titulo-2">¿QUIERES DAR A CONOCER TU EMPRESA?</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+           
+      </div>
+</section>
 
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; www.app-arriendos.com 2018</p>
+        <p class="m-0 text-center url text-white">Copyright &copy; www.dondevivir.com 2018</p>
       </div>
       <!-- /.container -->
     </footer>
 	
-
-
-
-
-
-
 
 	<!-- REQUIRED JS SCRIPTS -->
 	<script src="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/jquery/jquery.js"></script>
