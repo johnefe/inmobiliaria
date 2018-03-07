@@ -65,7 +65,7 @@ public class Inmueble implements Serializable {
 
 
 	@Column(name = "price")
-	private Double price;
+	private Integer price;
 
 
 	@OneToOne(fetch = FetchType.LAZY)
@@ -159,11 +159,13 @@ public class Inmueble implements Serializable {
 		this.state = state;
 	}
 
-	public Double getPrice() {
+	
+
+	public Integer getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 

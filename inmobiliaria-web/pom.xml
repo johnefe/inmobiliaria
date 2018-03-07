@@ -55,7 +55,7 @@
 			<artifactId>inmobiliaria-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-
+		
 		<!-- SPRING -->
 		<dependency>
 			<groupId>org.springframework</groupId>

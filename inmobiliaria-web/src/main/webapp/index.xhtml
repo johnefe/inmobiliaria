@@ -161,18 +161,19 @@
               <!-- Portfolio Section -->
       <div class="row ">
         <div class="col-lg-12 text-center"> 
-            <h3>ARRENDOS RECIENTES</h3>
-            <p>Encuentra aquí los arrendos agregados recientemente </p>
+            <h3>ANTICRES RECIENTES</h3>
+            <p>Encuentra aquí los anticreses agregados recientemente </p>
         </div> 
         <div class="col-lg-12 app-recientes"> 
             <div class="row">
-        <!-- primer anuncio -->
+            <ui:repeat var="arrendosAnticres" value="#{indexAppBean.inmueblesAnticres}">
+                <!-- primer anuncio -->
              <div class="col-lg-3 mb-3">
               <div class="card h-60 text-center">
                 
                 <div class="card-body">
-                  <h4 class="card-title">Apartaestudio en Arrendo</h4>
-                  <h6 class="card-subtitle mb-2 text-muted">$500000</h6>
+                  <h4 class="card-title">#{arrendosAnticres.titleInmueble}</h4>
+                  <h6 class="card-subtitle mb-2 text-muted">$#{arrendosAnticres.price}</h6>
                   <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
                 </div>
                 <div class="card-footer">
@@ -181,48 +182,8 @@
               </div>
             </div>
         <!-- fin primer anuncio -->
-        <!-- segundo anuncio -->
-             <div class="col-lg-3 mb-3">
-              <div class="card h-60 text-center">
-                <div class="card-body">
-                  <h4 class="card-title">Apartaestudio en Arrendo</h4>
-                  <h6 class="card-subtitle mb-2 text-muted">$500000</h6>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                </div>
-                <div class="card-footer">
-                  <a href="#">Leer información</a>
-                </div>
-              </div>
-            </div>
-        <!-- fin segundo anuncio -->
-        <!-- tercer anuncio -->
-             <div class="col-lg-3 mb-3">
-              <div class="card h-60 text-center">
-                <div class="card-body">
-                  <h4 class="card-title">Apartaestudio en Arrendo</h4>
-                  <h6 class="card-subtitle mb-2 text-muted">$500000</h6>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                </div>
-                <div class="card-footer">
-                  <a href="#">Leer información</a>
-                </div>
-              </div>
-            </div>
-        <!-- fin tercer anuncio -->
-        <!-- cuarto anuncio -->
-             <div class="col-lg-3 mb-3">
-              <div class="card h-60 text-center">
-                <div class="card-body">
-                  <h4 class="card-title">Apartaestudio en Arrendo</h4>
-                  <h6 class="card-subtitle mb-2 text-muted">$500000</h6>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                </div>
-                <div class="card-footer">
-                  <a href="#">Leer información</a>
-                </div>
-              </div>
-            </div>
-        <!-- fin cuarto anuncio --> 
+            
+            </ui:repeat>  
             </div>
         
         </div>
@@ -239,20 +200,20 @@
               <!-- Portfolio Section -->
       <div class="row ">
         <div class="col-lg-12 text-center"> 
-            <h3>ARRENDOS RECIENTES</h3>
+            <h3>VENTAS RECIENTES</h3>
             <p>Encuentra aquí los arrendos agregados recientemente </p>
         </div> 
         <div class="col-lg-12 app-recientes"> 
             <div class="row">
-            <ui:repeat var="" value="">
-        <!-- primer anuncio -->
+             <ui:repeat var="arrendosVentas" value="#{indexAppBean.inmueblesVentas}">
+                <!-- primer anuncio -->
              <div class="col-lg-3 mb-3">
               <div class="card h-60 text-center">
                 
                 <div class="card-body">
-                  <h4 class="card-title">Apartaestudio en Arrendo</h4>
-                  <h6 class="card-subtitle mb-2 text-muted">$500000</h6>
-                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                  <h4 class="card-title">#{arrendosVentas.titleInmueble}</h4>
+                  <h6 class="card-subtitle mb-2 text-muted">$#{arrendosVentas.price}</h6>
+                  <p class="card-text">Lorem ipsum dolor sit, consetur adipisicing elit.</p>
                 </div>
                 <div class="card-footer">
                   <a href="#">Leer información</a>
@@ -260,7 +221,8 @@
               </div>
             </div>
         <!-- fin primer anuncio -->
-        </ui:repeat>
+            
+            </ui:repeat> 
         
             </div>
         
