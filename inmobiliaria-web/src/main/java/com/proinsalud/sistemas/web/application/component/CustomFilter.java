@@ -66,23 +66,24 @@ public class CustomFilter extends GenericFilterBean implements Serializable {
 		LOG.info("URL: " + requestURL.toLowerCase());
 		if (requestURL.toLowerCase().contains("javax.faces.resource")) {
 			return true;
-		} else if (requestURL.toLowerCase().contains("/proinsalud-web/resources")) {
+		} else if (requestURL.toLowerCase().contains("/inmobiliaria-web/resources")) {
 			return true;
-		} else if (requestURL.toLowerCase().equals("/proinsalud-web/secured/bienvenido")
-				|| requestURL.toLowerCase().equals("/proinsalud-web/secured/index.xhtml")
-				|| requestURL.toLowerCase().equals("/proinsalud-web/secured/")
-				|| requestURL.toLowerCase().equals("/proinsalud-web/secured")
-				|| requestURL.toLowerCase().equals("/proinsalud-web/")
-				|| requestURL.toLowerCase().equals("/proinsalud-web/login")
-				|| requestURL.toLowerCase().equals("/proinsalud-web/logout")
-				|| requestURL.toLowerCase().equals("/proinsalud-web/index.xhtml")
-				|| requestURL.toLowerCase().equals("/proinsalud-web/errors")
-				|| requestURL.toLowerCase().equals("/proinsalud-web/secured/error/acceso_denegado.xhtml")
-				|| requestURL.toLowerCase().equals("/proinsalud-web/secured/error/error_page.xhtml")) {
+		} else if (requestURL.toLowerCase().equals("/inmobiliaria-web/secured/bienvenido")
+				|| requestURL.toLowerCase().equals("/inmobiliaria-web/secured/index.xhtml")
+				|| requestURL.toLowerCase().equals("/inmobiliaria-web/secured/")
+				|| requestURL.toLowerCase().equals("/inmobiliaria-web/secured")
+				|| requestURL.toLowerCase().equals("/inmobiliaria-web/")
+				|| requestURL.toLowerCase().equals("/inmobiliaria-web/login")
+				|| requestURL.toLowerCase().equals("/inmobiliaria-web/register")
+				|| requestURL.toLowerCase().equals("/inmobiliaria-web/logout")
+				|| requestURL.toLowerCase().equals("/inmobiliaria-web/index.xhtml")
+				|| requestURL.toLowerCase().equals("/inmobiliaria-web/errors")
+				|| requestURL.toLowerCase().equals("/inmobiliaria-web/secured/error/acceso_denegado.xhtml")
+				|| requestURL.toLowerCase().equals("/inmobiliaria-web/secured/error/error_page.xhtml")) {
 			sessionBean.setOptionSelectedApp(null);
 			return true;
 		} else {
-			String url = requestURL.split("/proinsalud-web/secured/")[1];
+			String url = requestURL.split("/inmobiliaria-web/secured/")[1];
 			url = url.endsWith("index.xhtml") ? url.replace("index.xhtml","" ) : url;
 			List<String> urlList = Arrays.asList(url.split("/"));
 			Option option = App.hasPermission(urlList);
