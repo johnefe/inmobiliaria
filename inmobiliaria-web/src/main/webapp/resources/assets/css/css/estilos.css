@@ -14,13 +14,13 @@ font-family: 'Gochi Hand', cursive;
 /*----TITULOS-----*/
 
 .color-yellow{
-	color:#FF9800;
+	color:#FF9800 !important;
 }
 .color-black{
-	color:#212121;
+	color:#212121 !important;
 }
 .color-gray{
-	color:#757575;
+	color:#757575 !important;
 }
 .titulo-one{
 	font-size:25px;
@@ -63,6 +63,11 @@ font-family: 'Gochi Hand', cursive;
 	font-family: 'Pontano Sans', sans-serif;
 	font-size: 20px;
 	font-weight: bold;
+}
+.titulo-3{
+	font-family: 'Montserrat', sans-serif;	
+	font-size: 14px;
+	
 }
 .texto-3{
 	font-size: 18px;

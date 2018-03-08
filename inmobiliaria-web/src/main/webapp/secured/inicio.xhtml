@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<h:head id="head">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Donde Vivir</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+		name="viewport" />
+	<!-- 	FAVICON -->
+
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/estilos.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/font-awesome.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/font-awesome.min.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/modern-business.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-grid.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-grid.min.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-reboot.min.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-reboot.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap.css" />
+	<script src="https://use.fontawesome.com/74edfe93a4.js"></script>
+</h:head>
+<body>
+
+	<!-- Navigation -->
+	<nav
+		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top header-app">
+	<div class="container ">
+		<a class="navbar-brand app-a" href="#{facesContext.externalContext.requestContextPath}/">¿DONDE VIVIR?</a>
+		<button class="navbar-toggler navbar-toggler-right" type="button"
+			data-toggle="collapse" data-target="#navbarResponsive"
+			aria-controls="navbarResponsive" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link app-link"
+					href="about.html">BUSCAR INMUEBLES</a></li>
+
+				<li class="nav-item"><a class="nav-link app-link"
+					href="#{facesContext.externalContext.requestContextPath}/login">INGRESAR</a></li>
+				<li class="nav-item"><a class="nav-link app-a"
+					href="services.html">PUBLICA TU INMUEBLE</a></li>
+			</ul>
+		</div>
+	</div>
+	</nav>
+
+	<section class="container">
+		<div class="col-lg-12">
+			<div class="row py-4">
+				<div class="col-lg-12 text-center">
+				<div class="card my-2">
+				  <div class="card-body">
+				    <h3 class="titulo-2 color-gray">Bienvenido, aqui puedes publicar tus inmuebles y pautar con nosotros.</h3>
+				  </div>
+				</div>
+					
+				</div>
+				<!-- categorias de mis inmuebles -->
+				<div class="col-lg-12 col-md-12 my-2 ">
+					<div class="card text-center">
+				  <div class="card-header">
+				    <ul class="nav nav-tabs card-header-tabs">
+				      <li class="nav-item">
+				        <a class="nav-link active color-yellow titulo-3" href="#">Inmuebles en venta</a>
+				      </li>
+				      <li class="nav-item">
+				        <a class="nav-link color-gray titulo-3" href="#">Inmuebles en arriendo</a>
+				      </li>
+				      <li class="nav-item">
+				        <a class="nav-link color-gray titulo-3" href="#">Inmuebles en anticres</a>
+				      </li>
+				    </ul>
+				  </div>
+				  <div class="card-body">
+				    <h5 class="card-title">Special title treatment</h5>
+				    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+				    <a href="#" class="btn btn-primary">Go somewhere</a>
+				  </div>
+				</div>
+				</div>
+				
+				<!-- *************************** -->
+				
+				<!-- 	que puedo hacer -->
+				<div class="col-lg-12 col-md-12 my-2 ">
+					<div class="card text-center">
+				  <div class="card-header">
+				   	<h4 class="titulo-3 color-yellow">¿Aún no sabes que puedes hacer con nuestra Aplicación?</h4>
+				  </div>
+				  <div class="card-body">
+				    <span class="border"></span>
+				  </div>
+				</div>
+				</div>
+				
+				<!-- *************************** -->
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="py-5 bg-dark">
+	<div class="container">
+		<p class="m-0 text-center url text-white">Copyright &copy;
+			www.dondevivir.com 2018</p>
+	</div>
+	<!-- /.container --> </footer>
+
+
+	<!-- REQUIRED JS SCRIPTS -->
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/jquery/jquery.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/jquery/jquery.min.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

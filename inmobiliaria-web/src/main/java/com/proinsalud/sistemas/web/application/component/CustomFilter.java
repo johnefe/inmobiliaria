@@ -75,6 +75,7 @@ public class CustomFilter extends GenericFilterBean implements Serializable {
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/")
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/login")
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/register")
+				|| requestURL.toLowerCase().equals("/inmobiliaria-web/inicio")
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/logout")
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/index.xhtml")
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/errors")
