@@ -55,11 +55,23 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item"><a class="nav-link app-link"
 					href="about.html">BUSCAR INMUEBLES</a></li>
-
-				<li class="nav-item"><a class="nav-link app-link"
-					href="#{facesContext.externalContext.requestContextPath}/login">INGRESAR</a></li>
 				<li class="nav-item"><a class="nav-link app-a"
 					href="services.html">PUBLICA TU INMUEBLE</a></li>
+
+				<h:panelGroup rendered="#{proinsaludBean.user == null}">
+							<li class="nav-item"><a
+								class="nav-link app-link" href="#{facesContext.externalContext.requestContextPath}/login">
+									INGRESAR </a></li>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{proinsaludBean.user != null}">
+					<li class="nav-item"><a
+								class="nav-link app-link" href="#{facesContext.externalContext.requestContextPath}/secured/index.xhtml">
+									#{proinsaludBean.user.username} </a></li>
+					<li class="nav-item"><a
+								class="nav-link app-link" href="#{facesContext.externalContext.requestContextPath}/logout">
+									SALIR </a></li>
+				</h:panelGroup>
+				
 			</ul>
 		</div>
 	</div>
