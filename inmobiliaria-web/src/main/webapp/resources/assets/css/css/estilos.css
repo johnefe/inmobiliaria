@@ -171,4 +171,11 @@ font-family: 'Gochi Hand', cursive;
 }
 
 /*--------------------------------------------*/
-
+.notification{
+	padding: 2px;
+	margin: 3px;
+}
+.icono{
+	padding: 2px;
+	margin: 4px;
+}
