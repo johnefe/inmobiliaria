@@ -81,7 +81,7 @@
 		<mapping class="com.proinsalud.sistemas.core.digital_turn.model.PointServicePriority" />
 		<mapping class="com.proinsalud.sistemas.core.digital_turn.model.Slider" />
 		
-		<!-- SCHEMA INMOBILIARIA -->
+		<!-- SCHEMA INMOBILIARIA 
 		<mapping class="com.proinsalud.sistemas.core.inmobiliaria.model.Calification" />
 		<mapping class="com.proinsalud.sistemas.core.inmobiliaria.model.Cliente" />
 		<mapping class="com.proinsalud.sistemas.core.inmobiliaria.model.Comentary" />
@@ -93,7 +93,7 @@
 		<mapping class="com.proinsalud.sistemas.core.inmobiliaria.model.TypeBussines" />
 		<mapping class="com.proinsalud.sistemas.core.inmobiliaria.model.TypePublicity" />
 		<mapping class="com.proinsalud.sistemas.core.inmobiliaria.model.Userr" />
-
+-->
 
 	</session-factory>
 </hibernate-configuration>

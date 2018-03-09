@@ -14,7 +14,7 @@ font-family: 'Gochi Hand', cursive;
 /*----TITULOS-----*/
 
 .color-yellow{
-	color:#FF9800 !important;
+	color:#fcd134 !important;
 }
 .color-black{
 	color:#212121 !important;
@@ -59,6 +59,18 @@ font-family: 'Gochi Hand', cursive;
 .bg-login a:hover{
 	color:#FF9800;
 }
+
+/*backgrounds*/
+
+.bg-option{
+	background:#FFF3E0;
+}
+
+.bg-btn-option{
+	background: #E0E0E0 !important;
+	
+}
+/*-----------*/
 .titulo-2{
 	font-family: 'Pontano Sans', sans-serif;
 	font-size: 20px;
@@ -86,6 +98,9 @@ font-family: 'Gochi Hand', cursive;
 	background: #F5F5F5;
 	padding:10px;
 	font-style: none;
+}
+.bg-anuncio{
+	background: #F5F5F5 !important;
 }
 .line{
 	border-top: 1px solid #FF9800;

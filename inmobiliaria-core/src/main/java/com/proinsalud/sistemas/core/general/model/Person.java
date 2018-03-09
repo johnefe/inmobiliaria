@@ -57,9 +57,9 @@ import com.proinsalud.sistemas.core.util.json.JsonViews;
  */
 @Entity
 @Table(name = "person", schema = "general")
-@NamedQueries({ @NamedQuery(name = "Persons.findByNombre", query = "SELECT p FROM Persons p WHERE p.firstName=:nombrePersona"),
-		@NamedQuery(name = "Persons.findAllEntityWithUsers", query = "SELECT p FROM Persons p WHERE EXISTS (SELECT pr FROM Provider pr WHERE pr.person = p.id) or EXISTS (SELECT e FROM Employee e WHERE p.id = e.person)"),
-		@NamedQuery(name = "Persons.findEntityByIdentification", query = "SELECT p FROM Persons p WHERE p.identification=:identification")})
+@NamedQueries({ @NamedQuery(name = "Person.findByNombre", query = "SELECT p FROM Person p WHERE p.firstName=:nombrePersona"),
+		@NamedQuery(name = "Person.findAllEntityWithUsers", query = "SELECT p FROM Person p WHERE EXISTS (SELECT pr FROM Provider pr WHERE pr.person = p.id) or EXISTS (SELECT e FROM Employee e WHERE p.id = e.person)"),
+		@NamedQuery(name = "Person.findEntityByIdentification", query = "SELECT p FROM Person p WHERE p.identification=:identification")})
 @CustomJson
 public class Person implements Serializable {
 
