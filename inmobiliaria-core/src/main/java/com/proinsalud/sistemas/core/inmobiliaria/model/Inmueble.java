@@ -14,13 +14,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.proinsalud.sistemas.core.general.model.Municipality;
+import com.proinsalud.sistemas.core.security.model.Users;
 
 @Entity
 @Table(name="inmueble", schema = "inmobiliaria")
 public class Inmueble implements Serializable {
 
 	private static final long serialVersionUID = 1436245850272148180L;
-
+	
+	
 	@Id
 	@Column(name = "id_inmueble")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +35,10 @@ public class Inmueble implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_municipality")
 	private Municipality municipality;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_user")
+	private Users user;
 	
 	
 	@Column(name = "title_inmueble")
@@ -83,9 +89,6 @@ public class Inmueble implements Serializable {
 	@Column(name = "img_url_three")
 	private String imgUrlThree;
 
-	public Inmueble() {
-		super();
-	}
 
 	public Long getId() {
 		return id;
@@ -208,17 +211,20 @@ public class Inmueble implements Serializable {
 	public void setTitleInmueble(String titleInmueble) {
 		this.titleInmueble = titleInmueble;
 	}
+	
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
 
 	@Override
 	public String toString() {
 		return "Inmueble [id=" + id + ", titleInmueble=" + titleInmueble + ", bedroom=" + bedroom + ", bathroom="
 				+ bathroom + ", kitchen=" + kitchen + ", address=" + address + ", state=" + state + ", price=" + price
-				+ ", typeBussines=" + typeBussines + ", imgUrlOne=" + imgUrlOne + ", imgUrlTwo=" + imgUrlTwo
-				+ ", imgUrlThree=" + imgUrlThree + "]";
+				+ ", imgUrlOne=" + imgUrlOne + ", imgUrlTwo=" + imgUrlTwo + ", imgUrlThree=" + imgUrlThree + "]";
 	}
 
-	
-
-	
-	
 }

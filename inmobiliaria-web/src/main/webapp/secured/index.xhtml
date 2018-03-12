@@ -110,54 +110,25 @@
 				   
 				    <p:outputPanel  id="pnlListAnuncios" rendered="#{!boardBean.showFormInmueble}" >
 				     <div class="row">
-				    	<!-- un inmueble -->
-				    	<div class="col-lg-4 col-md-4 col-xs-3">
-				    	<div class="alert bg-anuncio" role="alert">
-							<h4 class="alert-heading titulo-2 color-gray">APARTAMENTO EN VENTA</h4>
-							<p class=" titulo-3 color-gray">Calle 21 # 24-64</p>
-							<p class="texto-4 color-gray">Precio: $ 120.000.000</p>
-							<hr class="line"/>
-													
-							<p:commandButton process="@form" title="VER INMUEBLE" 
-							action="#{boardBean.loadInmueble()}" update="pnlGeneral"
-							 class="btn bg-btn-option color-black" />
-						</div>
+					    	<!-- un inmueble -->
+					    	<ui:repeat var="inmueble" value="#{boardBean.inmueblesVentas}">
+					    		<div class="col-lg-4 col-md-4 col-xs-3">
+						    	<div class="alert bg-anuncio" role="alert">
+									<h4 class="alert-heading titulo-2 color-gray">#{inmueble.titleInmueble}</h4>
+									<p class=" titulo-3 color-gray">#{inmueble.address}</p>
+									<p class="texto-4 color-gray">Precio: $ #{inmueble.price}</p>
+									<hr class="line"/>
+															
+									<p:commandButton process="@form" title="VER INMUEBLE" 
+									action="#{boardBean.loadInmueble(inmueble)}" update="pnlGeneral"
+									 class="btn bg-btn-option color-black" />
+								</div>
+					    	</div>
+					    	</ui:repeat>
+					    	
+				    	<!-- fin un inmueble -->	    	
 				    	</div>
-				    	<!-- fin un inmueble -->
-				    	<!-- un inmueble -->
-				    	<div class="col-lg-4 col-md-4 col-xs-3">
-				    	<div class="alert bg-anuncio" role="alert">
-							<h4 class="alert-heading titulo-2 color-gray">CASA EN VENTA</h4>
-							<p class=" titulo-3 color-gray">Calle 21 # 24-64</p>
-							<p class="texto-4 color-gray">Precio: $ 100.000.000</p>
-							<hr class="line"/>
-							<a href="#" class="btn bg-btn-option color-black">VER INMUEBLE</a>
-						</div>
-				    	</div>
-				    	<!-- fin un inmueble -->
-				    	<!-- un inmueble -->
-				    	<div class="col-lg-4 col-md-4 col-xs-3">
-				    	<div class="alert bg-anuncio" role="alert">
-							<h4 class="alert-heading titulo-2 color-gray">CASA EN VENTA</h4>
-							<p class=" titulo-3 color-gray">Calle 21 # 24-64</p>
-							<p class="texto-4 color-gray">Precio: $ 100.000.000</p>
-							<hr class="line"/>
-							<a href="#" class="btn bg-btn-option color-black">VER INMUEBLE</a>
-						</div>
-				    	</div>
-				    	<!-- fin un inmueble -->
-				    	<!-- un inmueble -->
-				    	<div class="col-lg-4 col-md-4 col-xs-3">
-				    	<div class="alert bg-anuncio" role="alert">
-							<h4 class="alert-heading titulo-2 color-gray">CASA EN VENTA</h4>
-							<p class=" titulo-3 color-gray">Calle 21 # 24-64</p>
-							<p class="texto-4 color-gray">Precio: $ 100.000.000</p>
-							<hr class="line"/>
-							<a href="#" class="btn bg-btn-option color-black">VER INMUEBLE</a>
-						</div>
-				    	</div>
-				    	</div>
-				    	<!-- fin un inmueble -->
+		
 				    	</p:outputPanel>
 				    	<p:outputPanel id="pnlInmuebleDetail" rendered="#{boardBean.showFormInmueble}">
 				    		<div class="row"> 

@@ -88,14 +88,6 @@ public class IndexAppBean implements Serializable {
 		return tiposNegocios;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public static Log getLog() {
-		return LOG;
-	}
-
 	public ITypeBussinesService getiTypeBussinesService() {
 		return iTypeBussinesService;
 	}
