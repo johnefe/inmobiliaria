@@ -24,3 +24,13 @@ heroku pg:psql postgresql-symmetrical-40652 --app inmobiliariapp2018
 
 
 https://cloud.digitalocean.com/welcome?i=f3aedd
+
+
+para registrar un usuario nuevo esta en usuarios/usuarios_sistema.xhtml
+ahi se registran el usuario pero no tiene permisos
+para asiganarle permiso debe ser ese usuario administrador que se encuentra en la tabla authority
+pero la relacion debe ser user_authority
+para que cuando se registre el nuevo usuario tambien debe registrar en user option los modulos que se le vayan a mostrar
+los paginas deben ser de recurso y deben tener permmisos crud
+
+

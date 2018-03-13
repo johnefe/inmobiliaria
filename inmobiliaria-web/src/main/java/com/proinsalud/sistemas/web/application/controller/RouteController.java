@@ -23,6 +23,12 @@ public class RouteController {
 		LOG.info("--redirect to index");
 		return "index";
 	}
+	
+	@GetMapping({ "/{app}/inmueble" })
+	public String securedInmueble() {
+		LOG.info("--redirect to index");
+		return "inmueble";
+	}
 
 	// @GetMapping("/{app}/{module}/{idModule}")
 	// public String goToPage(@PathVariable(name = "app", required = true) String

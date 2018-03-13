@@ -12,7 +12,15 @@ font-family: 'Pontano Sans', sans-serif;
 font-family: 'Gochi Hand', cursive;
 */
 /*----TITULOS-----*/
-
+.bg-gray-header-card{
+	background:#E0E0E0 !important;
+}
+.aviso{
+	color: #000 !important;
+	font-size: 15px;
+	font-family: 'Montserrat', sans-serif;	
+	font-weight: bold;
+}
 .color-yellow{
 	color:#fcd134 !important;
 }
@@ -21,6 +29,9 @@ font-family: 'Gochi Hand', cursive;
 }
 .color-gray{
 	color:#757575 !important;
+}
+.color-tomato{
+	color: #EF6C00 !important;
 }
 .titulo-one{
 	font-size:25px;
@@ -89,6 +100,18 @@ font-family: 'Gochi Hand', cursive;
 	font-size: 15px !important;
 	font-family: 'Montserrat', sans-serif;	
 }
+.texto-5{
+	font-size: 15px !important;
+	font-family:  'Pontano Sans', sans-serif;
+	padding: 3px !important;
+	margin:4px !important;
+	font-weight: bold !important;
+}
+
+.plan p{
+	padding: 0px;
+	margin: 0px;
+}
 .bg-l{
 
 	width: 50% !important;
@@ -101,6 +124,21 @@ font-family: 'Gochi Hand', cursive;
 }
 .bg-anuncio{
 	background: #F5F5F5 !important;
+}
+
+.bg-body-card{
+	background: #FAFAFA;
+}
+
+.bg-body-info{
+	background: #FBE9E7;
+}
+.btn-select{
+	background: #BDBDBD;
+	color:#fff;
+}
+.btn-select:hover{
+	color:#fff;
 }
 .line{
 	border-top: 1px solid #FF9800;
