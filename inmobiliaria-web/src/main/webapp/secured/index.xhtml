@@ -70,7 +70,32 @@
 								class="nav-link app-link" href="#{facesContext.externalContext.requestContextPath}/logout">
 									SALIR </a></li>
 				</h:panelGroup>
-				
+				<ui:repeat var="app" value="#{proinsaludBean.user.userOptions}">
+
+					<li class="treeview">
+						<a href="#">
+							<i class="fa fa-plus"></i>
+							<span>#{app.option.name}</span>
+							<span class="pull-right-container">
+								<i class="fa fa-angle-left pull-right"></i>
+							</span>
+						</a>
+
+						<ul class="treeview-menu">
+							<ui:repeat var="modu" value="#{app.option.options}">
+								<li>
+									<a href="#{facesContext.externalContext.requestContextPath}/secured/#{app.option.detail}/#{modu.detail}">
+										<i class="fa fa-briefcase"></i>
+										<span>#{modu.name}</span>
+										<span class="pull-right-container">
+											<i class="fa fa-caret-right"></i>
+										</span>
+									</a>
+								</li>
+							</ui:repeat>
+						</ul>
+					</li>
+				</ui:repeat>
 			</ul>
 		</div>
 	</div>
