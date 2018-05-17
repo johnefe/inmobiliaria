@@ -85,59 +85,7 @@
 														<p:message for="txt_password" id="passwordMsg" />
 													</div>
 												</div>
-
-												<div class="clearfix" />
-
-												<div class="col-sm-12 form-group">
-													<label for="txt_timeout" class="col-sm-12 control-label">#{msg['lbl.tiempoSession']}</label>
-													<div class="col-sm-12">
-														<h:inputText maxlength="4" onkeypress="return onlyNumbers(event);" type="text" autocomplete="off" styleClass="form-control" id="txt_timeout" value="#{usuariosSistemaBean.timeSession}" required="true" requiredMessage="#{msg['obligatoryField']}">
-														</h:inputText>
-														<p:watermark for="txt_timeout" value="#{msg['lbl.nombre']}" />
-														<p:message for="txt_timeout" />
-													</div>
-												</div>
-
-												<div class="clearfix" />
-
-												<!-- <div class="col-sm-12 form-group">
-													<label for="cbx_person" class="col-sm-12 control-label">#{msg['lbl.persona']}</label>
-													<div class="col-sm-12">
-														<h:inputText rendered="#{usuariosSistemaBean.userCurrent.id != null}" type="text" styleClass="form-control" id="cbx_person_hidden" value="#{usuariosSistemaBean.userCurrent.person.firstName} #{usuariosSistemaBean.userCurrent.person.lastName}" disabled="true" />
-														<p:selectOneListbox rendered="#{usuariosSistemaBean.userCurrent.id == null}" disabled="#{usuariosSistemaBean.userCurrent.id != null}" style="width:100%; !important" id="cbx_person" value="#{usuariosSistemaBean.userCurrent.person}" converter="hdsConvertEntity" var="p" filter="true"
-															filterMatchMode="contains" required="true" requiredMessage="#{msg['obligatoryFieldList']}">
-															<f:selectItems value="#{usuariosSistemaBean.persons}" var="person" itemLabel="#{person.firstName} #{person.lastName} #{person.identification}" itemValue="#{person}" />
-															<p:column style="width:180px;">
-																<h:outputText value="#{p.firstName} #{p.lastName}" style="padding-left: 15px !important;" />
-															</p:column>
-															<p:column>
-																<h:outputText value="#{p.employee ne null ? 'Empleado':'' or p.provider ne null ? 'Proveedor':''}" style="padding-right: 15px !important;" />
-															</p:column>
-															<p:ajax event="change" process="@this" update="msg_cbx_person, @this" />
-															<p:ajax event="blur" process="@this" update="msg_cbx_person, @this" />
-														</p:selectOneListbox>
-														<p:message id="msg_cbx_person" for="cbx_person" />
-													</div>
-												</div>-->
-
-												<div class="clearfix" />
-
-												<div class="col-sm-6 form-group">
-													<label for="bol_active" class="col-sm-12 control-label">#{msg['lbl.usuarioActivo']}</label>
-													<div class="col-sm-12">
-														<p:selectBooleanCheckbox id="bol_active" value="#{usuariosSistemaBean.userCurrent.enabled}" itemLabel="#{msg['lbl.usuarioActivo']}"></p:selectBooleanCheckbox>
-														<p:message for="bol_active" />
-													</div>
-												</div>
-
-												<div class="col-sm-6 form-group">
-													<label for="bol_template_user" class="col-sm-12 control-label">#{msg['lbl.plantillaUsuario']}</label>
-													<div class="col-sm-12">
-														<p:selectBooleanCheckbox id="bol_template_user" value="#{usuariosSistemaBean.userCurrent.profile}" itemLabel="#{msg['lbl.plantillaUsuario']}"></p:selectBooleanCheckbox>
-														<p:message for="bol_template_user" />
-													</div>
-												</div>
-
+			
 												<div class="clearfix" />
 
 												<div class="col-sm-12">
@@ -159,9 +107,7 @@
 				</div>
 				<div class="col-lg-12">
 					<div class="row py-3">
-						<div class="col-lg-6 col-md-6 col-xs-1 bg-l text-left">
-							<a class="texto-4 " href="#{facesContext.externalContext.requestContextPath}/">Acepto Terminos y condiciones</a>
-						</div>
+						 
 						<div class="col-lg-6 col-md-6 col-xs-1 bg-l text-right">
 							<a  class="texto-4 " href="#{facesContext.externalContext.requestContextPath}/login">Ya estoy registrado</a>
 						</div>
