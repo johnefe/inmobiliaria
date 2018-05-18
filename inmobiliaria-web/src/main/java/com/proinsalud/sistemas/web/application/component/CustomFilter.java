@@ -70,6 +70,7 @@ public class CustomFilter extends GenericFilterBean implements Serializable {
 			return true;
 		} else if (requestURL.toLowerCase().equals("/inmobiliaria-web/secured/bienvenido")
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/secured/index.xhtml")
+				|| requestURL.toLowerCase().equals("/inmobiliaria-web/secured/buscar_inmuebles.xhtml")
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/secured/")
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/secured")
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/")
@@ -77,6 +78,7 @@ public class CustomFilter extends GenericFilterBean implements Serializable {
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/login")
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/register")
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/inicio")
+				|| requestURL.toLowerCase().equals("/inmobiliaria-web/buscar_inmuebles")
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/logout")
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/index.xhtml")
 				|| requestURL.toLowerCase().equals("/inmobiliaria-web/errors")

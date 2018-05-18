@@ -38,9 +38,13 @@
 	<div class="row">
 		<div class="col-lg-6 offset-lg-3  col-md-10 offset-md-1">
 			<div class="col-lg-12 text-center title-login">
-			<a class="titulo-one color-yellow " href="#{facesContext.externalContext.requestContextPath}/"><h3>¿DONDE VIVIR?</h3></a>	
+			<!-- <a class="titulo-one color-yellow " href="#{facesContext.externalContext.requestContextPath}/"><h3>¿DONDE VIVIR?</h3></a> -->	
 			</div>
 			<div class="row  jumbotron bg-login">
+				<div class="col-lg-12 text-center">
+					<a class="titulo-one color-yellow " href="#{facesContext.externalContext.requestContextPath}/"><h3>¿DONDE VIVIR?</h3></a>	
+				</div>
+			
 				<div class="col-lg-12 col-md-12 text-center py-3">
 					<a class="titulo-2 color-gray ">REGISTRO DE PERSONAS Y EMPRESAS</a>
 					<P>Ingresa un nombre de usuario y una contraseña, para que puedas publicar tu inmueble o generar publicidad para tu negocio</P>
@@ -52,9 +56,10 @@
 								<div class="box-body">
 									<div class=" col-lg-12 col-md-12 col-sm-12">
 										<div class="panel panel-default">
-											<div class="panel-heading" style="height: 50px;">
-												<label class="subtitle-head">#{msg['lbl.usuarioNuevo']}</label>
-											</div>
+										
+											<!-- <div class="panel-heading" style="height: 50px;"> -->
+												<!-- <label class="subtitle-head">#{msg['lbl.usuarioNuevo']}</label> -->
+											<!-- </div> -->
 											<div class="panel-body form-fields-vertical">
 												<div class="col-lg-12 col-sm-12 form-group">
 													<label for="txt_user_name" class="col-sm-12 control-label">#{msg['lbl.nombreUsuario']}</label>
@@ -77,24 +82,31 @@
 															<f:validateRegex for="txt_password" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{5,20})$" />
 														</h:inputText>
 														<p:watermark for="txt_password" value="#{msg['lbl.contrasena']}" />
-														<span class="input-group-btn">
-															<button class="btn btn-default" type="button" onclick="password();">#{msg['lbl.generar']}</button>
-														</span>
+														
 													</div>
-													<div style="padding-left: 16px; padding-right: 16px;">
-														<p:message for="txt_password" id="passwordMsg" />
+													
+												</div>
+												<div class="clearfix" />
+
+												<div class="col-sm-12 form-group">
+													<label for="txt_password2" class="col-sm-12 control-label">#{msg['lbl.contrasenaConfirm']}</label>
+													<div class="col-sm-12 input-group" style="padding-left: 16px; padding-right: 16px;">
+														<h:inputText type="text" autocomplete="off" validatorMessage="#{msg.passwordValidatorMsg}" styleClass="form-control" id="txt_password2" value="#{usuariosSistemaBean.passwordTemp}" required="#{usuariosSistemaBean.obligatorio}"
+															requiredMessage="#{msg['obligatoryField']}">
+															<f:ajax event="blur" render="passwordMsg" />
+															<f:validateRegex for="txt_password2" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{5,20})$" />
+														</h:inputText>
+														<p:watermark for="txt_password2" value="#{msg['lbl.contrasena']}" />
+														
 													</div>
+													
 												</div>
 			
 												<div class="clearfix" />
 
-												<div class="col-sm-12">
-													<div class="div-btn">
-														<p:commandButton title="#{msg['lbl.guardar']}" process="@form" action="#{usuariosSistemaBean.save()}" update=":form1" onstart="showSpinner();" onsuccess="hideSpinner();" styleClass="btn-ic" icon="ic-btn ic-btn-save" />
-														<p:commandButton title="#{msg['lbl.cancelar']}" process="@this" action="#{usuariosSistemaBean.cancel()}" update="@form,@([id$=form1],[id$=msg_cbx_person]),@(form :not(#tblPersons))" styleClass="btn-ic" icon="ic-btn ic-btn-cancel" >
-														<p:resetInput target="pnlForm"/>
-														</p:commandButton>
-													</div>
+												<div class="col-lg-12 col-sm-12">	
+													<button type="submit" class="btn-login">REGISTRARME</button>
+													<!-- <p:commandButton title="#{msg['lbl.guardar']}" process="@form" action="#{usuariosSistemaBean.save()}" update=":form1" onstart="showSpinner();" onsuccess="hideSpinner();" styleClass="btn-ic" icon="ic-btn ic-btn-save" /> -->	
 												</div>
 											</div>
 										</div>
@@ -108,8 +120,8 @@
 				<div class="col-lg-12">
 					<div class="row py-3">
 						 
-						<div class="col-lg-6 col-md-6 col-xs-1 bg-l text-right">
-							<a  class="texto-4 " href="#{facesContext.externalContext.requestContextPath}/login">Ya estoy registrado</a>
+						<div class="col-lg-12 col-md-12 col-xs-1 bg-l text-center">
+							<a  class="texto-4 " href="#{facesContext.externalContext.requestContextPath}/">Ya tengo una cuenta, volver al inicio.</a>
 						</div>
 					</div>
 				</div>

@@ -45,6 +45,20 @@ public class LoginController {
 		}
 		return page;
 	}
+	
+	@GetMapping("/buscar_inmuebles")
+	public String buscar_inmuebles(ModelMap model) {
+		String page = ViewConstants.VIEW_SEARCH;
+		String msg = (String) this.request.getSession().getAttribute(Constants.Auth.VAR_SESSION_ERROR);
+		if (msg != null) {
+			model.addAttribute("loginError", msg);
+			this.request.getSession().removeAttribute(Constants.Auth.VAR_SESSION_ERROR);
+		}
+		if (App.isAuthenticated()) {
+			page = ViewConstants.VIEW_SEARCH;
+		}
+		return page;
+	}
 	/*estas paginas solo funcionaran cuando no halla sesion iniciada*/
 	@GetMapping("/home")
 	public String home(ModelMap model) {
