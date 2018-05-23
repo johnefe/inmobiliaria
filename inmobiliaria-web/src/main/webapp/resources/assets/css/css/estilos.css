@@ -221,7 +221,8 @@ font-family: 'Gochi Hand', cursive;
 /*marco de anuncio*/
 .marco{
 	border:1px solid #BDBDBD;
-	padding: 10px;
+	padding: 5px;
+	margin: 10px;	
 }
 
 .descripcion{
@@ -230,15 +231,19 @@ font-family: 'Gochi Hand', cursive;
 }
 .titulo-marco{
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 18px;
 	font-family: 'Pontano Sans', sans-serif;
+	
 }
 .sub-titulo-marco{
-	font-size: 17px;
+	font-size: 15px;
 	color: #757575;
 	font-family: 'Montserrat', sans-serif;	
 }
 
 .btn-detalles{
 	margin: 8px;
+}
+.box-app{
+	padding-left: 5%;
 }
