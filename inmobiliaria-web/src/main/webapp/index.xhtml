@@ -132,7 +132,7 @@
 	<div class="row">
 		<div class="col-lg-12 col-md-12 title-app">
 			<h3 class="titulo-2 ">¿ESTAS BUSCANDO UN LUGAR DONDE VIVIR?</h3>
-			<p class="texto-3">En app arriendos puedes encontrar el mejor lugar para vivir
+			<p class="texto-3">En <strong class="tit-app">DONDE VIVIR</strong> puedes encontrar el mejor lugar para vivir
 				según tu interés</p>
 		</div>
 	</div>
@@ -140,10 +140,10 @@
 	<!-- Marketing Icons Section -->
 	<div class="row">
 		<ui:repeat var="tipoNegocios" value="#{indexAppBean.tiposNegocios}">
-			<div class="col-lg-4  mb-4 text-center">
-				<div class="card-app col-lg-8 offset-2 rounded-circle">
-					<div class="col-lg-12">
-						<h4>#{tipoNegocios.nameTypeBussines}</h4>
+			<div class="col-lg-4  mb-4 col-md-4 text-center bussines" >
+				<div class="card-app col-lg-8  col-md-12 col-sm-6 offset-sm-3 col-xs-4 col-9 rounded-circle">
+					<div class="col-lg-12  col-md-12 col-sm-12  col-xs-12 title-circle" >
+						<h4>#{tipoNegocios.nameTypeBussines.toUpperCase()}</h4>
 						<a href="#">Ver más</a>
 					</div>
 
@@ -169,10 +169,12 @@
 						<div class="col-lg-3 mb-3">
 							<div class="card h-60 text-center">
 								<div class="card-body">
-									<h4 class="card-title">#{arrendo.titleInmueble}</h4>
-									<h6 class="card-subtitle mb-2 text-muted">$#{arrendo.price}</h6>
-									<p class="card-text">Lorem ipsum dolor sit amet,
-										consectetur adipisicing elit.</p>
+									<div class="body-info"> 
+										<h4 class="card-title">#{arrendo.titleInmueble}</h4>
+										<h6 class="card-subtitle mb-2 text-muted precio">$#{arrendo.price}</h6>
+										<p class="card-text">#{arrendo.municipality.name}, #{arrendo.municipality.department.name},</p>
+									</div>
+									
 								</div>
 								<div class="card-footer">
 									<a href="#">Leer información</a>

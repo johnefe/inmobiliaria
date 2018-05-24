@@ -71,6 +71,11 @@ font-family: 'Gochi Hand', cursive;
 	color:#FF9800;
 }
 
+.tit-app{
+	font-weight: bolbd;
+	font-size: 18px;
+	color:#FF9800;
+}
 /*backgrounds*/
 
 .bg-option{
@@ -200,14 +205,41 @@ font-family: 'Gochi Hand', cursive;
     padding-top:55px;
     border: 3px solid #636668;
     width: 180px;
-    height: 180px;
+    height: 220px;
 }
+.title-circle{
+	padding-top: 20px;
+}
+.title-circle a{
+	font-family: 'Montserrat', sans-serif;	
+	font-size: 20px;
+}
+.title-circle a:hover{
+	text-decoration: none;
+	color: #fff;
+}
+
 .card-app a{
     color:#fff;
     font-size:15px;
     text-decoration:none;
 }
-
+.body-info{
+	width: 100% !important;
+	margin: 0;
+}
+.card-title{
+	font-size: 20px;
+}
+.card-body{
+	width: 100% !important;
+	padding: 10px !important;
+	max-height: 300px;
+	min-height: 150px;
+}
+.precio{
+	font-size: 23px;
+}
 /*--------------------------------------------*/
 .notification{
 	padding: 2px;
@@ -246,4 +278,73 @@ font-family: 'Gochi Hand', cursive;
 }
 .box-app{
 	padding-left: 5%;
+}
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+  
+  //CSS
+  
+}
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  //CSS
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  //CSS
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+  
+  //CSS
+  
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  .bussines{
+  padding-left: 25% !important;
+   
+  }
+  
 }

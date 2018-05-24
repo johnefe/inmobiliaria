@@ -1,6 +1,7 @@
 package com.proinsalud.sistemas.web.inmobiliaria;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class IndexAppBean implements Serializable {
 	private List<Inmueble> inmueblesVentas;
 	private List<Inmueble> inmueblesAnticres;
 	private List<Inmueble> inmuebles;
-	
+	DecimalFormat formatea = new DecimalFormat("###,###.##");
 	
 	public IndexAppBean() {
 		super();
@@ -66,6 +67,7 @@ public class IndexAppBean implements Serializable {
 	}
 	
 	public void loadInmuebles() {
+		
 		inmueblesArriendo=new ArrayList<Inmueble>();
 		inmueblesAnticres=new ArrayList<Inmueble>();
 		inmueblesVentas=new ArrayList<Inmueble>();
@@ -106,6 +108,14 @@ public class IndexAppBean implements Serializable {
 
 	public List<Inmueble> getInmuebles() {
 		return inmuebles;
+	}
+
+	public DecimalFormat getFormatea() {
+		return formatea;
+	}
+
+	public void setFormatea(DecimalFormat formatea) {
+		this.formatea = formatea;
 	}
 	
 	
