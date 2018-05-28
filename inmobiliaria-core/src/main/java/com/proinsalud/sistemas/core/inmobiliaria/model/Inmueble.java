@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,6 +20,7 @@ import com.proinsalud.sistemas.core.security.model.Users;
 
 @Entity
 @Table(name="inmueble", schema = "inmobiliaria")
+@NamedQueries({ @NamedQuery(name = "Inmueble.findArriendo", query = "SELECT i FROM Inmueble i WHERE upper(i.typeBussines.nameTypeBussines)=:nArriendo OR upper(i.typeBussines.nameTypeBussines)=:nAnticres OR upper(i.typeBussines.nameTypeBussines)=:nVenta ORDER BY i.id DESC")})
 public class Inmueble implements Serializable {
 
 	private static final long serialVersionUID = 1436245850272148180L;

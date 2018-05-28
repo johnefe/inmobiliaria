@@ -11,6 +11,9 @@ public class ViewConstants {
 	public static final String VIEW_REGISTER = "register";
 	public static final String VIEW_INDEX = "index";
 	public static final String VIEW_SEARCH = "buscar_inmuebles";
+	public static final String VIEW_ARRIENDO = "arriendo";
+	public static final String VIEW_ANTICRES = "anticres";
+	public static final String VIEW_VENTA = "venta";
 	public static final String VIEW_ERROR_PAGE = "error/error_page";
 
 }

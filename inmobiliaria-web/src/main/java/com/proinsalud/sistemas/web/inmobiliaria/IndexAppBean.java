@@ -71,19 +71,30 @@ public class IndexAppBean implements Serializable {
 		inmueblesArriendo=new ArrayList<Inmueble>();
 		inmueblesAnticres=new ArrayList<Inmueble>();
 		inmueblesVentas=new ArrayList<Inmueble>();
-		inmuebles= iInmuebleService.findAllEntity();
+		inmuebles= iInmuebleService.findArriendo();
+		//inmueblesArriendo = iInmuebleService.findArriendo();
+		
 		for(Inmueble m:inmuebles) {
 			if(m.getTypeBussines().getNameTypeBussines().equals("arriendo")) {
-				inmueblesArriendo.add(m);
+				
+				if (inmueblesArriendo.size()<4) {
+					inmueblesArriendo.add(m);
+				}
 			}
 			if(m.getTypeBussines().getNameTypeBussines().equals("anticres")) {
-				inmueblesAnticres.add(m);
+				
+				if(inmueblesAnticres.size()<4) {
+					inmueblesAnticres.add(m);
+				}
 			}
 			if(m.getTypeBussines().getNameTypeBussines().equals("venta")) {
-				inmueblesVentas.add(m);
+				
+				if(inmueblesVentas.size()<4) {
+					inmueblesVentas.add(m);
+				}
 			}
 			
-		}		
+		}	
 	}
 
 	public List<TypeBussines> getTiposNegocios() {

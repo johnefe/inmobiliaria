@@ -1,13 +1,15 @@
 package com.proinsalud.sistemas.core.inmobiliaria.dao.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.proinsalud.sistemas.core.generic.GenericDao;
 import com.proinsalud.sistemas.core.inmobiliaria.dao.IInmuebleDao;
 import com.proinsalud.sistemas.core.inmobiliaria.model.Inmueble;
-import com.proinsalud.sistemas.core.generic.GenericDao;
 /**
  * @author Jhon Frey Diaz
  * @datetime 2/03/2018 - 11:45:15 a. m.
@@ -47,6 +49,19 @@ public class InmuebleDao extends GenericDao<Long, Inmueble> implements IInmueble
 
 	public void deleteEntity(List<Inmueble> entities) {
 		super.deleteAll(entities);
+	}
+
+	public List<Inmueble> findArriendo() {
+		String nArriendo= "ARRIENDO";
+		String nAnticres= "ANTICRES";
+		String nVenta= "VENTA";
+		List<Inmueble> lst = new ArrayList<Inmueble>();
+		HashMap<String, Object> parametros = new HashMap<String, Object>();
+		parametros.put("nArriendo", nArriendo);
+		parametros.put("nAnticres", nAnticres);
+		parametros.put("nVenta", nVenta);
+		lst = executeNamedQuery("Inmueble.findArriendo", parametros);
+		return lst;
 	}
 
 }

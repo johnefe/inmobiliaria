@@ -88,6 +88,49 @@ public class LoginController {
 		}
 		return page;
 	}
+	
+	@GetMapping("/arriendo")
+	public String arriendo(ModelMap model) {
+		String page = ViewConstants.VIEW_ARRIENDO;
+		String msg = (String) this.request.getSession().getAttribute(Constants.Auth.VAR_SESSION_ERROR);
+		if (msg != null) {
+			model.addAttribute("loginError", msg);
+			this.request.getSession().removeAttribute(Constants.Auth.VAR_SESSION_ERROR);
+		}
+		if (App.isAuthenticated()) {
+			//page = ViewConstants.REDIRECT;
+			page = ViewConstants.VIEW_ARRIENDO;
+		}
+		return page;
+	}
+	@GetMapping("/anticres")
+	public String anticres(ModelMap model) {
+		String page = ViewConstants.VIEW_ANTICRES;
+		String msg = (String) this.request.getSession().getAttribute(Constants.Auth.VAR_SESSION_ERROR);
+		if (msg != null) {
+			model.addAttribute("loginError", msg);
+			this.request.getSession().removeAttribute(Constants.Auth.VAR_SESSION_ERROR);
+		}
+		if (App.isAuthenticated()) {
+			//page = ViewConstants.REDIRECT;
+			page = ViewConstants.VIEW_ANTICRES;
+		}
+		return page;
+	}
+	@GetMapping("/venta")
+	public String venta(ModelMap model) {
+		String page = ViewConstants.VIEW_VENTA;
+		String msg = (String) this.request.getSession().getAttribute(Constants.Auth.VAR_SESSION_ERROR);
+		if (msg != null) {
+			model.addAttribute("loginError", msg);
+			this.request.getSession().removeAttribute(Constants.Auth.VAR_SESSION_ERROR);
+		}
+		if (App.isAuthenticated()) {
+			//page = ViewConstants.REDIRECT;
+			page = ViewConstants.VIEW_VENTA;
+		}
+		return page;
+	}
 	@GetMapping("/detalle_inmueble")
 	public String detalle_inmueble(ModelMap model) {
 		String page = ViewConstants.VIEW_DETAIL_INMUEBLE;

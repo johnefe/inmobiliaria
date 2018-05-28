@@ -22,4 +22,6 @@ public interface IInmuebleDao {
 	
 	public void deleteEntity(List<Inmueble> entities);
 	
+	public List<Inmueble> findArriendo();
+	
 }

@@ -63,5 +63,11 @@ public class InmuebleService implements IInmuebleService, Serializable {
 		iInmuebleDao.deleteEntity(entities);
 	}
 
+	@Transactional
+	public List<Inmueble> findArriendo() {
+		// TODO Auto-generated method stub
+		return iInmuebleDao.findArriendo();
+	}
+
 }
 
