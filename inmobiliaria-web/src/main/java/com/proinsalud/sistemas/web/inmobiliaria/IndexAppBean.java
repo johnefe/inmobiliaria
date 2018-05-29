@@ -42,7 +42,11 @@ public class IndexAppBean implements Serializable {
 	private List<Inmueble> inmueblesArriendo;
 	private List<Inmueble> inmueblesVentas;
 	private List<Inmueble> inmueblesAnticres;
+	private List<Inmueble> Arriendo;
+	private List<Inmueble> Ventas;
+	private List<Inmueble> Anticres;
 	private List<Inmueble> inmuebles;
+	
 	DecimalFormat formatea = new DecimalFormat("###,###.##");
 	
 	public IndexAppBean() {
@@ -53,6 +57,7 @@ public class IndexAppBean implements Serializable {
 	public void init() {
 		App.initInjectionAutowired(this);
 		loadTypeBussines();
+		inmueblesArriendo();
 		
 	}
 	
@@ -71,9 +76,7 @@ public class IndexAppBean implements Serializable {
 		inmueblesArriendo=new ArrayList<Inmueble>();
 		inmueblesAnticres=new ArrayList<Inmueble>();
 		inmueblesVentas=new ArrayList<Inmueble>();
-		inmuebles= iInmuebleService.findArriendo();
-		//inmueblesArriendo = iInmuebleService.findArriendo();
-		
+		inmuebles= iInmuebleService.findArriendo();	
 		for(Inmueble m:inmuebles) {
 			if(m.getTypeBussines().getNameTypeBussines().equals("arriendo")) {
 				
@@ -93,8 +96,26 @@ public class IndexAppBean implements Serializable {
 					inmueblesVentas.add(m);
 				}
 			}
-			
-		}	
+		}
+		
+	}
+	
+	
+	public void inmueblesArriendo() {
+		Arriendo=new ArrayList<Inmueble>();
+		Anticres=new ArrayList<Inmueble>();
+		Ventas=new ArrayList<Inmueble>();
+		for(Inmueble m:inmuebles) {
+			if(m.getTypeBussines().getNameTypeBussines().equals("arriendo")) {
+				Arriendo.add(m);
+			}
+			if(m.getTypeBussines().getNameTypeBussines().equals("anticres")) {
+				Anticres.add(m);
+			}
+			if(m.getTypeBussines().getNameTypeBussines().equals("venta")) {
+				Ventas.add(m);
+			}
+		}
 	}
 
 	public List<TypeBussines> getTiposNegocios() {
@@ -120,7 +141,7 @@ public class IndexAppBean implements Serializable {
 	public List<Inmueble> getInmuebles() {
 		return inmuebles;
 	}
-
+	/**/
 	public DecimalFormat getFormatea() {
 		return formatea;
 	}
@@ -128,7 +149,18 @@ public class IndexAppBean implements Serializable {
 	public void setFormatea(DecimalFormat formatea) {
 		this.formatea = formatea;
 	}
-	
-	
+	/**/
+
+	public List<Inmueble> getArriendo() {
+		return Arriendo;
+	}
+
+	public List<Inmueble> getVentas() {
+		return Ventas;
+	}
+
+	public List<Inmueble> getAnticres() {
+		return Anticres;
+	}
 
 }

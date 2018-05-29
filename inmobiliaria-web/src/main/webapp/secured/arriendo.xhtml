@@ -77,232 +77,92 @@
 	</div>
 	</nav>
 	<!-- HEADER -->
-	<header class="container">
-		<div class="col-lg-12 col-md-12 py-3 ">
+	<header >
+		<div class="row" >
+			<div class="col-lg-12 col-md-12 py-3 ">
 			<div class="row ">				
 				<div class="col-lg-12 text-center">
-					<h4>Inmuebles que estan en Arriendo</h4>
+					<h4>INMUEBLES QUE ESTAN EN ARRIENDO</h4>
+					<small>Apartamentos, casas, apartaestudios y habitaciones, encuentra el tuyo.</small>
+				</div>
+				<div class="col-lg-12">
+					<div class="row">
+						 <ui:repeat var="tiposInmuebles" value="#{tipoNegocioBean.tiposInmuebles}">
+						 	<div class="col-lg-#{tipoNegocioBean.sizeDivInmuebles} text-center">
+						 		<h3>#{tiposInmuebles.nameTypeInmueble.toUpperCase()}</h3>
+							</div>
+						 </ui:repeat>	
+					</div>
 				</div>
 			</div>
 		</div>
-		
+		</div>
 	</header>
 	<!-- END HEADER -->
 	<!-- seccion de inmuebles  -->
 	<section class="app-todos text-center">
 		
-		<div class="row box-app">
+		<div class="row">
 			<!-- anuncios -->
 			<div class="col-lg-9">
 				<div class="container">
-			<div class="row">
-			<!--  un anuncion -->
-			<div class="col-lg-5 col-md-5 marco">
-				<div class="row">
-					<div class="col-lg-6">
-						<img width="100%;" src="#{facesContext.externalContext.requestContextPath}/resources/assets/img/515-C0001-01_1_h.jpg"></img>
-					</div>
-					<div class="col-lg-6">
+					<div class="row">
+					<!--  un anuncion -->
+					<ui:repeat var="arriendos" value="#{indexAppBean.arriendo}">
+						<div class="col-lg-5 col-md-5 marco">
 						<div class="row">
-							<div class="col-lg-12 text-center">
-								<h4 class=" titulo-marco">Apartamento en Venta, URBANIZACION LA FLORA Cali.</h4>
+							<div class="col-lg-6">
+								<img width="100%;" src="#{facesContext.externalContext.requestContextPath}/resources/assets/img/515-C0001-01_1_h.jpg"></img>
 							</div>
-							<div class="col-lg-12">
-								<div class="row ">
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Valor de Arriendo:</p>
+							<div class="col-lg-6">
+								<div class="row">
+									<div class="col-lg-12 text-center">
+										<h4 class=" titulo-marco">#{arriendos.titleInmueble}</h4>
 									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">$600.000</p>
+									<div class="col-lg-12">
+										<div class="row ">
+											<div class="col-lg-7 text-left">
+												<p class="descripcion sub-titulo-marco">Valor de Arriendo:</p>
+											</div>
+											<div class="col-lg-5 text-left">
+											<p class="descripcion">$#{arriendos.price}</p>
+											</div>
+											<div class="col-lg-7 text-left">
+												<p class="descripcion sub-titulo-marco">Habitaciones:</p>
+											</div>
+											<div class="col-lg-5 text-left">
+											<p class="descripcion">#{arriendos.bedroom}</p>
+											</div>
+											<div class="col-lg-7 text-left">
+												<p class="descripcion sub-titulo-marco">Baños:</p>
+											</div>
+											<div class="col-lg-5 text-left">
+											<p class="descripcion">#{arriendos.bathroom}</p>
+											</div>
+											<div class="col-lg-7 text-left">
+												<p class="descripcion sub-titulo-marco">Parqueadero:</p>
+											</div>
+											<div class="col-lg-5 text-left">
+											<p class="descripcion">1</p>
+											</div>
+											
+										</div>
 									</div>
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Habitaciones:</p>
-									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">2</p>
-									</div>
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Baños:</p>
-									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">1</p>
-									</div>
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Parqueadero:</p>
-									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">1</p>
-									</div>
-									
 								</div>
+							</div>
+							<!-- boton de ver detalles -->
+							<div class="col-lg-12 btn-detalles">
+								<button type="submit" class="btn-login">VER   DETALLADAMENTE</button>
+								<!-- <p:commandButton title="#{msg['lbl.guardar']}" process="@form" action="#{usuariosSistemaBean.save()}" update=":form1" onstart="showSpinner();" onsuccess="hideSpinner();" styleClass="btn-ic" icon="ic-btn ic-btn-save" /> -->	
+														
 							</div>
 						</div>
 					</div>
-					<!-- boton de ver detalles -->
-					<div class="col-lg-12 btn-detalles">
-						<button type="submit" class="btn-login">VER   DETALLADAMENTE</button>
-						<!-- <p:commandButton title="#{msg['lbl.guardar']}" process="@form" action="#{usuariosSistemaBean.save()}" update=":form1" onstart="showSpinner();" onsuccess="hideSpinner();" styleClass="btn-ic" icon="ic-btn ic-btn-save" /> -->	
-												
+				
+					</ui:repeat>
+					<!-- fin de un anuncio -->
 					</div>
 				</div>
-			</div>
-			<!-- fin de un anuncio -->	
-			<!--  un anuncion -->
-			<div class="col-lg-5 col-md-5 marco">
-				<div class="row">
-					<div class="col-lg-6">
-						<img width="100%;" src="#{facesContext.externalContext.requestContextPath}/resources/assets/img/515-C0001-01_1_h.jpg"></img>
-					</div>
-					<div class="col-lg-6">
-						<div class="row">
-							<div class="col-lg-12 text-center">
-								<h4 class=" titulo-marco">Apartamento en Venta, URBANIZACION LA FLORA Cali.</h4>
-							</div>
-							<div class="col-lg-12">
-								<div class="row ">
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Valor de Arriendo:</p>
-									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">$600.000</p>
-									</div>
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Habitaciones:</p>
-									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">2</p>
-									</div>
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Baños:</p>
-									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">1</p>
-									</div>
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Parqueadero:</p>
-									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">1</p>
-									</div>
-									
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- boton de ver detalles -->
-					<div class="col-lg-12 btn-detalles">
-							<a href="#{facesContext.externalContext.requestContextPath}/detalle_inmueble" class="btn-login">VER DETALLADAMENTE</a>
-						<!-- <button type="submit" class="btn-login">VER   DETALLADAMENTE</button> -->
-						<!-- <p:commandButton title="#{msg['lbl.guardar']}" process="@form" action="#{usuariosSistemaBean.save()}" update=":form1" onstart="showSpinner();" onsuccess="hideSpinner();" styleClass="btn-ic" icon="ic-btn ic-btn-save" /> -->	
-												
-					</div>
-				</div>
-			</div>
-			<!-- fin de un anuncio -->
-			<!--  un anuncion -->
-			<div class="col-lg-5 col-md-5 marco">
-				<div class="row">
-					<div class="col-lg-6">
-						<img width="100%;" src="#{facesContext.externalContext.requestContextPath}/resources/assets/img/515-C0001-01_1_h.jpg"></img>
-					</div>
-					<div class="col-lg-6">
-						<div class="row">
-							<div class="col-lg-12 text-center">
-								<h4 class=" titulo-marco">Apartamento en Venta, URBANIZACION LA FLORA Cali.</h4>
-							</div>
-							<div class="col-lg-12">
-								<div class="row ">
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Valor de Arriendo:</p>
-									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">$600.000</p>
-									</div>
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Habitaciones:</p>
-									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">2</p>
-									</div>
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Baños:</p>
-									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">1</p>
-									</div>
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Parqueadero:</p>
-									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">1</p>
-									</div>
-									
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- boton de ver detalles -->
-					<div class="col-lg-12 btn-detalles">
-						<button type="submit" class="btn-login">VER   DETALLADAMENTE</button>
-						<!-- <p:commandButton title="#{msg['lbl.guardar']}" process="@form" action="#{usuariosSistemaBean.save()}" update=":form1" onstart="showSpinner();" onsuccess="hideSpinner();" styleClass="btn-ic" icon="ic-btn ic-btn-save" /> -->	
-												
-					</div>
-				</div>
-			</div>
-			<!-- fin de un anuncio -->
-			<!--  un anuncion -->
-			<div class="col-lg-5 col-md-5 marco">
-				<div class="row">
-					<div class="col-lg-6">
-						<img width="100%;" src="#{facesContext.externalContext.requestContextPath}/resources/assets/img/515-C0001-01_1_h.jpg"></img>
-					</div>
-					<div class="col-lg-6">
-						<div class="row">
-							<div class="col-lg-12 text-center">
-								<h4 class=" titulo-marco">Apartamento en Venta, URBANIZACION LA FLORA Cali.</h4>
-							</div>
-							<div class="col-lg-12">
-								<div class="row ">
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Valor de Arriendo:</p>
-									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">$600.000</p>
-									</div>
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Habitaciones:</p>
-									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">2</p>
-									</div>
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Baños:</p>
-									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">1</p>
-									</div>
-									<div class="col-lg-7 text-left">
-										<p class="descripcion sub-titulo-marco">Parqueadero:</p>
-									</div>
-									<div class="col-lg-5 text-left">
-									<p class="descripcion">1</p>
-									</div>
-									
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- boton de ver detalles -->
-					<div class="col-lg-12 btn-detalles">
-						<button type="submit" class="btn-login">VER   DETALLADAMENTE</button>
-						<!-- <p:commandButton title="#{msg['lbl.guardar']}" process="@form" action="#{usuariosSistemaBean.save()}" update=":form1" onstart="showSpinner();" onsuccess="hideSpinner();" styleClass="btn-ic" icon="ic-btn ic-btn-save" /> -->	
-												
-					</div>
-				</div>
-			</div>
-			<!-- fin de un anuncio -->
-			</div>
-		</div>
 			</div>
 			<!-- fin anuncios -->
 			<!-- espacio para publicidad -->
@@ -335,7 +195,6 @@
 		
 	</section>
 	<!-- end seccion de inmuebles -->
-
 	<section class="app-todas-ventas">
 	<div class="container">
 
