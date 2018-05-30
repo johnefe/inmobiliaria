@@ -280,6 +280,23 @@ font-family: 'Gochi Hand', cursive;
 	padding-left: 5%;
 }
 
+/*css en arriendo  */
+
+.btn-sorft{
+	background: #FAFAFA; /* #212629 #FF9800 gris claro #E0E0E0  gris mas claro #F5F5F5*/
+	border-radius:0px !important;
+	width: 90%;
+	left:5%;
+	padding: 5px;
+	font-size: 20px !important;
+	cursor: pointer;
+
+}
+
+
+
+
+
 /* 
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops

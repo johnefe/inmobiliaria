@@ -28,6 +28,8 @@ public class TipoNegocioBean implements Serializable {
 
 	private static final long serialVersionUID = -306780998175143210L;
 	private static final Log LOG = App.getLogger(TipoNegocioBean.class);
+	private static final String PANEL_INMUEBLES_FILTRO = "PANEL_INMUEBLES_FILTRO";
+	private static final String PANEL_INMUEBLES = "PANEL_INMUEBLES";
 
 	@Autowired
 	private ITypeBussinesService iTypeBussinesService;
@@ -38,6 +40,9 @@ public class TipoNegocioBean implements Serializable {
 	private List<TypeBussines> tiposNegocios;
 	private List<TipoInmueble> tiposInmuebles;
 	private int sizeDivInmuebles;
+	
+	private boolean ShowpnlInmueblesFiltro;
+	private boolean ShowpnlInmuebles;
 
 	public TipoNegocioBean() {
 		super();
@@ -50,7 +55,7 @@ public class TipoNegocioBean implements Serializable {
 	}
 
 	public void loadTypeBussines() {
-		
+		mostrarPanel(PANEL_INMUEBLES);
 		try {
 			tiposNegocios = iTypeBussinesService.findAllEntity();
 			tiposInmuebles = iTipoInmuebleService.findAllEntity();
@@ -73,6 +78,30 @@ public class TipoNegocioBean implements Serializable {
 		return sizeTotal / elements;
 	}
 	
+	public void ocultarPaneles() {
+		ShowpnlInmueblesFiltro=false;
+		ShowpnlInmuebles= false;
+	}
+	
+	private void mostrarPanel(String panel) {
+		ocultarPaneles();
+		switch (panel) {
+		case PANEL_INMUEBLES_FILTRO:
+			ShowpnlInmueblesFiltro = true;
+			ShowpnlInmuebles= false;
+			break;
+		case PANEL_INMUEBLES:
+			ShowpnlInmuebles= true;
+			ShowpnlInmueblesFiltro= false;
+		default:
+			break;
+		}
+	}
+	
+	public void ShowInmublesByType() {
+		mostrarPanel(PANEL_INMUEBLES_FILTRO);
+		System.out.println("jajajajaj");
+	}
 	
 	/* getters and setters*/
 
@@ -88,7 +117,13 @@ public class TipoNegocioBean implements Serializable {
 	public int getSizeDivInmuebles() {
 		return sizeDivInmuebles;
 	}
-	
-	
 
+	public boolean isShowpnlInmueblesFiltro() {
+		return ShowpnlInmueblesFiltro;
+	}
+
+	public boolean isShowpnlInmuebles() {
+		return ShowpnlInmuebles;
+	}
+	
 }

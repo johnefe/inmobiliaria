@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<h:head id="head">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Donde Vivir</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+		name="viewport" />
+	<!-- 	FAVICON -->
+
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/estilos.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/font-awesome.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/font-awesome.min.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/modern-business.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-grid.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-grid.min.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-reboot.min.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-reboot.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap.css" />
+	<script src="https://use.fontawesome.com/74edfe93a4.js"></script>
+</h:head>
+<body>
+
+	<!-- Navigation -->
+	
+	<nav
+		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top header-app">
+	<div class="container ">
+		<a class="navbar-brand app-a" href="#{facesContext.externalContext.requestContextPath}/">¿DONDE VIVIR?</a>
+		<button class="navbar-toggler navbar-toggler-right" type="button"
+			data-toggle="collapse" data-target="#navbarResponsive"
+			aria-controls="navbarResponsive" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link app-link"
+					href="#{facesContext.externalContext.requestContextPath}/buscar_inmuebles">BUSCAR INMUEBLES</a></li>
+				<li class="nav-item"><a class="nav-link app-a"
+					href="#{facesContext.externalContext.requestContextPath}/secured/inmueble/inmueble">PUBLICA TU INMUEBLE</a></li>
+
+				<h:panelGroup rendered="#{proinsaludBean.user == null}">
+							<li class="nav-item"><a
+								class="nav-link app-link" href="#{facesContext.externalContext.requestContextPath}/login">
+									INGRESAR </a></li>
+				</h:panelGroup>
+				<!-- <h:panelGroup rendered="#{proinsaludBean.user != null}">
+					<li class="nav-item"><a
+								class="nav-link app-link" href="#{facesContext.externalContext.requestContextPath}/secured/index.xhtml">
+									#{proinsaludBean.user.username.toUpperCase()} </a></li>
+					<li class="nav-item"><a
+								class="nav-link app-link" href="#{facesContext.externalContext.requestContextPath}/logout">
+									SALIR </a></li>
+				</h:panelGroup> -->
+				
+			</ul>
+		</div>
+	</div>
+	</nav>
+	<!-- HEADER -->
+	<p:outputPanel id="pnlGeneral">
+		<header >
+			<h:form id="formTiposInmuebles" prependId="false">
+				<div class="row" >
+					<div class="col-lg-12 col-md-12 py-3 ">
+					<div class="row ">				
+						<div class="col-lg-12 text-center">
+							<h4>INMUEBLES QUE ESTAN EN ARRIENDO</h4>
+							<small>Puedes filtrar por el tipo de Inmueble y encuentra tu arriendo de tu interés</small>
+						</div>
+						<div class="col-lg-12">
+							<div class="row">
+								 <ui:repeat var="tiposInmuebles" value="#{tipoNegocioBean.tiposInmuebles}">
+								 	<div class="col-lg-#{tipoNegocioBean.sizeDivInmuebles} text-center py-3">
+								 		<!-- <h3>#{tiposInmuebles.nameTypeInmueble.toUpperCase()}</h3>-->
+								 		<p:commandButton title="#{tiposInmuebles.nameTypeInmueble.toUpperCase()}" process="@form" action="#{tipoNegocioBean.ShowInmublesByType()}" update="@([id$=pnlGeneral])"  class="btn btn-sorft"  />
+										<!-- <p:commandButton title="#{msg['lbl.guardar']}" process="@form" action="#{usuariosSistemaBean.save()}" update=":form1" onstart="showSpinner();" onsuccess="hideSpinner();" styleClass="btn-ic" icon="ic-btn ic-btn-save" /> -->	
+									</div>
+								 </ui:repeat>	
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+			</h:form>
+		</header>
+	<!-- END HEADER -->
+	<!-- seccion de inmuebles  -->
+		<section class="app-todos text-center">
+			
+			<div class="row">
+				<!-- anuncios -->
+				<div class="col-lg-9">
+					<div class="container">
+						
+						<!-- espacio para los inmuebles -->
+						<p:outputPanel id="pnlInmueblesFiltro" rendered="#{tipoNegocioBean.showpnlInmueblesFiltro}">
+							<div class="row">
+								<h2>espacio</h2>
+							</div>
+						</p:outputPanel>
+						
+						<p:outputPanel id="pnlInmuebles" rendered="#{tipoNegocioBean.showpnlInmuebles}">
+							<h:form id="formInmueblesByFiltro" prependId="false">
+							<div class="row">
+						<!--  un anuncio -->
+							<ui:repeat var="arriendos" value="#{indexAppBean.arriendo}">
+								
+								 <div class="col-lg-5 col-md-5 marco">
+									<div class="row">
+										<div class="col-lg-6">
+											<img width="100%;" src="#{facesContext.externalContext.requestContextPath}/resources/assets/img/515-C0001-01_1_h.jpg"></img>
+										</div>
+										<div class="col-lg-6">
+											<div class="row">
+												<div class="col-lg-12 text-center">
+													<h4 class=" titulo-marco">#{arriendos.titleInmueble}</h4>
+												</div>
+												<div class="col-lg-12">
+													<div class="row ">
+														<div class="col-lg-7 text-left">
+															<p class="descripcion sub-titulo-marco">Valor de Arriendo:</p>
+														</div>
+														<div class="col-lg-5 text-left">
+														<p class="descripcion">$#{arriendos.price}</p>
+														</div>
+														<div class="col-lg-7 text-left">
+															<p class="descripcion sub-titulo-marco">Habitaciones:</p>
+														</div>
+														<div class="col-lg-5 text-left">
+														<p class="descripcion">#{arriendos.bedroom}</p>
+														</div>
+														<div class="col-lg-7 text-left">
+															<p class="descripcion sub-titulo-marco">Baños:</p>
+														</div>
+														<div class="col-lg-5 text-left">
+														<p class="descripcion">#{arriendos.bathroom}</p>
+														</div>
+														<div class="col-lg-7 text-left">
+															<p class="descripcion sub-titulo-marco">Parqueadero:</p>
+														</div>
+														<div class="col-lg-5 text-left">
+														<p class="descripcion">1</p>
+														</div>
+														
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- boton de ver detalles -->
+										<div class="col-lg-12 btn-detalles">
+											<!--  <button type="submit" class="btn-login">VER   DETALLADAMENTE</button>-->
+											 <p:commandButton title="VER DETALLADAMENTE" process="@form" action="#{tipoNegocioBean.ShowInmublesByType()}" update="" class="btn-login"  />	
+																	
+										</div>
+									</div>
+								</div>
+							
+							</ui:repeat>
+							<!-- fin de un anuncio -->
+							</div>
+							</h:form>
+						</p:outputPanel>
+						<!-- fin espacio para los inmuebles -->
+					
+					</div>
+				</div>
+				<!-- fin anuncios -->
+				<!-- espacio para publicidad -->
+				<div class="col-lg-3">
+					<!-- 	publicidad -->
+					<div class="col-lg-12 col-md-12 my-2 ">
+						<div class="card text-center">
+					  <div class="card-header">
+					   	<h4 class="titulo-3 color-yellow">Algo que te puede interesar</h4>
+					  </div>
+					  <div class="card-body">
+					    <div class="row">
+					    	<div class="col-lg-12">
+					    		<div class="alert alert-success" role="alert">
+								  <h4 class="alert-heading">Well done!</h4>
+								  <p>Aww yeah, you successfully res kind of content.</p>
+								  <hr/>
+								  <p class="mb-0">Whenever you need to, bnd tidy.</p>
+								</div>
+					    	</div>
+					    </div>
+					  </div>
+					</div>
+					</div>
+					
+					<!-- *************************** -->
+				</div>
+				<!-- fin publicidad -->
+			</div>
+			
+		</section>
+		<!-- end seccion de inmuebles -->
+		<section class="app-todas-ventas">
+		<div class="container">
+	
+			<div class="row ">
+				<div class="col-lg-12 text-center">
+					<h3 class="titulo-2 color-yellow">INMUEBLES EN VENTA O
+						ARRIENDO EN COLOMBIA</h3>
+				</div>
+				<div class="col-6 col-md">
+					<h5  class="titulo-2">Apartamentos</h5>
+					<hr class="line" />
+					<ul class="list-unstyled text-small">
+						<li><a class="text-muted" href="#">Cool stuff</a></li>
+						<li><a class="text-muted" href="#">Random feature</a></li>
+						<li><a class="text-muted" href="#">Team feature</a></li>
+						<li><a class="text-muted" href="#">Stuff for developers</a></li>
+						<li><a class="text-muted" href="#">Another one</a></li>
+						<li><a class="text-muted" href="#">Last time</a></li>
+					</ul>
+				</div>
+				<div class="col-6 col-md">
+					<h5  class="titulo-2">Casas</h5>
+					<hr class="line" />
+					<ul class="list-unstyled text-small">
+						<li><a class="text-muted" href="#">Cool stuff</a></li>
+						<li><a class="text-muted" href="#">Random feature</a></li>
+						<li><a class="text-muted" href="#">Team feature</a></li>
+						<li><a class="text-muted" href="#">Stuff for developers</a></li>
+						<li><a class="text-muted" href="#">Another one</a></li>
+						<li><a class="text-muted" href="#">Last time</a></li>
+					</ul>
+				</div>
+				<div class="col-6 col-md">
+					<h5  class="titulo-2">Habitaciones</h5>
+					<hr class="line" />
+					<ul class="list-unstyled text-small">
+						<li><a class="text-muted" href="#">Cool stuff</a></li>
+						<li><a class="text-muted" href="#">Random feature</a></li>
+						<li><a class="text-muted" href="#">Team feature</a></li>
+						<li><a class="text-muted" href="#">Stuff for developers</a></li>
+						<li><a class="text-muted" href="#">Another one</a></li>
+						<li><a class="text-muted" href="#">Last time</a></li>
+					</ul>
+				</div>
+				<div class="col-6 col-md">
+					<h5 class="titulo-2">Apartaestudios</h5>
+					<hr class="line" />
+					<ul class="list-unstyled text-small">
+						<li><a class="text-muted" href="#">Cool stuff</a></li>
+						<li><a class="text-muted" href="#">Random feature</a></li>
+						<li><a class="text-muted" href="#">Team feature</a></li>
+						<li><a class="text-muted" href="#">Stuff for developers</a></li>
+						<li><a class="text-muted" href="#">Another one</a></li>
+						<li><a class="text-muted" href="#">Last time</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		</section>
+		
+	</p:outputPanel>
+	<section class="app-todas-ventas">
+		<div class="col-lg-12 text-center">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 bg-gris text-center">
+					
+					<!-- <span class="fa fa-building-o fa-4x"></span> -->
+					<div class="col-lg-12 ">
+						<h2 class="titulo-one color-gray">¿QUIERES DAR A CONOCER TU EMPRESA?</h2>
+						<h4 class="texto-3 color-yellow">Muchas personas visitan nuestro sitio
+							web, haz que conoscan tu negocio!</h4>
+					</div>
+	
+				</div>
+			</div>
+	
+		</div>
+	</section>
+	
+	<!-- Footer -->
+	<footer class="py-5 bg-dark">
+	<div class="container">
+		<p class="m-0 text-center url text-white">Copyright &copy;
+			www.dondevivir.com 2018</p>
+	</div>
+	<!-- /.container --> </footer>
+
+
+	<!-- REQUIRED JS SCRIPTS -->
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/jquery/jquery.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/jquery/jquery.min.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
