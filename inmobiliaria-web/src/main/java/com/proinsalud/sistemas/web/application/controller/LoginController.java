@@ -81,6 +81,7 @@ public class LoginController {
 		if (msg != null) {
 			model.addAttribute("loginError", msg);
 			this.request.getSession().removeAttribute(Constants.Auth.VAR_SESSION_ERROR);
+			
 		}
 		if (App.isAuthenticated()) {
 			//page = ViewConstants.REDIRECT;
@@ -93,9 +94,11 @@ public class LoginController {
 	public String arriendo(ModelMap model) {
 		String page = ViewConstants.VIEW_ARRIENDO;
 		String msg = (String) this.request.getSession().getAttribute(Constants.Auth.VAR_SESSION_ERROR);
-		if (msg != null) {
-			model.addAttribute("loginError", msg);
-			this.request.getSession().removeAttribute(Constants.Auth.VAR_SESSION_ERROR);
+		if (msg == null) {
+			//model.addAttribute("loginError", msg);
+			//this.request.getSession().removeAttribute(Constants.Auth.VAR_SESSION_ERROR);
+			
+			page = ViewConstants.VIEW_ARRIENDO;
 		}
 		if (App.isAuthenticated()) {
 			//page = ViewConstants.REDIRECT;

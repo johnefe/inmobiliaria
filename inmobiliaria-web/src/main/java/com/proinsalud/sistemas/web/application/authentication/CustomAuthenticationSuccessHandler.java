@@ -36,6 +36,7 @@ import com.proinsalud.sistemas.web.util.UserDetailsHelper;
  * @datetime 5/02/2018 - 8:59:07 a. m.
  *
  */
+
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
