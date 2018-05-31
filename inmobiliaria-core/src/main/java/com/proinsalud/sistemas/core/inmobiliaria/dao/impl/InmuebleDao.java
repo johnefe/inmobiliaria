@@ -64,4 +64,12 @@ public class InmuebleDao extends GenericDao<Long, Inmueble> implements IInmueble
 		return lst;
 	}
 
+	public List<Inmueble> findInmuebleByTipo(Long idTipo) {
+		List<Inmueble> lst = new ArrayList<Inmueble>();
+		HashMap<String, Object> parametros = new HashMap<String, Object>();
+		parametros.put("idTipo", idTipo);
+		lst = executeNamedQuery("Inmueble.findInmuebleByTipo", parametros);
+		return lst;
+	}
+
 }

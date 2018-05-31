@@ -20,7 +20,8 @@ import com.proinsalud.sistemas.core.security.model.Users;
 
 @Entity
 @Table(name="inmueble", schema = "inmobiliaria")
-@NamedQueries({ @NamedQuery(name = "Inmueble.findArriendo", query = "SELECT i FROM Inmueble i WHERE upper(i.typeBussines.nameTypeBussines)=:nArriendo OR upper(i.typeBussines.nameTypeBussines)=:nAnticres OR upper(i.typeBussines.nameTypeBussines)=:nVenta ORDER BY i.id DESC")})
+@NamedQueries({ @NamedQuery(name = "Inmueble.findArriendo", query = "SELECT i FROM Inmueble i WHERE upper(i.typeBussines.nameTypeBussines)=:nArriendo OR upper(i.typeBussines.nameTypeBussines)=:nAnticres OR upper(i.typeBussines.nameTypeBussines)=:nVenta ORDER BY i.id DESC"),
+	            @NamedQuery(name = "Inmueble.findInmuebleByTipo", query = "SELECT i FROM Inmueble i WHERE i.tipoInmueble.id=:idTipo ORDER BY i.id DESC")})
 public class Inmueble implements Serializable {
 
 	private static final long serialVersionUID = 1436245850272148180L;

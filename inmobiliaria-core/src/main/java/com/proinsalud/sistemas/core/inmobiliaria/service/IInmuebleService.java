@@ -24,5 +24,5 @@ public interface IInmuebleService {
 	
 	public List<Inmueble> findArriendo();
 
-	
+	public List<Inmueble> findInmuebleByTipo(Long idTipo);
 }

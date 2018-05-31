@@ -22,4 +22,5 @@ public interface ITipoInmuebleService {
 	
 	public void deleteEntity(List<TipoInmueble> entities);
 	
+	
 }

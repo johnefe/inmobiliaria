@@ -1,6 +1,7 @@
 package com.proinsalud.sistemas.web.inmobiliaria;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,8 +11,10 @@ import javax.faces.bean.ViewScoped;
 import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.proinsalud.sistemas.core.inmobiliaria.model.Inmueble;
 import com.proinsalud.sistemas.core.inmobiliaria.model.TipoInmueble;
 import com.proinsalud.sistemas.core.inmobiliaria.model.TypeBussines;
+import com.proinsalud.sistemas.core.inmobiliaria.service.IInmuebleService;
 import com.proinsalud.sistemas.core.inmobiliaria.service.ITipoInmuebleService;
 import com.proinsalud.sistemas.core.inmobiliaria.service.ITypeBussinesService;
 import com.proinsalud.sistemas.web.util.App;
@@ -36,9 +39,15 @@ public class TipoNegocioBean implements Serializable {
 	
 	@Autowired
 	private ITipoInmuebleService iTipoInmuebleService;
+	
+	@Autowired
+	private IInmuebleService iInmuebleService;
 
 	private List<TypeBussines> tiposNegocios;
 	private List<TipoInmueble> tiposInmuebles;
+	private List<Inmueble> inmuebles;
+	
+	private TipoInmueble tipoInmueble;
 	private int sizeDivInmuebles;
 	
 	private boolean ShowpnlInmueblesFiltro;
@@ -98,9 +107,14 @@ public class TipoNegocioBean implements Serializable {
 		}
 	}
 	
-	public void ShowInmublesByType() {
+	public void ShowInmublesByType(TipoInmueble tipoInmueble) {
 		mostrarPanel(PANEL_INMUEBLES_FILTRO);
-		System.out.println("jajajajaj");
+		inmuebles = new ArrayList<Inmueble>();
+		inmuebles = iInmuebleService.findInmuebleByTipo(tipoInmueble.getId());
+		System.out.println(inmuebles);
+		System.out.println(inmuebles.size());
+		System.out.println(tipoInmueble.getId());
+		
 	}
 	
 	/* getters and setters*/
@@ -124,6 +138,18 @@ public class TipoNegocioBean implements Serializable {
 
 	public boolean isShowpnlInmuebles() {
 		return ShowpnlInmuebles;
+	}
+
+	public TipoInmueble getTipoInmueble() {
+		return tipoInmueble;
+	}
+
+	public void setTipoInmueble(TipoInmueble tipoInmueble) {
+		this.tipoInmueble = tipoInmueble;
+	}
+
+	public List<Inmueble> getInmuebles() {
+		return inmuebles;
 	}
 	
 }

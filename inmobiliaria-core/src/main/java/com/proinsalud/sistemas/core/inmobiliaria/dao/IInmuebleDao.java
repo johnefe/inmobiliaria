@@ -24,4 +24,6 @@ public interface IInmuebleDao {
 	
 	public List<Inmueble> findArriendo();
 	
+	public List<Inmueble> findInmuebleByTipo(Long idTipo);
+	
 }

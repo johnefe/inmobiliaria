@@ -94,7 +94,7 @@
 								 <ui:repeat var="tiposInmuebles" value="#{tipoNegocioBean.tiposInmuebles}">
 								 	<div class="col-lg-#{tipoNegocioBean.sizeDivInmuebles} text-center py-3">
 								 		<!-- <h3>#{tiposInmuebles.nameTypeInmueble.toUpperCase()}</h3>-->
-								 		<p:commandButton title="#{tiposInmuebles.nameTypeInmueble.toUpperCase()}" process="@form" action="#{tipoNegocioBean.ShowInmublesByType()}" update="@([id$=pnlGeneral])"  class="btn btn-sorft"  />
+								 		<p:commandButton title="#{tiposInmuebles.nameTypeInmueble.toUpperCase()}" process="@form" action="#{tipoNegocioBean.ShowInmublesByType(tiposInmuebles)}" update="@([id$=pnlGeneral])"  class="btn btn-sorft"  />
 										<!-- <p:commandButton title="#{msg['lbl.guardar']}" process="@form" action="#{usuariosSistemaBean.save()}" update=":form1" onstart="showSpinner();" onsuccess="hideSpinner();" styleClass="btn-ic" icon="ic-btn ic-btn-save" /> -->	
 									</div>
 								 </ui:repeat>	
@@ -118,7 +118,61 @@
 						<!-- espacio para los inmuebles -->
 						<p:outputPanel id="pnlInmueblesFiltro" rendered="#{tipoNegocioBean.showpnlInmueblesFiltro}">
 							<div class="row">
-								<h2>espacio</h2>
+								<!--  un anuncio -->
+							<ui:repeat var="inmueble" value="#{tipoNegocioBean.inmuebles}">
+								
+								 <div class="col-lg-5 col-md-5 marco">
+									<div class="row">
+										<div class="col-lg-6">
+											<img width="100%;" src="#{facesContext.externalContext.requestContextPath}/resources/assets/img/515-C0001-01_1_h.jpg"></img>
+										</div>
+										<div class="col-lg-6">
+											<div class="row">
+												<div class="col-lg-12 text-center">
+													<h4 class=" titulo-marco">#{inmueble.titleInmueble}</h4>
+												</div>
+												<div class="col-lg-12">
+													<div class="row ">
+														<div class="col-lg-7 text-left">
+															<p class="descripcion sub-titulo-marco">Valor de Arriendo:</p>
+														</div>
+														<div class="col-lg-5 text-left">
+														<p class="descripcion">$#{inmueble.price}</p>
+														</div>
+														<div class="col-lg-7 text-left">
+															<p class="descripcion sub-titulo-marco">Habitaciones:</p>
+														</div>
+														<div class="col-lg-5 text-left">
+														<p class="descripcion">#{inmueble.bedroom}</p>
+														</div>
+														<div class="col-lg-7 text-left">
+															<p class="descripcion sub-titulo-marco">Baños:</p>
+														</div>
+														<div class="col-lg-5 text-left">
+														<p class="descripcion">#{inmueble.bathroom}</p>
+														</div>
+														<div class="col-lg-7 text-left">
+															<p class="descripcion sub-titulo-marco">Parqueadero:</p>
+														</div>
+														<div class="col-lg-5 text-left">
+														<p class="descripcion">1</p>
+														</div>
+														
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- boton de ver detalles -->
+										<div class="col-lg-12 btn-detalles">
+											<!--  <button type="submit" class="btn-login">VER   DETALLADAMENTE</button>-->
+											 <p:commandButton title="VER DETALLADAMENTE" process="@form" action="#{tipoNegocioBean.ShowInmublesByType()}" update="" class="btn-login"  />	
+																	
+										</div>
+									</div>
+								</div>
+							
+							</ui:repeat>
+							<!-- fin de un anuncio -->
 							</div>
 						</p:outputPanel>
 						

@@ -59,7 +59,8 @@ public class UsuariosSistemaBean implements Serializable {
 
 	public void initData() {
 		try {
-			persons = iPersonaService.findAllEntityWithUsers();
+			//persons = iPersonaService.findAllEntityWithUsers();
+
 		} catch (Exception e) {
 			UtilWeb.printError(LOG, e);
 		}

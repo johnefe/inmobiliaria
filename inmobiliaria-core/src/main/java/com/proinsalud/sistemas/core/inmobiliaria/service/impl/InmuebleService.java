@@ -69,5 +69,11 @@ public class InmuebleService implements IInmuebleService, Serializable {
 		return iInmuebleDao.findArriendo();
 	}
 
+	@Transactional
+	public List<Inmueble> findInmuebleByTipo(Long idTipo) {
+		// TODO Auto-generated method stub
+		return iInmuebleDao.findInmuebleByTipo(idTipo);
+	}
+
 }
 
