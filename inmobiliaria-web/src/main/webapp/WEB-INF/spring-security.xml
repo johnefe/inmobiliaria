@@ -15,7 +15,6 @@
 		<!-- <access-denied-handler error-page="/secured/error/acceso_denegado.xhtml" /> -->
 
 		<intercept-url pattern="/secured/**" access="${role.administrator}" />
-		
 		<intercept-url pattern="/secured/error/**" access="${role.anonymous},${role.administrator}" />
 		<intercept-url pattern="/secured/*" access="${role.view}" />
 		<intercept-url pattern="/secured/info/*" access="${role.superadmin}" />
