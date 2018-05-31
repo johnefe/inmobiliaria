@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:p="http://primefaces.org/ui">
+<h:head id="head">
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>Donde Vivir</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+		name="viewport" />
+	<!-- 	FAVICON -->
+
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/estilos.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/font-awesome.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/font-awesome.min.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/css/modern-business.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-grid.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-grid.min.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-reboot.min.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap-reboot.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/css/bootstrap.css" />
+	<script src="https://use.fontawesome.com/74edfe93a4.js"></script>
+</h:head>
+<body>
+
+	<!-- Navigation -->
+	<nav
+		class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top header-app">
+	<div class="container ">
+		<a class="navbar-brand app-a" href="#{facesContext.externalContext.requestContextPath}/">¿DONDE VIVIR?</a>
+		<button class="navbar-toggler navbar-toggler-right" type="button"
+			data-toggle="collapse" data-target="#navbarResponsive"
+			aria-controls="navbarResponsive" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarResponsive">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link app-link"
+					href="#{facesContext.externalContext.requestContextPath}/buscar_inmuebles">BUSCAR INMUEBLES</a></li>
+				<li class="nav-item"><a class="nav-link app-a"
+					href="#{facesContext.externalContext.requestContextPath}/secured/index.xhtml">PUBLICA TU INMUEBLE</a></li>
+
+				<h:panelGroup rendered="#{proinsaludBean.user == null}">
+							<li class="nav-item"><a
+								class="nav-link app-link" href="#{facesContext.externalContext.requestContextPath}/login">
+									INGRESAR </a></li>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{proinsaludBean.user != null}">
+					<li class="nav-item"><a
+								class="nav-link app-link" href="#{facesContext.externalContext.requestContextPath}/secured/index.xhtml">
+									#{proinsaludBean.user.username.toUpperCase()} </a></li>
+					<li class="nav-item"><a
+								class="nav-link app-link" href="#{facesContext.externalContext.requestContextPath}/logout">
+									SALIR </a></li>
+				</h:panelGroup>
+				
+			</ul>
+		</div>
+	</div>
+	</nav>
+	<!-- HEADER -->
+	<header>
+	<div id="carouselExampleIndicators" class="carousel slide"
+		data-ride="carousel">
+		<ol class="carousel-indicators">
+			<li data-target="#carouselExampleIndicators" data-slide-to="0"
+				class="active"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<!-- Slide One - Set the background image for this slide in the line below -->
+			<div class="carousel-item active"
+				style="background-image: url('#{facesContext.externalContext.requestContextPath}/resources/assets/img/back.jpg')">
+				<div class="carousel-caption d-none d-md-block">
+					<h3>Arriendos, Antincres y Ventas</h3>
+					<p class="texto-3">Encuentra habitaciones, apartamentos y casas donde tu
+						quieras</p>
+				</div>
+			</div>
+			<!-- Slide Two - Set the background image for this slide in the line below -->
+			<div class="carousel-item"
+				style="background-image: url('#{facesContext.externalContext.requestContextPath}/resources/assets/img/back.jpg')">
+				<div class="carousel-caption d-none d-md-block">
+					<h3>Pauta con nosotros</h3>
+					<p class="texto-3">Miles de usuarios estan navengando en app arriendos, haz
+						conocer tu negocio</p>
+				</div>
+			</div>
+			<!-- Slide Three - Set the background image for this slide in the line below -->
+			<div class="carousel-item"
+				style="background-image: url('#{facesContext.externalContext.requestContextPath}/resources/assets/img/back.jpg')">
+				<div class="carousel-caption d-none d-md-block">
+					<h3>Third Slide</h3>
+					<p>This is a description for the third slide.</p>
+				</div>
+			</div>
+		</div>
+		<a class="carousel-control-prev" href="#carouselExampleIndicators"
+			role="button" data-slide="prev"> <span
+			class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+			class="sr-only">Previous</span>
+		</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+			role="button" data-slide="next"> <span
+			class="carousel-control-next-icon" aria-hidden="true"></span> <span
+			class="sr-only">Next</span>
+		</a>
+	</div>
+	</header>
+	<!-- END HEADER -->
+
+	<!-- SECTION CATEGORIES INMOBILIARIA -->
+	<section class="container"> <!-- title app-->
+	<div class="row">
+		<div class="col-lg-12 col-md-12 title-app">
+			<h3 class="titulo-2 ">¿ESTAS BUSCANDO UN LUGAR DONDE VIVIR?</h3>
+			<p class="texto-3">En <strong class="tit-app">DONDE VIVIR</strong> puedes encontrar el mejor lugar para vivir
+				según tu interés</p>
+		</div>
+	</div>
+
+	<!-- Marketing Icons Section -->
+	<div class="row">
+		<ui:repeat var="tipoNegocios" value="#{indexAppBean.tiposNegocios}">
+			<div class="col-lg-4  mb-4 col-md-4 text-center bussines" >
+				<div class="card-app col-lg-8  col-md-12 col-sm-6 offset-sm-3 col-xs-4 col-9 rounded-circle">
+					<div class="col-lg-12  col-md-12 col-sm-12  col-xs-12 title-circle" >
+						<h4>#{tipoNegocios.nameTypeBussines.toUpperCase()}</h4>
+						<a href="#{facesContext.externalContext.requestContextPath}/#{tipoNegocios.nameTypeBussines}">Ver más</a>
+					</div>
+
+				</div>
+			</div>
+		</ui:repeat>
+	</div>
+	<!-- /.row --> </section>
+
+	<!--ARRENDOS AGREGADOS RECIENTEMENTE-->
+	<section class="app-todos">
+	<div class="container">
+		<!-- Portfolio Section -->
+		<div class="row ">
+			<div class="col-lg-12 text-center">
+				<h3 class="titulo-2 color-black">ARRENDOS RECIENTES</h3>
+				<p class="texto-3">Encuentra aquí los arrendos agregados recientemente</p>
+			</div>
+			<div class="col-lg-12 app-recientes">
+				<div class="row">
+					<ui:repeat var="arrendo" value="#{indexAppBean.inmueblesArriendo}">
+						<!-- primer anuncio -->
+						<div class="col-lg-3 col-md-6 mb-3">
+							<div class="card h-60 text-center">
+								<div class="card-body">
+									<div class="body-info"> 
+										<h4 class="card-title">#{arrendo.titleInmueble}</h4>
+										<h6 class="card-subtitle mb-2 text-muted precio">$#{arrendo.price}</h6>
+										<p class="card-text">#{arrendo.municipality.name}, #{arrendo.municipality.department.name},</p>
+									</div>
+									
+								</div>
+								<div class="card-footer">
+									<a href="#">Leer información</a>
+								</div>
+							</div>
+						</div>
+						<!-- fin primer anuncio -->
+					</ui:repeat>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+	</div>
+	</section>
+
+	<!-- VENTAS RECIENTES -->
+	<section class="app-todas-ventas">
+	<div class="container">
+		<!-- Portfolio Section -->
+		<div class="row ">
+			<div class="col-lg-12 text-center">
+				<h3 class="titulo-2 color-yellow">ANTICRES RECIENTES</h3>
+				<p class="texto-3">Encuentra aquí los anticreses agregados recientemente</p>
+			</div>
+			<div class="col-lg-12 app-recientes">
+				<div class="row">
+					<ui:repeat var="arrendosAnticres"
+						value="#{indexAppBean.inmueblesAnticres}">
+						<!-- primer anuncio -->
+						<div class="col-lg-3 col-md-6 mb-3">
+							<div class="card h-60 text-center">
+								<div class="card-body">
+									<h4 class="card-title">#{arrendosAnticres.titleInmueble}</h4>
+									<h6 class="card-subtitle mb-2 text-muted">$#{arrendosAnticres.price}</h6>
+									<p class="card-text">#{arrendosAnticres.municipality.name}, #{arrendosAnticres.municipality.department.name},</p>
+								</div>
+								<div class="card-footer">
+									<a href="#">Leer información</a>
+								</div>
+							</div>
+						</div>
+						<!-- fin primer anuncio -->
+					</ui:repeat>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+	</div>
+	</section>
+	<!-- anticres recientes -->
+	<section class="app-todas-anticres">
+	<div class="container">
+		<!-- Portfolio Section -->
+		<div class="row ">
+			<div class="col-lg-12 text-center">
+				<h3 class="titulo-2 color-black">VENTAS RECIENTES</h3>
+				<p>Encuentra aquí los arrendos agregados recientemente</p>
+			</div>
+			<div class="col-lg-12 app-recientes">
+				<div class="row">
+					<ui:repeat var="arrendosVentas"
+						value="#{indexAppBean.inmueblesVentas}">
+						<!-- primer anuncio -->
+						<div class="col-lg-3 col-md-6 mb-3">
+							<div class="card h-60 text-center">
+
+								<div class="card-body">
+									<h4 class="card-title">#{arrendosVentas.titleInmueble}</h4>
+									<h6 class="card-subtitle mb-2 text-muted">$#{arrendosVentas.price}</h6>
+									<p class="card-text">#{arrendosVentas.municipality.name}, #{arrendosVentas.municipality.department.name},</p>
+								</div>
+								<div class="card-footer">
+									<a href="#">Leer información</a>
+								</div>
+							</div>
+						</div>
+						<!-- fin primer anuncio -->
+					</ui:repeat>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+	</div>
+	</section>
+
+	<section class="app-todas-ventas">
+	<div class="container">
+
+		<div class="row ">
+			<div class="col-lg-12 text-center">
+				<h3 class="titulo-2 color-yellow">INMUEBLES EN VENTA O
+					ARRIENDO EN COLOMBIA</h3>
+			</div>
+			<div class="col-6 col-md">
+				<h5  class="titulo-2">Apartamentos</h5>
+				<hr class="line" />
+				<ul class="list-unstyled text-small">
+					<li><a class="text-muted" href="#">Cool stuff</a></li>
+					<li><a class="text-muted" href="#">Random feature</a></li>
+					<li><a class="text-muted" href="#">Team feature</a></li>
+					<li><a class="text-muted" href="#">Stuff for developers</a></li>
+					<li><a class="text-muted" href="#">Another one</a></li>
+					<li><a class="text-muted" href="#">Last time</a></li>
+				</ul>
+			</div>
+			<div class="col-6 col-md">
+				<h5  class="titulo-2">Casas</h5>
+				<hr class="line" />
+				<ul class="list-unstyled text-small">
+					<li><a class="text-muted" href="#">Cool stuff</a></li>
+					<li><a class="text-muted" href="#">Random feature</a></li>
+					<li><a class="text-muted" href="#">Team feature</a></li>
+					<li><a class="text-muted" href="#">Stuff for developers</a></li>
+					<li><a class="text-muted" href="#">Another one</a></li>
+					<li><a class="text-muted" href="#">Last time</a></li>
+				</ul>
+			</div>
+			<div class="col-6 col-md">
+				<h5  class="titulo-2">Habitaciones</h5>
+				<hr class="line" />
+				<ul class="list-unstyled text-small">
+					<li><a class="text-muted" href="#">Cool stuff</a></li>
+					<li><a class="text-muted" href="#">Random feature</a></li>
+					<li><a class="text-muted" href="#">Team feature</a></li>
+					<li><a class="text-muted" href="#">Stuff for developers</a></li>
+					<li><a class="text-muted" href="#">Another one</a></li>
+					<li><a class="text-muted" href="#">Last time</a></li>
+				</ul>
+			</div>
+			<div class="col-6 col-md">
+				<h5 class="titulo-2">Apartaestudios</h5>
+				<hr class="line" />
+				<ul class="list-unstyled text-small">
+					<li><a class="text-muted" href="#">Cool stuff</a></li>
+					<li><a class="text-muted" href="#">Random feature</a></li>
+					<li><a class="text-muted" href="#">Team feature</a></li>
+					<li><a class="text-muted" href="#">Stuff for developers</a></li>
+					<li><a class="text-muted" href="#">Another one</a></li>
+					<li><a class="text-muted" href="#">Last time</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	</section>
+	<section class="app-todas-ventas">
+	<div class="col-lg-12 text-center">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 bg-gris text-center">
+				
+				<!-- <span class="fa fa-building-o fa-4x"></span> -->
+				<div class="col-lg-12 ">
+					<h2 class="titulo-one color-gray">¿QUIERES DAR A CONOCER TU EMPRESA?</h2>
+					<h4 class="texto-3 color-yellow">Muchas personas visitan nuestro sitio
+						web, haz que conoscan tu negocio!</h4>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="py-5 bg-dark">
+	<div class="container">
+		<p class="m-0 text-center url text-white">Copyright &copy;
+			www.dondevivir.com 2018</p>
+	</div>
+	<!-- /.container --> </footer>
+
+
+	<!-- REQUIRED JS SCRIPTS -->
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/jquery/jquery.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/jquery/jquery.min.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/resources/assets/css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

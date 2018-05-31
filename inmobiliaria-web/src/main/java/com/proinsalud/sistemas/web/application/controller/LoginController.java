@@ -28,7 +28,7 @@ public class LoginController {
 			this.request.getSession().removeAttribute(Constants.Auth.VAR_SESSION_ERROR);
 		}
 		if (App.isAuthenticated()) {
-			page = ViewConstants.REDIRECT;
+			page = ViewConstants.VIEW_HOME;
 		}
 		return page;
 	}
