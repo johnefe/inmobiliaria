@@ -46,6 +46,7 @@ public class TipoNegocioBean implements Serializable {
 	private List<TypeBussines> tiposNegocios;
 	private List<TipoInmueble> tiposInmuebles;
 	private List<Inmueble> inmuebles;
+	private List<Inmueble> listInmuebles;
 	
 	private TipoInmueble tipoInmueble;
 	private int sizeDivInmuebles;
@@ -61,11 +62,13 @@ public class TipoNegocioBean implements Serializable {
 	public void init() {
 		App.initInjectionAutowired(this);
 		loadTypeBussines();
+		//loadInmuebles();
 	}
 
 	public void loadTypeBussines() {
 		mostrarPanel(PANEL_INMUEBLES);
 		try {
+			tiposNegocios = new ArrayList<TypeBussines>();
 			tiposNegocios = iTypeBussinesService.findAllEntity();
 			tiposInmuebles = iTipoInmuebleService.findAllEntity();
 			sizeDivInmuebles = sizeDiv(tiposInmuebles.size());
@@ -107,13 +110,35 @@ public class TipoNegocioBean implements Serializable {
 		}
 	}
 	
+	public void loadInmuebles() {
+		listInmuebles = new ArrayList<Inmueble>();
+		//listInmuebles = iInmuebleService.findAllEntity();
+	}
+	
 	public void ShowInmublesByType(TipoInmueble tipoInmueble) {
-		mostrarPanel(PANEL_INMUEBLES_FILTRO);
 		inmuebles = new ArrayList<Inmueble>();
+		listInmuebles = new ArrayList<Inmueble>();
+		mostrarPanel(PANEL_INMUEBLES_FILTRO);
 		inmuebles = iInmuebleService.findInmuebleByTipo(tipoInmueble.getId());
-		System.out.println(inmuebles);
-		System.out.println(inmuebles.size());
-		System.out.println(tipoInmueble.getId());
+		
+		long i=tipoInmueble.getId();
+		for(Inmueble m:inmuebles) {
+			for(TypeBussines t:tiposNegocios) {
+				if(m.getTypeBussines().getId().equals(i)) {
+					
+						listInmuebles.add(m);
+				}				 
+			}
+		}
+		
+		
+		System.out.println("-----lista de inmuebles------------");
+		System.out.println(listInmuebles);
+		
+		System.out.println(i);
+		System.out.println(listInmuebles.size());
+		//System.out.println(listInmuebles.size());
+
 		
 	}
 	
@@ -151,5 +176,9 @@ public class TipoNegocioBean implements Serializable {
 	public List<Inmueble> getInmuebles() {
 		return inmuebles;
 	}
-	
+
+	public List<Inmueble> getListInmuebles() {
+		return listInmuebles;
+	}
+		
 }
