@@ -33,6 +33,7 @@ public class TipoNegocioBean implements Serializable {
 	private static final Log LOG = App.getLogger(TipoNegocioBean.class);
 	private static final String PANEL_INMUEBLES_FILTRO = "PANEL_INMUEBLES_FILTRO";
 	private static final String PANEL_INMUEBLES = "PANEL_INMUEBLES";
+	private static final String PANEL_DETAIL_INMUEBLE = "PANEL_DETAIL_INMUEBLE";
 
 	@Autowired
 	private ITypeBussinesService iTypeBussinesService;
@@ -46,13 +47,16 @@ public class TipoNegocioBean implements Serializable {
 	private List<TypeBussines> tiposNegocios;
 	private List<TipoInmueble> tiposInmuebles;
 	private List<Inmueble> inmuebles;
-	private List<Inmueble> listInmuebles;
-	
+	private List<Inmueble> listInmueblesArriendo;
+	private List<Inmueble> listInmueblesVenta;
+	private List<Inmueble> listInmueblesAnticres;
 	private TipoInmueble tipoInmueble;
+	private Inmueble inmueble;
 	private int sizeDivInmuebles;
 	
 	private boolean ShowpnlInmueblesFiltro;
 	private boolean ShowpnlInmuebles;
+	private boolean ShowpnlDetailInmueble;
 
 	public TipoNegocioBean() {
 		super();
@@ -62,7 +66,7 @@ public class TipoNegocioBean implements Serializable {
 	public void init() {
 		App.initInjectionAutowired(this);
 		loadTypeBussines();
-		//loadInmuebles();
+		
 	}
 
 	public void loadTypeBussines() {
@@ -72,6 +76,7 @@ public class TipoNegocioBean implements Serializable {
 			tiposNegocios = iTypeBussinesService.findAllEntity();
 			tiposInmuebles = iTipoInmuebleService.findAllEntity();
 			sizeDivInmuebles = sizeDiv(tiposInmuebles.size());
+
 		} catch (Exception e) {
 			UtilWeb.printError(LOG, e);
 		}
@@ -101,45 +106,46 @@ public class TipoNegocioBean implements Serializable {
 		case PANEL_INMUEBLES_FILTRO:
 			ShowpnlInmueblesFiltro = true;
 			ShowpnlInmuebles= false;
+			ShowpnlDetailInmueble = false;
 			break;
 		case PANEL_INMUEBLES:
 			ShowpnlInmuebles= true;
 			ShowpnlInmueblesFiltro= false;
+			ShowpnlDetailInmueble = false;
+		case PANEL_DETAIL_INMUEBLE:
+			ShowpnlInmuebles= false;
+			ShowpnlInmueblesFiltro= false;
+			ShowpnlDetailInmueble = true;
 		default:
 			break;
 		}
 	}
 	
-	public void loadInmuebles() {
-		listInmuebles = new ArrayList<Inmueble>();
-		//listInmuebles = iInmuebleService.findAllEntity();
+	public void ShowDetailInmueble() {
+		mostrarPanel(PANEL_DETAIL_INMUEBLE);
 	}
 	
 	public void ShowInmublesByType(TipoInmueble tipoInmueble) {
 		inmuebles = new ArrayList<Inmueble>();
-		listInmuebles = new ArrayList<Inmueble>();
-		mostrarPanel(PANEL_INMUEBLES_FILTRO);
-		inmuebles = iInmuebleService.findInmuebleByTipo(tipoInmueble.getId());
-		
 		long i=tipoInmueble.getId();
+		listInmueblesArriendo = new ArrayList<Inmueble>();
+		listInmueblesVenta = new ArrayList<Inmueble>();
+		listInmueblesAnticres = new ArrayList<Inmueble>();
+		inmuebles = iInmuebleService.findInmuebleByTipo(i);
+		mostrarPanel(PANEL_INMUEBLES_FILTRO);
+		
 		for(Inmueble m:inmuebles) {
-			for(TypeBussines t:tiposNegocios) {
-				if(m.getTypeBussines().getId().equals(i)) {
-					
-						listInmuebles.add(m);
-				}				 
-			}
+			
+				if(m.getTypeBussines().getNameTypeBussines().equals("arriendo")) {		
+					listInmueblesArriendo.add(m);
+				}
+				if(m.getTypeBussines().getNameTypeBussines().equals("venta")) {		
+					listInmueblesVenta.add(m);
+				}
+				if(m.getTypeBussines().getNameTypeBussines().equals("anticres")) {		
+					listInmueblesAnticres.add(m);
+				}
 		}
-		
-		
-		System.out.println("-----lista de inmuebles------------");
-		System.out.println(listInmuebles);
-		
-		System.out.println(i);
-		System.out.println(listInmuebles.size());
-		//System.out.println(listInmuebles.size());
-
-		
 	}
 	
 	/* getters and setters*/
@@ -177,8 +183,57 @@ public class TipoNegocioBean implements Serializable {
 		return inmuebles;
 	}
 
-	public List<Inmueble> getListInmuebles() {
-		return listInmuebles;
+	public List<Inmueble> getListInmueblesArriendo() {
+		return listInmueblesArriendo;
 	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public static Log getLog() {
+		return LOG;
+	}
+
+	public static String getPanelInmueblesFiltro() {
+		return PANEL_INMUEBLES_FILTRO;
+	}
+
+	public static String getPanelInmuebles() {
+		return PANEL_INMUEBLES;
+	}
+	
+	public static String getPanelDetailInmueble() {
+		return PANEL_DETAIL_INMUEBLE;
+	}
+
+	public ITypeBussinesService getiTypeBussinesService() {
+		return iTypeBussinesService;
+	}
+
+	public ITipoInmuebleService getiTipoInmuebleService() {
+		return iTipoInmuebleService;
+	}
+
+	public IInmuebleService getiInmuebleService() {
+		return iInmuebleService;
+	}
+
+	public List<Inmueble> getListInmueblesVenta() {
+		return listInmueblesVenta;
+	}
+
+	public List<Inmueble> getListInmueblesAnticres() {
+		return listInmueblesAnticres;
+	}
+
+	public boolean isShowpnlDetailInmueble() {
+		return ShowpnlDetailInmueble;
+	}
+
+	public Inmueble getInmueble() {
+		return inmueble;
+	}
+	
 		
 }
