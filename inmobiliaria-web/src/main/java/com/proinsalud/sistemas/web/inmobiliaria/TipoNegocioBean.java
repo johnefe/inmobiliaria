@@ -98,6 +98,7 @@ public class TipoNegocioBean implements Serializable {
 	public void ocultarPaneles() {
 		ShowpnlInmueblesFiltro=false;
 		ShowpnlInmuebles= false;
+		ShowpnlDetailInmueble = false;
 	}
 	
 	private void mostrarPanel(String panel) {
