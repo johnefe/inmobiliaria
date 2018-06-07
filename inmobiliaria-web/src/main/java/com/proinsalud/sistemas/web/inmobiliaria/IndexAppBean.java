@@ -57,7 +57,9 @@ public class IndexAppBean implements Serializable {
 	public void init() {
 		App.initInjectionAutowired(this);
 		loadTypeBussines();
+		loadInmuebles();
 		inmueblesArriendo();
+		
 		
 	}
 	
@@ -65,7 +67,7 @@ public class IndexAppBean implements Serializable {
 		
 		try {
 			tiposNegocios = iTypeBussinesService.findAllEntity();
-			loadInmuebles();
+			
 		} catch (Exception e) {
 			UtilWeb.printError(LOG, e);
 		}
@@ -102,6 +104,7 @@ public class IndexAppBean implements Serializable {
 	
 	
 	public void inmueblesArriendo() {
+		
 		Arriendo=new ArrayList<Inmueble>();
 		Anticres=new ArrayList<Inmueble>();
 		Ventas=new ArrayList<Inmueble>();

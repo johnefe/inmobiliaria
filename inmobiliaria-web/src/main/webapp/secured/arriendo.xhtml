@@ -164,8 +164,7 @@
 										<!-- boton de ver detalles -->
 										<div class="col-lg-12 btn-detalles">
 											<!--  <button type="submit" class="btn-login">VER   DETALLADAMENTE</button>-->
-											 <p:commandButton title="VER DETALLADAMENTE" process="@form" action="#{tipoNegocioBean.ShowInmublesByType()}" update="" class="btn-login"  />	
-																	
+											 <p:commandButton title="VER DETALLADAMENTE" process="@this" action="#{tipoNegocioBean.ShowDetailInmueble(inmueble)}" update="@([id$=pnlGeneral])" class="btn-login"  />						
 										</div>
 									</div>
 								</div>
@@ -176,7 +175,7 @@
 						</p:outputPanel>
 						
 						<p:outputPanel id="pnlInmuebles" rendered="#{tipoNegocioBean.showpnlInmuebles}">
-							<h:form id="formInmueblesByFiltro" prependId="false">
+						
 							<div class="row">
 						<!--  un anuncio -->
 							<ui:repeat var="arriendos" value="#{indexAppBean.arriendo}">
@@ -225,7 +224,7 @@
 										<!-- boton de ver detalles -->
 										<div class="col-lg-12 btn-detalles">
 											<!--  <button type="submit" class="btn-login">VER   DETALLADAMENTE</button>-->
-											 <p:commandButton title="VER DETALLADAMENTE" process="@form" action="#{tipoNegocioBean.ShowInmublesByType()}" update="" class="btn-login"  />	
+											 <p:commandButton title="VER DETALLADAMENTE" process="@this" action="#{tipoNegocioBean.ShowDetailInmueble(arriendos)}" update="@([id$=pnlGeneral])" class="btn-login"  />	
 																	
 										</div>
 									</div>
@@ -234,10 +233,78 @@
 							</ui:repeat>
 							<!-- fin de un anuncio -->
 							</div>
-							</h:form>
+					
 						</p:outputPanel>
 						<!-- fin espacio para los inmuebles -->
-					
+						
+						<p:outputPanel id="pnlDetailInmueble" rendered="#{tipoNegocioBean.showpnlDetailInmueble}">
+							<div class="row">
+								<div class="col-lg-12 text-center">
+									<h4 class="titulo-1">Titulo del inmueble</h4>
+								</div>
+								<div class="col-lg-12">
+									<div class="row">
+										<div class="col-lg-8">
+											<img height="390px;" width="100%;" src="#{facesContext.externalContext.requestContextPath}/resources/assets/img/515-C0001-01_1_h.jpg"></img>
+										</div>
+										<div class="col-lg-4">
+											<div class="row">
+												<!--  -->
+												<div class="col-lg-6">
+													<h3>VALOR</h3>
+												</div>
+												<div class="col-lg-6">
+													<h3>700.000</h3>
+												</div>
+												<!--  -->
+												<!--  -->
+												<div class="col-lg-6">
+													<h3>CIUDAD:</h3>
+												</div>
+												<div class="col-lg-6">
+													<h3>PASTO</h3>
+												</div>
+												<!--  -->
+												<!--  -->
+												<div class="col-lg-6">
+													<h3>DIRECCION</h3>
+												</div>
+												<div class="col-lg-6">
+													<h3>LAS CUADRAS</h3>
+												</div>
+												<!--  -->
+												<!--  -->
+												<div class="col-lg-6">
+													<h3>HABITACIONES</h3>
+												</div>
+												<div class="col-lg-6">
+													<h3>3</h3>
+												</div>
+												<!--  -->
+												<!--  -->
+												<div class="col-lg-6">
+													<h3>BAÑOS</h3>
+												</div>
+												<div class="col-lg-6">
+													<h3>2</h3>
+												</div>
+												<!--  -->
+												<!--  -->
+												<div class="col-lg-6">
+													<h3>COSINA</h3>
+												</div>
+												<div class="col-lg-6">
+													<h3>1</h3>
+												</div>
+												<!--  -->
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</p:outputPanel>
+						
 					</div>
 				</div>
 				<!-- fin anuncios -->

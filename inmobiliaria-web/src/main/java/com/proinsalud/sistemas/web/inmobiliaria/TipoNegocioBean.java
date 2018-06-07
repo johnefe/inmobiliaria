@@ -52,6 +52,7 @@ public class TipoNegocioBean implements Serializable {
 	private List<Inmueble> listInmueblesAnticres;
 	private TipoInmueble tipoInmueble;
 	private Inmueble inmueble;
+	private Inmueble dateilInmueble;
 	private int sizeDivInmuebles;
 	
 	private boolean ShowpnlInmueblesFiltro;
@@ -113,17 +114,22 @@ public class TipoNegocioBean implements Serializable {
 			ShowpnlInmuebles= true;
 			ShowpnlInmueblesFiltro= false;
 			ShowpnlDetailInmueble = false;
+			break;
 		case PANEL_DETAIL_INMUEBLE:
 			ShowpnlInmuebles= false;
 			ShowpnlInmueblesFiltro= false;
 			ShowpnlDetailInmueble = true;
+			break;
 		default:
 			break;
 		}
 	}
 	
-	public void ShowDetailInmueble() {
+	public void ShowDetailInmueble(Inmueble inmueble) {
 		mostrarPanel(PANEL_DETAIL_INMUEBLE);
+		dateilInmueble = inmueble;
+		
+
 	}
 	
 	public void ShowInmublesByType(TipoInmueble tipoInmueble) {
@@ -188,14 +194,6 @@ public class TipoNegocioBean implements Serializable {
 		return listInmueblesArriendo;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public static Log getLog() {
-		return LOG;
-	}
-
 	public static String getPanelInmueblesFiltro() {
 		return PANEL_INMUEBLES_FILTRO;
 	}
@@ -235,6 +233,17 @@ public class TipoNegocioBean implements Serializable {
 	public Inmueble getInmueble() {
 		return inmueble;
 	}
-	
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public static Log getLog() {
+		return LOG;
+	}
+
+	public Inmueble getDateilInmueble() {
+		return dateilInmueble;
+	}
 		
 }
