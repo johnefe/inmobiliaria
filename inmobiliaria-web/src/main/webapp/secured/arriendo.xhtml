@@ -187,7 +187,7 @@
 										</div>
 										<div class="col-lg-6">
 											<div class="row">
-												<div class="col-lg-12 text-center">
+												<div class="col-lg-12 text-center ">
 													<h4 class=" titulo-marco">#{arriendos.titleInmueble}</h4>
 												</div>
 												<div class="col-lg-12">
@@ -239,67 +239,107 @@
 						
 						<p:outputPanel id="pnlDetailInmueble" rendered="#{tipoNegocioBean.showpnlDetailInmueble}">
 							<div class="row">
-								<div class="col-lg-12 text-center">
-									<h4 class="titulo-1">Titulo del inmueble</h4>
+								<div class="col-lg-12 text-center bg-detail-inmueble">
+									<h4 class="titulo-1">#{tipoNegocioBean.detailInmueble.titleInmueble.toUpperCase()}</h4>
 								</div>
-								<div class="col-lg-12">
+								<div class="col-lg-12 marco-bg-detail">
 									<div class="row">
 										<div class="col-lg-8">
-											<img height="390px;" width="100%;" src="#{facesContext.externalContext.requestContextPath}/resources/assets/img/515-C0001-01_1_h.jpg"></img>
+												
+												<div class="row">
+													<div class="col-lg-12">
+														<img height="390px;" width="100%;" src="#{facesContext.externalContext.requestContextPath}/resources/assets/img/515-C0001-01_1_h.jpg"></img>
+													</div>
+													<div class="col-lg-12 text-left info-contacto-inmueble">
+														<h4>DEJA TU COMENTARIO:</h4>
+													</div>
+													<div class="col-lg-12 ">
+														<textarea style="width: 100%; height: 130px;" rows="" cols=""></textarea>
+													</div>
+													<div class="col-lg-12">
+														<p:commandButton title="ENVIAR MENSAJE" process="@this" action="#{tipoNegocioBean.ShowDetailInmueble(arriendos)}" update="@([id$=pnlGeneral])" class="btn-login"  />										
+													</div>			
+												</div>
+									
 										</div>
-										<div class="col-lg-4">
+										<div class="col-lg-4 sub-marco-detail">
 											<div class="row">
 												<!--  -->
-												<div class="col-lg-6">
-													<h3>VALOR</h3>
+												<div class="col-lg-6 text-left">
+													<h3 class="descripcion sub-titulo-marco">VALOR:</h3>
 												</div>
-												<div class="col-lg-6">
-													<h3>700.000</h3>
-												</div>
-												<!--  -->
-												<!--  -->
-												<div class="col-lg-6">
-													<h3>CIUDAD:</h3>
-												</div>
-												<div class="col-lg-6">
-													<h3>PASTO</h3>
+												<div class="col-lg-6 text-left">
+													<h3 class="titulo-2">#{tipoNegocioBean.detailInmueble.price}</h3>
 												</div>
 												<!--  -->
-												<!--  -->
-												<div class="col-lg-6">
-													<h3>DIRECCION</h3>
+												<div class="col-lg-6 text-left">
+													<h3 class="descripcion sub-titulo-marco">CIUDAD:</h3>
 												</div>
-												<div class="col-lg-6">
-													<h3>LAS CUADRAS</h3>
-												</div>
-												<!--  -->
-												<!--  -->
-												<div class="col-lg-6">
-													<h3>HABITACIONES</h3>
-												</div>
-												<div class="col-lg-6">
-													<h3>3</h3>
+												<div class="col-lg-6 text-left">
+													<h3 class="titulo-2">#{tipoNegocioBean.detailInmueble.municipality.name}</h3>
 												</div>
 												<!--  -->
-												<!--  -->
-												<div class="col-lg-6">
-													<h3>BAÑOS</h3>
+												<div class="col-lg-6 text-left">
+													<h3 class="descripcion sub-titulo-marco">DIRECCION:</h3>
 												</div>
-												<div class="col-lg-6">
-													<h3>2</h3>
-												</div>
-												<!--  -->
-												<!--  -->
-												<div class="col-lg-6">
-													<h3>COSINA</h3>
-												</div>
-												<div class="col-lg-6">
-													<h3>1</h3>
+												<div class="col-lg-6 text-left ">
+													<h3 class="titulo-2">#{tipoNegocioBean.detailInmueble.address}</h3>
 												</div>
 												<!--  -->
-												
+												<div class="col-lg-6 text-left">
+													<h3 class="descripcion sub-titulo-marco">HABITACIONES:</h3>
+												</div>
+												<div class="col-lg-6 text-left">
+													<h3 class="titulo-2">#{tipoNegocioBean.detailInmueble.bedroom}</h3>
+												</div>
+												<!-- -->
+												<div class="col-lg-6 text-left">
+													<h3 class="descripcion sub-titulo-marco">BAÑOS:</h3>
+												</div>
+												<div class="col-lg-6 text-left">
+													<h3 class="titulo-2">#{tipoNegocioBean.detailInmueble.bathroom}</h3>
+												</div>
+												<!--  -->
+												<div class="col-lg-6 text-left">
+													<h3 class="descripcion sub-titulo-marco">COCINA:</h3>
+												</div>
+												<div class="col-lg-6 text-left">
+													<h3 class="titulo-2">#{tipoNegocioBean.detailInmueble.kitchen}</h3>
+												</div>
+												<!--  -->
+												<div class="col-lg-6 text-left">
+													<h3 class="descripcion sub-titulo-marco">ZONA LAVANDERIA:</h3>
+												</div>
+												<div class="col-lg-6 text-left">
+													<h3 class="titulo-2">#{tipoNegocioBean.detailInmueble.laundry eq 0 ? 'No':'Si'}</h3>
+												</div>
+												<!--#{prefixBean.prefix.id eq null ? 'Nuevo' : 'Editar'}  -->
+												<div class="col-lg-6 text-left">
+													<h3 class="descripcion sub-titulo-marco">GARAJE:</h3>
+												</div>
+												<div class="col-lg-6 text-left">
+													<h3 class="titulo-2">#{tipoNegocioBean.detailInmueble.garage eq 0 ? 'No':'Si'}</h3>
+												</div>
+												<!--  -->
+												<div class="col-lg-12 text-left">
+													<p>#{tipoNegocioBean.detailInmueble.description eq NULL ? '.':tipoNegocioBean.detailInmueble.description}
+													</p>
+												</div>
+												<div class="col-lg-12 text-left info-contacto-inmueble">
+														<h4>CONTACTO:</h4>
+													</div>
+													<div class="col-lg-6 ">
+														<h3 class="descripcion sub-titulo-marco">NOMBRE:</h3>
+														<p class="descripcion">#{tipoNegocioBean.detailInmueble.person.firstName.toUpperCase()} #{tipoNegocioBean.detailInmueble.person.lastName.toUpperCase()}</p>
+													</div>
+													<div class="col-lg-6 ">
+														<h3 class="descripcion sub-titulo-marco">TELÉFONO:</h3>
+														<p class="descripcion">#{tipoNegocioBean.detailInmueble.person.numberPhone}</p>
+													</div>
 											</div>
 										</div>
+										
+									
 									</div>
 								</div>
 							</div>

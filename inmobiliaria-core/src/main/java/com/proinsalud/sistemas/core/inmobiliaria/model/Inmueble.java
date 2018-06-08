@@ -48,7 +48,15 @@ public class Inmueble implements Serializable {
 	@Column(name = "title_inmueble")
 	private String titleInmueble;	
 	
-
+	@Column(name = "garage")
+	private Integer garage;	
+	
+	@Column(name = "laundry")
+	private Integer laundry;	
+	
+	@Column(name = "description")
+	private String description;
+	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_tipo_inmueble")
 	private TipoInmueble tipoInmueble;
@@ -222,13 +230,41 @@ public class Inmueble implements Serializable {
 	public void setUser(Users user) {
 		this.user = user;
 	}
+	
+	
+	public Integer getGarage() {
+		return garage;
+	}
+
+	public void setGarage(Integer garage) {
+		this.garage = garage;
+	}
+
+	public Integer getLaundry() {
+		return laundry;
+	}
+
+	public void setLaundry(Integer laundry) {
+		this.laundry = laundry;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
 	@Override
 	public String toString() {
-		return "Inmueble [id=" + id + ", titleInmueble=" + titleInmueble + ", bedroom=" + bedroom + ", bathroom="
-				+ bathroom + ", kitchen=" + kitchen + ", address=" + address + ", state=" + state + ", price=" + price
-				+ ", imgUrlOne=" + imgUrlOne + ", imgUrlTwo=" + imgUrlTwo + ", imgUrlThree=" + imgUrlThree + "]";
+		return "Inmueble [id=" + id + ", user=" + user + ", titleInmueble=" + titleInmueble + ", garage=" + garage
+				+ ", laundry=" + laundry + ", description=" + description + ", tipoInmueble=" + tipoInmueble
+				+ ", bedroom=" + bedroom + ", bathroom=" + bathroom + ", kitchen=" + kitchen + ", address=" + address
+				+ ", state=" + state + ", price=" + price + ", imgUrlOne=" + imgUrlOne + ", imgUrlTwo=" + imgUrlTwo
+				+ ", imgUrlThree=" + imgUrlThree + "]";
 	}
 
+	
 	
 }

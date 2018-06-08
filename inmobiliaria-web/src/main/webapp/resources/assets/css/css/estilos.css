@@ -293,7 +293,24 @@ font-family: 'Gochi Hand', cursive;
 
 }
 
+.bg-detail-inmueble{
+	background: #FF9800;
+	padding: 5px;
+	color:#fff;
+}
 
+.marco-bg-detail{
+	border: 1px solid #FF9800;
+}
+
+.sub-marco-detail{
+	padding: 5px;
+	padding-top: 15px;
+}
+
+.info-contacto-inmueble{
+	padding: 15px;
+}
 
 
 

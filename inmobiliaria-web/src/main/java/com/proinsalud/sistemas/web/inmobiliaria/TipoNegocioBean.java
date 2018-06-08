@@ -52,7 +52,7 @@ public class TipoNegocioBean implements Serializable {
 	private List<Inmueble> listInmueblesAnticres;
 	private TipoInmueble tipoInmueble;
 	private Inmueble inmueble;
-	private Inmueble dateilInmueble;
+	private Inmueble detailInmueble;
 	private int sizeDivInmuebles;
 	
 	private boolean ShowpnlInmueblesFiltro;
@@ -127,7 +127,7 @@ public class TipoNegocioBean implements Serializable {
 	
 	public void ShowDetailInmueble(Inmueble inmueble) {
 		mostrarPanel(PANEL_DETAIL_INMUEBLE);
-		dateilInmueble = inmueble;
+		detailInmueble = inmueble;
 		
 
 	}
@@ -234,16 +234,8 @@ public class TipoNegocioBean implements Serializable {
 		return inmueble;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	public static Log getLog() {
-		return LOG;
-	}
-
-	public Inmueble getDateilInmueble() {
-		return dateilInmueble;
+	public Inmueble getDetailInmueble() {
+		return detailInmueble;
 	}
 		
 }
