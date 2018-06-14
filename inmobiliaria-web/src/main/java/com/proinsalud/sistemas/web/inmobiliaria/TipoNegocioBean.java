@@ -1,7 +1,9 @@
 package com.proinsalud.sistemas.web.inmobiliaria;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,11 +11,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import org.apache.commons.logging.Log;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.proinsalud.sistemas.core.inmobiliaria.model.Comentary;
 import com.proinsalud.sistemas.core.inmobiliaria.model.Inmueble;
 import com.proinsalud.sistemas.core.inmobiliaria.model.TipoInmueble;
 import com.proinsalud.sistemas.core.inmobiliaria.model.TypeBussines;
+import com.proinsalud.sistemas.core.inmobiliaria.service.IComentaryService;
 import com.proinsalud.sistemas.core.inmobiliaria.service.IInmuebleService;
 import com.proinsalud.sistemas.core.inmobiliaria.service.ITipoInmuebleService;
 import com.proinsalud.sistemas.core.inmobiliaria.service.ITypeBussinesService;
@@ -43,7 +48,9 @@ public class TipoNegocioBean implements Serializable {
 	
 	@Autowired
 	private IInmuebleService iInmuebleService;
-
+	
+	@Autowired
+	private IComentaryService iComentaryService;
 	private List<TypeBussines> tiposNegocios;
 	private List<TipoInmueble> tiposInmuebles;
 	private List<Inmueble> inmuebles;
@@ -53,11 +60,13 @@ public class TipoNegocioBean implements Serializable {
 	private TipoInmueble tipoInmueble;
 	private Inmueble inmueble;
 	private Inmueble detailInmueble;
+	private Comentary comentary;
 	private int sizeDivInmuebles;
-	
+	private String comentario="";
 	private boolean ShowpnlInmueblesFiltro;
 	private boolean ShowpnlInmuebles;
 	private boolean ShowpnlDetailInmueble;
+	private Date fecha;
 
 	public TipoNegocioBean() {
 		super();
@@ -128,8 +137,30 @@ public class TipoNegocioBean implements Serializable {
 	public void ShowDetailInmueble(Inmueble inmueble) {
 		mostrarPanel(PANEL_DETAIL_INMUEBLE);
 		detailInmueble = inmueble;
-		
 
+	}
+	
+	public void SendMessage( Inmueble inmueblex) {
+		
+		//System.out.println(comentario);
+		try {
+			
+			if(comentario != null && inmueblex.getId() != null) {
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+				detailInmueble = inmueblex;
+				Date date = new Date();
+				dateFormat.format(date);
+				comentary= new Comentary();
+				comentary.setDescription(comentario);
+				comentary.setInmueble(detailInmueble);
+				comentary.setCreateAt(date);
+				comentary = iComentaryService.persistEntity(comentary);
+				RequestContext.getCurrentInstance().execute("cleanComentary();");
+			}
+			
+		} catch (Exception e) {
+			UtilWeb.printError(LOG, e);
+		}
 	}
 	
 	public void ShowInmublesByType(TipoInmueble tipoInmueble) {
@@ -237,5 +268,20 @@ public class TipoNegocioBean implements Serializable {
 	public Inmueble getDetailInmueble() {
 		return detailInmueble;
 	}
-		
+
+	public Comentary getComentary() {
+		return comentary;
+	}
+
+	public void setComentary(Comentary comentary) {
+		this.comentary = comentary;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
 }

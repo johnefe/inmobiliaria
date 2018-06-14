@@ -258,12 +258,13 @@ public class Inmueble implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Inmueble [id=" + id + ", user=" + user + ", titleInmueble=" + titleInmueble + ", garage=" + garage
-				+ ", laundry=" + laundry + ", description=" + description + ", tipoInmueble=" + tipoInmueble
-				+ ", bedroom=" + bedroom + ", bathroom=" + bathroom + ", kitchen=" + kitchen + ", address=" + address
-				+ ", state=" + state + ", price=" + price + ", imgUrlOne=" + imgUrlOne + ", imgUrlTwo=" + imgUrlTwo
-				+ ", imgUrlThree=" + imgUrlThree + "]";
+		return "Inmueble [id=" + id + ", titleInmueble=" + titleInmueble + ", garage=" + garage + ", laundry=" + laundry
+				+ ", description=" + description + ", bedroom=" + bedroom + ", bathroom=" + bathroom + ", kitchen="
+				+ kitchen + ", address=" + address + ", state=" + state + ", price=" + price + ", imgUrlOne="
+				+ imgUrlOne + ", imgUrlTwo=" + imgUrlTwo + ", imgUrlThree=" + imgUrlThree + "]";
 	}
+
+	
 
 	
 	

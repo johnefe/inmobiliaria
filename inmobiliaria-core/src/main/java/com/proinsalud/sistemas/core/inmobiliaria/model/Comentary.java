@@ -34,7 +34,7 @@ public class Comentary implements Serializable {
 	private Date createAt;
 
 
-	@Column(name = "description", length = 500)
+	@Column(name = "description")
 	private String description;
 
 	public Comentary() {
@@ -75,7 +75,8 @@ public class Comentary implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Comentary [id=" + id + ", createAt=" + createAt + ", description=" + description + "]";
+		return "Comentary [createAt=" + createAt + ", description="
+				+ description + "]";
 	}
 
 }
