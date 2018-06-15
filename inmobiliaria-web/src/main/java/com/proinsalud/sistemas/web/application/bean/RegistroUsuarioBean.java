@@ -9,7 +9,7 @@ import javax.faces.bean.ViewScoped;
 import org.apache.commons.logging.Log;
 
 import com.proinsalud.sistemas.core.security.model.Users;
-import com.proinsalud.sistemas.web.digital_turn.DigitalTurnAttentionBean;
+//import com.proinsalud.sistemas.web.digital_turn.DigitalTurnAttentionBean;
 import com.proinsalud.sistemas.web.util.App;
 import com.proinsalud.sistemas.web.util.UtilWeb;
 
@@ -24,7 +24,7 @@ public class RegistroUsuarioBean implements Serializable  {
 
 	private static final long serialVersionUID = -6213800443677802094L;
 	
-	private static final Log LOG = App.getLogger(DigitalTurnAttentionBean.class);
+	//private static final Log LOG = App.getLogger(DigitalTurnAttentionBean.class);
 	
 	private Users user;
 	
@@ -45,7 +45,7 @@ public class RegistroUsuarioBean implements Serializable  {
 			
 			
 		} catch (Exception e) {
-			UtilWeb.printError(LOG, e);
+		//	UtilWeb.printError(LOG, e);
 		}
 		
 	}

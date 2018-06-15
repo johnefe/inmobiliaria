@@ -137,6 +137,7 @@ public class TipoNegocioBean implements Serializable {
 	public void ShowDetailInmueble(Inmueble inmueble) {
 		mostrarPanel(PANEL_DETAIL_INMUEBLE);
 		detailInmueble = inmueble;
+		RequestContext.getCurrentInstance().execute("cleanComentary();");
 
 	}
 	

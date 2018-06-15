@@ -41,7 +41,7 @@ import com.fasterxml.jackson.databind.ser.PropertyFilter;
 import com.fasterxml.jackson.databind.ser.PropertyWriter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-import com.proinsalud.sistemas.core.convocatory.model.Provider;
+//import com.proinsalud.sistemas.core.convocatory.model.Provider;
 import com.proinsalud.sistemas.core.human_talent.model.Employee;
 import com.proinsalud.sistemas.core.security.model.Users;
 import com.proinsalud.sistemas.core.util.json.CustomJson;
@@ -142,10 +142,10 @@ public class Person implements Serializable {
 	@JsonView(JsonViews.Complete.class)
 	private List<Users> users;
 
-	@JsonManagedReference
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "person")
-	@JsonView(JsonViews.Complete.class)
-	private Provider provider;
+	//@JsonManagedReference
+	//@OneToOne(fetch = FetchType.LAZY, mappedBy = "person")
+	//@JsonView(JsonViews.Complete.class)
+	//private Provider provider;
 
 	@JsonManagedReference
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "person")
@@ -364,9 +364,9 @@ public class Person implements Serializable {
 		this.sexo = sexo;
 	}
 
-	public Provider getProvider() {
-		return provider;
-	}
+	//public Provider getProvider() {
+	//	return provider;
+	//}
 
 	public Employee getEmployee() {
 		return employee;

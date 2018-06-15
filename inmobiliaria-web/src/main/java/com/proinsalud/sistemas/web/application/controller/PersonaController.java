@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.proinsalud.sistemas.core.convocatory.model.Provider;
-import com.proinsalud.sistemas.core.convocatory.service.IProviderService;
+//import com.proinsalud.sistemas.core.convocatory.model.Provider;
+//import com.proinsalud.sistemas.core.convocatory.service.IProviderService;
 import com.proinsalud.sistemas.core.general.model.Person;
 import com.proinsalud.sistemas.core.general.service.IPersonaService;
 import com.proinsalud.sistemas.core.util.json.JsonViews;
@@ -30,7 +30,7 @@ public class PersonaController {
 	private IPersonaService iPersonaService;
 
 	@Autowired
-	private IProviderService iProviderService;
+	//private IProviderService iProviderService;
 
 	@RequestMapping(value="getpersons2" ,method = RequestMethod.POST)
 	public String getPersonsObjetMapper(@RequestBody String parametroPost) {
@@ -71,11 +71,11 @@ public class PersonaController {
 		return res;
 	}
 
-	@RequestMapping("providers")
-	public List<Provider> getProviders() {
-		List<Provider> lst = iProviderService.findAllEntity();
-		return lst;
-	}
+	//@RequestMapping("providers")
+	//public List<Provider> getProviders() {
+	//	List<Provider> lst = iProviderService.findAllEntity();
+	//	return lst;
+	//}
 
 	@RequestMapping("getpersons")
 	public List<Person> getPersons() {

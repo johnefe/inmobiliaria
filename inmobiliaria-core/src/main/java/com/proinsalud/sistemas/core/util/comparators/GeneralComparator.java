@@ -5,13 +5,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.proinsalud.sistemas.core.convocatory.model.CommentOrderBuy;
-import com.proinsalud.sistemas.core.convocatory.model.CommentProductOrderBuy;
-import com.proinsalud.sistemas.core.convocatory.model.QuotationConvocatoryProduct;
-import com.proinsalud.sistemas.core.convocatory.model.StepOrder;
-import com.proinsalud.sistemas.core.convocatory.model.StepOrderConvocatoryTypeConvocatory;
-import com.proinsalud.sistemas.core.documentary_management.model.FileLocation;
-import com.proinsalud.sistemas.core.documentary_management.model.Trd;
+//import com.proinsalud.sistemas.core.convocatory.model.CommentOrderBuy;
+//import com.proinsalud.sistemas.core.convocatory.model.CommentProductOrderBuy;
+//import com.proinsalud.sistemas.core.convocatory.model.QuotationConvocatoryProduct;
+//import com.proinsalud.sistemas.core.convocatory.model.StepOrder;
+//import com.proinsalud.sistemas.core.convocatory.model.StepOrderConvocatoryTypeConvocatory;
+//import com.proinsalud.sistemas.core.documentary_management.model.FileLocation;
+//import com.proinsalud.sistemas.core.documentary_management.model.Trd;
 import com.proinsalud.sistemas.core.human_talent.model.Area;
 import com.proinsalud.sistemas.core.security.model.UserHistorial;
 
@@ -49,21 +49,21 @@ public class GeneralComparator {
 		}
 	}
 
-	public static Comparator<FileLocation> FileLocationCompareByName = (a, b) -> a.getNameFileLocation().compareTo(b.getNameFileLocation());
+	//public static Comparator<FileLocation> FileLocationCompareByName = (a, b) -> a.getNameFileLocation().compareTo(b.getNameFileLocation());
 
-	public static Comparator<Trd> TrdCompareByName = (a, b) -> a.getTrdItem().getName().compareTo(b.getTrdItem().getName());
+	//public static Comparator<Trd> TrdCompareByName = (a, b) -> a.getTrdItem().getName().compareTo(b.getTrdItem().getName());
 
 	public static Comparator<Area> AreaCompareByName = (a, b) -> a.getName().compareTo(b.getName());
 	
 	public static Comparator<UserHistorial> UserHistorialCompareByDateAccessDesc = (a, b) -> b.getDateAccess().compareTo(a.getDateAccess());
 	
-	public static Comparator<CommentOrderBuy> CommentsOrderBuyByRegisteredDesc = (a, b) -> b.getRegistered().compareTo(a.getRegistered());
+	//public static Comparator<CommentOrderBuy> CommentsOrderBuyByRegisteredDesc = (a, b) -> b.getRegistered().compareTo(a.getRegistered());
 	
-	public static Comparator<CommentProductOrderBuy> CommentsProductOrderBuyByRegisteredDesc = (a, b) -> b.getRegistered().compareTo(a.getRegistered());
+	//public static Comparator<CommentProductOrderBuy> CommentsProductOrderBuyByRegisteredDesc = (a, b) -> b.getRegistered().compareTo(a.getRegistered());
 	
-	public static Comparator<QuotationConvocatoryProduct> QuotationConvocatoryProductByPrice = (pa, pb) -> (pa.getPrice().compareTo( pb.getPrice()));
+	//public static Comparator<QuotationConvocatoryProduct> QuotationConvocatoryProductByPrice = (pa, pb) -> (pa.getPrice().compareTo( pb.getPrice()));
 	
-	public static Comparator<StepOrder> StepOrderByDateRegisteredDesc = (a, b) -> (b.getRegistered().compareTo( a.getRegistered()));
+	//public static Comparator<StepOrder> StepOrderByDateRegisteredDesc = (a, b) -> (b.getRegistered().compareTo( a.getRegistered()));
 	
-	public static Comparator<StepOrderConvocatoryTypeConvocatory> StepOrderConvocatoryTypeConvocatoryByPosition =  (a, b) -> (a.getPosition().compareTo( b.getPosition()));;
+	//public static Comparator<StepOrderConvocatoryTypeConvocatory> StepOrderConvocatoryTypeConvocatoryByPosition =  (a, b) -> (a.getPosition().compareTo( b.getPosition()));;
 }

@@ -30,57 +30,10 @@
 		<mapping class="com.proinsalud.sistemas.core.general.model.DocumentType" />
 		<mapping class="com.proinsalud.sistemas.core.general.model.News" />
 		
-		
-
-		<!-- SCHEMA CONVOCATORY -->
-		<mapping class="com.proinsalud.sistemas.core.convocatory.model.Provider" />
-		<mapping class="com.proinsalud.sistemas.core.convocatory.model.Convocatory" />
-		<mapping class="com.proinsalud.sistemas.core.convocatory.model.Quotation" />
-		<mapping class="com.proinsalud.sistemas.core.convocatory.model.ConvocatoryProduct" />
-		<mapping class="com.proinsalud.sistemas.core.convocatory.model.Product" />
-		<mapping class="com.proinsalud.sistemas.core.convocatory.model.QuotationConvocatoryProduct" />
-		<mapping class="com.proinsalud.sistemas.core.convocatory.model.TypeConvocatory" />
-		<mapping class="com.proinsalud.sistemas.core.convocatory.model.CommentProductOrderBuy" />
-		<mapping class="com.proinsalud.sistemas.core.convocatory.model.CommentOrderBuy" />
-		<mapping class="com.proinsalud.sistemas.core.convocatory.model.OrderBuy" />
-		<mapping class="com.proinsalud.sistemas.core.convocatory.model.ProductOrderBuy" />
-		<mapping class="com.proinsalud.sistemas.core.convocatory.model.StepOrder" />
-		<mapping class="com.proinsalud.sistemas.core.convocatory.model.StepOrderConvocatory" />
-		<mapping class="com.proinsalud.sistemas.core.convocatory.model.StepOrderConvocatoryTypeConvocatory" />
-		<mapping class="com.proinsalud.sistemas.core.convocatory.model.StepOrderConvocatoryTyPeConvocatoryUsers" />
-		
-		
 		<!-- SCHEMA HUMAN TALENT -->
 		<mapping class="com.proinsalud.sistemas.core.human_talent.model.Employee" />
 		<mapping class="com.proinsalud.sistemas.core.human_talent.model.Area" />
-		
-		<!-- SCHEMA DOCUMENTARY MANAGEMENT -->
-		<mapping class="com.proinsalud.sistemas.core.documentary_management.model.FileDG" />
-		<mapping class="com.proinsalud.sistemas.core.documentary_management.model.Trd" />
-		<mapping class="com.proinsalud.sistemas.core.documentary_management.model.TrdItem" />
-		<mapping class="com.proinsalud.sistemas.core.documentary_management.model.LevelTrd" />
-		<mapping class="com.proinsalud.sistemas.core.documentary_management.model.FileLocation" />
-		
-		
-		<!-- SCHEMA WAREHOUSE -->
-		<mapping class="com.proinsalud.sistemas.core.warehouse.model.Medicine" />
-		<mapping class="com.proinsalud.sistemas.core.warehouse.model.ProductWarehouse" />
-		
-		<!-- SCHEMA DIGITALTURN -->
-		<mapping class="com.proinsalud.sistemas.core.digital_turn.model.DigitalTurn" />
-		<mapping class="com.proinsalud.sistemas.core.digital_turn.model.DigitalTurnTemp" />
-		<mapping class="com.proinsalud.sistemas.core.digital_turn.model.Module" />
-		<mapping class="com.proinsalud.sistemas.core.digital_turn.model.ModuleUser" />
-		<mapping class="com.proinsalud.sistemas.core.digital_turn.model.Point" />
-		<mapping class="com.proinsalud.sistemas.core.digital_turn.model.PointService" />
-		<mapping class="com.proinsalud.sistemas.core.digital_turn.model.PriorityTurn" />
-		<mapping class="com.proinsalud.sistemas.core.digital_turn.model.Sede" />
-		<mapping class="com.proinsalud.sistemas.core.digital_turn.model.Service" />
-		<mapping class="com.proinsalud.sistemas.core.digital_turn.model.Prefixes" />
-		<mapping class="com.proinsalud.sistemas.core.digital_turn.model.PrefixPoint" />
-		<mapping class="com.proinsalud.sistemas.core.digital_turn.model.PointServicePriority" />
-		<mapping class="com.proinsalud.sistemas.core.digital_turn.model.Slider" />
-		
+				
 		<!-- SCHEMA INMOBILIARIA -->
 		<mapping class="com.proinsalud.sistemas.core.inmobiliaria.model.Calification" />
 		<mapping class="com.proinsalud.sistemas.core.inmobiliaria.model.Cliente" />

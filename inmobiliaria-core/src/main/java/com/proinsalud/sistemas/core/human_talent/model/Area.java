@@ -17,7 +17,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.proinsalud.sistemas.core.documentary_management.model.Trd;
+//import com.proinsalud.sistemas.core.documentary_management.model.Trd;
 import com.proinsalud.sistemas.core.util.comparators.GeneralComparator;
 
 /**
@@ -45,8 +45,8 @@ public class Area implements Serializable {
 	@JoinColumn(name = "id_area_father")
 	private Area areaFather;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "area")
-	private List<Trd> trds;
+	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "area")
+	//private List<Trd> trds;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "areaFather")
 	private List<Area> areas;
@@ -79,13 +79,13 @@ public class Area implements Serializable {
 		this.areaFather = areaFather;
 	}
 
-	public List<Trd> getTrds() {
-		return trds;
-	}
+	//public List<Trd> getTrds() {
+	//	return trds;
+	//}
 
-	public void setTrds(List<Trd> trds) {
-		this.trds = trds;
-	}
+	//public void setTrds(List<Trd> trds) {
+	//	this.trds = trds;
+	//}
 
 	public List<Area> getAreas() {
 		return areas;
@@ -110,7 +110,7 @@ public class Area implements Serializable {
 			if (!lst.isEmpty()) {
 				organizedItemsAsc(lst);
 			} else {
-				GeneralComparator.organized(GeneralComparator.TrdCompareByName, o.getTrds(), "getTrds");
+				//GeneralComparator.organized(GeneralComparator.TrdCompareByName, o.getTrds(), "getTrds");
 			}
 		}
 	}

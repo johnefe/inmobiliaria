@@ -12,7 +12,7 @@ import org.primefaces.component.datatable.DataTable;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
-import com.proinsalud.sistemas.core.documentary_management.model.Trd;
+//import com.proinsalud.sistemas.core.documentary_management.model.Trd;
 import com.proinsalud.sistemas.core.human_talent.model.Area;
 import com.proinsalud.sistemas.core.security.model.Option;
 import com.proinsalud.sistemas.core.security.model.Users;
@@ -104,12 +104,12 @@ public class UtilWeb implements Serializable {
 			TreeNode child = new DefaultTreeNode("area", a, root);
 			root.getChildren().add(child);
 			List<Area> lstAreas = a.getAreas();
-			List<Trd> lstTrds = a.getTrds();
-			if (!lstAreas.isEmpty()) {
+		//	List<Trd> lstTrds = a.getTrds();
+			//if (!lstAreas.isEmpty()) {
 				loadAreas(child, lstAreas);
-			} else if (!lstTrds.isEmpty()) {
-				loadRootTree(child, lstTrds, "trd", "getTrds");
-			}
+			//} else if (!lstTrds.isEmpty()) {
+				//loadRootTree(child, lstTrds, "trd", "getTrds");
+			//}
 		}
 	}
 

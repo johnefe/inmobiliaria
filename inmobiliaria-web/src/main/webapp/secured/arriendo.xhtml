@@ -95,7 +95,6 @@
 								 	<div class="col-lg-#{tipoNegocioBean.sizeDivInmuebles} text-center py-3">
 								 		<!-- <h3>#{tiposInmuebles.nameTypeInmueble.toUpperCase()}</h3>-->
 								 		<p:commandButton title="#{tiposInmuebles.nameTypeInmueble.toUpperCase()}" process="@this" action="#{tipoNegocioBean.ShowInmublesByType(tiposInmuebles)}" update="@([id$=pnlGeneral])"  class="btn btn-sorft"  />
-										<!-- <p:commandButton title="#{msg['lbl.guardar']}" process="@form" action="#{usuariosSistemaBean.save()}" update=":form1" onstart="showSpinner();" onsuccess="hideSpinner();" styleClass="btn-ic" icon="ic-btn ic-btn-save" /> -->	
 									</div>
 								 </ui:repeat>	
 							</div>
@@ -226,9 +225,7 @@
 										</div>
 										<!-- boton de ver detalles -->
 										<div class="col-lg-12 btn-detalles">
-											<!--  <button type="submit" class="btn-login">VER   DETALLADAMENTE</button>-->
-											 <p:commandButton title="VER DETALLADAMENTE" process="@this" action="#{tipoNegocioBean.ShowDetailInmueble(arriendos)}" update="@([id$=pnlGeneral])" class="btn-login"  />	
-																	
+											 <p:commandButton title="VER DETALLADAMENTE" process="@this" action="#{tipoNegocioBean.ShowDetailInmueble(arriendos)}" update="@([id$=pnlGeneral])" class="btn-login"  />																
 										</div>
 									</div>
 								</div>
@@ -491,7 +488,7 @@
 	
 		</div>
 	</section>
-		<script>
+	<script>
 		function cleanComentary(){
 			document.getElementById("txtComentary").value="";
 		}
